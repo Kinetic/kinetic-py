@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Kinetic-py by Seagate</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Kinetic-py</h1>
+        <p>Kinetic Python Library</p>
+
+        <p class="view"><a href="https://github.com/Seagate/kinetic-py">View the Project on GitHub <small>Seagate/kinetic-py</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/Seagate/kinetic-py/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/Seagate/kinetic-py/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/Seagate/kinetic-py">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="introduction" class="anchor" href="#introduction"><span class="octicon octicon-link"></span></a>Introduction</h1>
+
+<p>This repository hosts the preliminary phase of the Kinetic Python Client source code. Improvements of this repo will be added in the near future to provide examples and documentation.</p>
+
+<h1>
+<a name="initial-setup" class="anchor" href="#initial-setup"><span class="octicon octicon-link"></span></a>Initial Setup</h1>
+
+<pre><code>git clone https://github.com/Seagate/kinetic-py.git
+</code></pre>
+
+<h1>
+<a name="running-tests" class="anchor" href="#running-tests"><span class="octicon octicon-link"></span></a>Running Tests</h1>
+
+<pre><code>python test/
+</code></pre>
+
+<h1>
+<a name="installing-from-source" class="anchor" href="#installing-from-source"><span class="octicon octicon-link"></span></a>Installing from Source</h1>
+
+<pre><code>sh compile_proto.sh
+python setup.py develop
+</code></pre>
+
+<h1>
+<a name="getting-started-with-client-api" class="anchor" href="#getting-started-with-client-api"><span class="octicon octicon-link"></span></a>Getting Started with Client API</h1>
+
+<div class="highlight highlight-python"><pre><span class="kn">from</span> <span class="nn">kinetic</span> <span class="kn">import</span> <span class="n">Client</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s">'localhost'</span><span class="p">,</span> <span class="mi">8123</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s">'message'</span><span class="p">,</span><span class="s">'hello world'</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">c</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'message'</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
+</pre></div>
+
+<p>Should print out <em>hello</em> <em>world</em></p>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>This project is licensed under GNU Lesser General Public License, version 2.1 </p>
+
+<ul>
+<li>
+<a href="LICENSE/LGPL2.1.md">Markdown</a> version</li>
+<li>
+<a href="LICENSE/LGPL2.1.txt">Original</a> version</li>
+</ul>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/Seagate">Seagate</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
