@@ -1,0 +1,8 @@
+.DS_STORE
+build
+dist
+*egg-info
+*.pyc
+
+# Proto
+kinetic/kinetic_pb2.py
