@@ -68,7 +68,7 @@ class AsyncClient(baseasync.BaseAsync):
         self.writer_thread.kill()
         self.reader_thread.kill()
 
-        self.dispatch(super(AsyncClient, self).close)
+        super(AsyncClient, self).close()
 
         self.writer_thread = None
         self.reader_thread = None

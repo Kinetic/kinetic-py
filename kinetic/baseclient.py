@@ -128,13 +128,14 @@ class BaseClient(object):
 
     def close(self):
         self._closed = True
-        if self.isConnected:
+        if self._socket:
             self._socket.shutdown(socket.SHUT_RDWR)
             self._socket.close()
         self._buff = ''
         self._socket = None
         self.connection_id = None
         self._sequence = itertools.count()
+
 
     def update_header(self, message):
         """
