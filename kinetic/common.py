@@ -134,8 +134,9 @@ class KineticMessageException(KineticException):
         return self.code + (': %s' % self.value if self.value else '')
 
 class Synchronization:
-    SYNC = 1
-    ASYNC = 2
+    INVALID_SYNCHRONIZATION = -1
+    WRITETHROUGH = 1 # ASYNC
+    WRITEBACK = 2 # SYNC
     FLUSH = 3
 
 class IntegrityAlgorithms:
