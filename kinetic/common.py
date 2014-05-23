@@ -148,12 +148,14 @@ class IntegrityAlgorithms:
     # 100-inf are private algorithms
 
 class LogTypes:
+    INVALID_TYPE = -1
     UTILIZATIONS = 0
     TEMPERATURES = 1
     CAPACITIES = 2
     CONFIGURATION = 3
     STATISTICS = 4
     MESSAGES = 5
+    LIMITS = 6
 
     @classmethod
     def all(cls):
@@ -163,4 +165,4 @@ class LogTypes:
             2->Drive Capacity, 3-> Drive Configuration, 4->Drive usage statistics, and 5-> Drive messages). This can be passed as
             the sole argument to the AdminClient.getLog function.
         """
-        return [cls.UTILIZATIONS, cls.TEMPERATURES, cls.CAPACITIES, cls.CONFIGURATION, cls.STATISTICS, cls.MESSAGES]
+        return [cls.UTILIZATIONS, cls.TEMPERATURES, cls.CAPACITIES, cls.CONFIGURATION, cls.STATISTICS, cls.MESSAGES, cls.LIMITS]
