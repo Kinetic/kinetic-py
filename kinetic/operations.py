@@ -323,6 +323,25 @@ class PushKeys(object):
     def onError(e):
         raise e
 
+class Flush(object):
+
+    @staticmethod
+    def build(types):
+        m = messages.Message()
+        m.command.header.messageType = messages.Message.FLUSHALLDATA
+
+        return (m, None)
+
+    @staticmethod
+    def parse(m, value):
+        Entry.fromResponse(m, value)
+        return None
+
+
+    @staticmethod
+    def onError(e):
+        raise e
+
 
 ### Admin Operations ###
 

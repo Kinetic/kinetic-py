@@ -16,6 +16,10 @@
 
 #@author: Ignacio Corderi
 
+# Protocol version
+protocol_version = '2.0.3'
+version = '0.7.0'
+
 #utils
 from utils import buildRange
 

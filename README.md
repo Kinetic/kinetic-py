@@ -1,12 +1,14 @@
 Introduction
-========
+============
 This repository hosts the preliminary phase of the Kinetic Python Client source code. Improvements of this repo will be added in the near future to provide examples and documentation.
 
 Initial Setup
 =============
 
     git clone https://github.com/Seagate/kinetic-py.git
-    
+    git submodule init
+    git submodule update
+
 Running Tests
 =============
 
@@ -32,6 +34,6 @@ Should print out _hello_ _world_
 License
 -------
 
-This project is licensed under GNU Lesser General Public License, version 2.1 
+This project is licensed under GNU Lesser General Public License, version 2.1
 * [Markdown](LICENSE/LGPL2.1.md) version
 * [Original](LICENSE/LGPL2.1.txt) version
