@@ -73,6 +73,9 @@ class Client(BaseClient):
     def pipedPush(self, *args, **kwargs):
         return self._process(operations.P2pPipedPush, *args, **kwargs)
 
+    def flush(self, *args, **kwargs):
+        return self._process(operations.Flush, *args, **kwargs)
+
 class KineticRangeIter(object):
 
     def __init__(self, client, startKey, endKey, startKeyInclusive,endKeyInclusive, prefetch):
