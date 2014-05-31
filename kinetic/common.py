@@ -135,8 +135,8 @@ class KineticMessageException(KineticException):
 
 class Synchronization:
     INVALID_SYNCHRONIZATION = -1
-    WRITETHROUGH = 1 # ASYNC
-    WRITEBACK = 2 # SYNC
+    WRITETHROUGH = 1 # Sync
+    WRITEBACK = 2 # Async
     FLUSH = 3
 
 class IntegrityAlgorithms:
