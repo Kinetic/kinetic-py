@@ -170,7 +170,7 @@ class GetPrevious(object):
 class GetKeyRange(object):
 
     @staticmethod
-    def build(startKey, endKey, startKeyInclusive=True, endKeyInclusive=True, maxReturned=256):
+    def build(startKey, endKey, startKeyInclusive=True, endKeyInclusive=True, maxReturned=200):
         if len(startKey) > common.MAX_KEY_SIZE: raise common.KineticClientException("Start key exceeds maximum size of {0} bytes.".format(common.MAX_KEY_SIZE))
         if len(endKey) > common.MAX_KEY_SIZE: raise common.KineticClientException("End key exceeds maximum size of {0} bytes.".format(common.MAX_KEY_SIZE))
 
