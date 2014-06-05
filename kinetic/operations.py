@@ -194,6 +194,31 @@ class GetKeyRange(object):
     def onError(e):
         raise e
 
+class GetVersion(object):
+
+    @staticmethod
+    def build(key):
+        (m,_) = _buildMessage(messages.Message.GETVERSION, key)
+        return (m, None)
+
+    @staticmethod
+    def parse(m, value):
+        try:
+            Entry.fromResponse(m, value)
+            return m.command.body.keyValue.dbVersion
+        except KineticMessageException as e:
+            if e.code == 'NOT_FOUND':
+                # return None on NOT_FOUND; 'cause dict.get
+                return None
+            raise
+
+    @staticmethod
+    def onError(e):
+        if isinstance(e,KineticMessageException):
+            if e.code and e.code == 'NOT_FOUND':
+                return None
+        raise e
+
 class P2pPush(object):
 
     @staticmethod

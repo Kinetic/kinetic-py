@@ -73,6 +73,15 @@ class Client(BaseClient):
     def pipedPush(self, *args, **kwargs):
         return self._process(operations.P2pPipedPush, *args, **kwargs)
 
+
+    def getVersion(self, *args, **kwargs):
+        """
+            Arguments: key -> The key you are seeking version information for.
+            Returns a protobuf object with the version property that determines the pair's current version.
+        """
+        return self._process(operations.GetVersion, *args, **kwargs)
+
+
     # @RequiresProtocol('2.0.3')
     def flush(self, *args, **kwargs):
         return self._process(operations.Flush, *args, **kwargs)

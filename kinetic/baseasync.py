@@ -177,7 +177,12 @@ class BaseAsync(Client):
     def getKeyRangeAsync(self, onSuccess, onError, *args, **kwargs):
         return self._processAsync(operations.GetKeyRange, onSuccess, onError, *args, **kwargs)
 
+    def getVersionAsync(self, onSuccess, onError, *args, **kwargs):
+        return self._processAsync(operations.GetVersion, onSuccess, onError, *args, **kwargs)
+
     def flushAsync(self, onSuccess, onError, *args, **kwargs):
         self._processAsync(operations.Flush, onSuccess, onError, *args, **kwargs)
+
+
 
 

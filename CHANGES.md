@@ -2,6 +2,13 @@ Changes since 0.7.0
 ===================
 This section will document changes to the library since the last release
 
+## New features
+- Added getVersion and getVersionAsync to the library.
+
+## Bug Fixes
+- Lowered default number of keys asked on ranges to 200 (ASKOVAD-287)
+- Fixed typo on baset test case (Merge #2, contributed by @zaitcev)
+
 Changes from 0.6.0.2 to 0.7.0
 =============================
 
