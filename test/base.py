@@ -32,7 +32,7 @@ from kinetic import buildRange
 
 KINETIC_JAR = os.environ.get('KINETIC_JAR')
 KINETIC_PORT = os.environ.get('KINETIC_PORT', 9123)
-KINETIC_HOST = os.environ.get('KINETIC_HOST', 'lcoalhost')
+KINETIC_HOST = os.environ.get('KINETIC_HOST', 'localhost')
 
 class SimulatorRuntimeError(RuntimeError):
 
@@ -152,7 +152,7 @@ class BaseTestCase(unittest.TestCase):
             cls.tearDownClass()
             raise
 
-        cls.client = Client("localhost", cls.port)
+        cls.client = Client(cls.host, cls.port)
 
     @classmethod
     def tearDownClass(cls):
