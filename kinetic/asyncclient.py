@@ -81,7 +81,7 @@ class AsyncClient(baseasync.BaseAsync):
         self.queue.put((header, value, onSuccess, onError))
         eventlet.sleep(0)
 
-    def flush(self):
+    def wait(self):
         self.queue.join()
 
     def send(self, header, value):
