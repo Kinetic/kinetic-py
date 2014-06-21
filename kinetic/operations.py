@@ -422,7 +422,52 @@ class Setup(object):
     @staticmethod
     def parse(m, value):
         Entry.fromResponse(m, value)
-        return True
+        return
+
+    @staticmethod
+    def onError(e):
+        raise e
+
+class Security(object):
+
+    @staticmethod
+    def build(acls):
+        m = messages.Message()
+        m.command.header.messageType = messages.Message.SECURITY
+
+        proto_acls = []
+
+        for acl in acls:
+            proto_acl = messages.Message.Security.ACL(identity=acl.identity,
+                                                      key=acl.key,
+                                                      hmacAlgorithm=acl.hmacAlgorithm)
+
+            proto_domains = []
+
+            for domain in acl.domains:
+                proto_d = messages.Message.Security.ACL.Scope(
+                            TlsRequired=domain.tlsRequired)
+
+                proto_d.permission.extend(domain.roles)
+
+                if domain.offset:
+                    proto_d.offset = domain.offset
+                if domain.value:
+                    proto_d.value = domain.value
+
+                proto_domains.append(proto_d)
+
+            proto_acl.scope.extend(proto_domains)
+            proto_acls.append(proto_acl)
+
+        m.command.body.security.acl.extend(proto_acls)
+
+        return (m, None)
+
+    @staticmethod
+    def parse(m, value):
+        Entry.fromResponse(m, value)
+        return
 
     @staticmethod
     def onError(e):

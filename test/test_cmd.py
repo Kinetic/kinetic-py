@@ -32,8 +32,8 @@ class BaseCommandTestCase(BaseTestCase):
     def setUp(self):
         super(BaseCommandTestCase, self).setUp()
         self.test_key = self.buildKey('test')
-        self.client = client.Client("localhost", self.port)
-        self.conn_args = '-H localhost -P %s ' % self.port
+        self.client = client.Client(self.host, self.port)
+        self.conn_args = '-H %s -P %s ' % (self.host, self.port)
 
     @contextlib.contextmanager
     def capture_stdout(self):
@@ -159,7 +159,7 @@ class TestCommand(BaseCommandTestCase):
         # because the cmd output uses text/line based delimiters it's hard to
         # reason about keynames with a new line in them in this test
         bad_characters = [ord(c) for c in ('\n', '\r')]
-        keys = [self.test_key + chr(ord_) for ord_ in range(256) if ord_ not
+        keys = [self.test_key + chr(ord_) for ord_ in range(200) if ord_ not
                 in bad_characters]
         for i, key in enumerate(keys):
             self.client.put(key, 'myvalue.%s' % i)

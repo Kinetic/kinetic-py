@@ -61,9 +61,9 @@ def _find_kinetic_jar(jar_path=None):
         jar_path = os.path.abspath(
             os.path.join(
                 os.path.dirname(__file__),
-                # /src/main/python/test_kinetic
-                '../../../../target',
-                'Kinetic-0.2.0.1-SNAPSHOT-jar-with-dependencies.jar',
+                # /kinetic-py/test/.
+                '../../kinetic-java/kinetic-simulator/target/',
+                'kinetic-simulator-0.6.0.3-SNAPSHOT-jar-with-dependencies.jar',
             )
         )
     if not os.path.exists(jar_path):
@@ -98,7 +98,7 @@ class BaseTestCase(unittest.TestCase):
 
     If the .jar is not readily locatable you will get an error and need to
     ensure that the KINETIC_JAR environment variable points to the real
-    path of Kinetic-1.0-SNAPSHOT-jar-with-dependencies.jar.
+    path for kinetic-simulator.
 
     """
 
