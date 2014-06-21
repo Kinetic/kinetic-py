@@ -143,7 +143,7 @@ class BaseAsync(Client):
 
     def _process(self, op, *args, **kwargs):
         if not self.isConnected: raise common.NotConnected("Must call connect() before sending operations.")
-        super(BaseAsync, self)._process(op, *args, **kwargs)
+        return super(BaseAsync, self)._process(op, *args, **kwargs)
 
     def _processAsync(self, op, onSuccess, onError, *args, **kwargs):
         if not self.isConnected: raise common.NotConnected("Must call connect() before sending operations.")
