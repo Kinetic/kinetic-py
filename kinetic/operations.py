@@ -351,7 +351,7 @@ class PushKeys(object):
 class Flush(object):
 
     @staticmethod
-    def build(types):
+    def build():
         m = messages.Message()
         m.command.header.messageType = messages.Message.FLUSHALLDATA
 
