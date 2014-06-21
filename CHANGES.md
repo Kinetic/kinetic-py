@@ -1,8 +1,12 @@
-Changes since 0.7.0
-===================
+Changes since 0.7.1
+===========================
 This section will document changes to the library since the last release
 
+Changes from 0.7.0 to 0.7.1
+===========================
+
 ## New features
+- Added setSecurity on AdminClient
 - Added getVersion and getVersionAsync to the library.
 
 ## Bug Fixes

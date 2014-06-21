@@ -21,6 +21,7 @@ import kinetic_pb2 as messages
 MAX_KEY_SIZE = 4*1024
 MAX_VALUE_SIZE = 1024*1024
 
+
 class Entry(object):
 
     #RPC: Note, you could build this as a class method, if you wanted the fromMessage to build
@@ -51,6 +52,7 @@ class Entry(object):
         else:
             return self.key
 
+
 class EntryMetadata(object):
 
     @staticmethod
@@ -67,6 +69,7 @@ class EntryMetadata(object):
     def __str__(self):
         return self.version or "None"
 
+
 class KeyRange(object):
 
     def __init__(self, startKey, endKey, startKeyInclusive=True,
@@ -79,6 +82,7 @@ class KeyRange(object):
     def getFrom(self, client, max=1024):
         return client.getKeyRange(self.startKey, self.endKey, self.startKeyInclusive, self.endKeyInclusive, max)
 
+
 class P2pOp(object):
 
     def __init__(self, key, version=None, newKey=None, force=None):
@@ -86,6 +90,7 @@ class P2pOp(object):
         self.version = version
         self.newKey = newKey
         self.force = force
+
 
 class Peer(object):
 
@@ -133,11 +138,67 @@ class KineticMessageException(KineticException):
     def __str__(self):
         return self.code + (': %s' % self.value if self.value else '')
 
+
+class HmacAlgorithms:
+    INVALID_HMAC_ALGORITHM = -1 # Must come first, so default is invalid
+    HmacSHA1 = 1 # this is the default
+
+
+class ACL(object):
+
+    DEFAULT_IDENTITY=1
+    DEFAULT_KEY = "asdfasdf"
+
+    def __init__(self, identity=DEFAULT_IDENTITY, key=DEFAULT_KEY, algorithm=HmacAlgorithms.HmacSHA1):
+        self.identity = identity
+        self.key = key
+        self.hmacAlgorithm = algorithm
+        self.domains = set()
+
+
+class Domain(object):
+    """
+        Domain object, which corresponds to the domain object in the Java client,
+        and is the Scope object in the protobuf.
+    """
+    def __init__(self, roles=None, tlsRequried=False, offset=None, value=None):
+        if roles:
+            self.roles = set(roles)
+        else:
+            self.roles = set()
+        self.tlsRequired = tlsRequried
+        self.offset = offset
+        self.value = value
+
+
+class Roles(object):
+    """
+        Role enumeration, which is the same thing as the permission field for each
+        scope in the protobuf ACL list.
+    """
+    READ = 0
+    WRITE = 1
+    DELETE = 2
+    RANGE = 3
+    SETUP = 4
+    P2POP = 5
+    GETLOG = 7
+    SECURITY = 8
+
+    @classmethod
+    def all(cls):
+        """
+            Return the set of all possible roles.
+        """
+        return [cls.READ, cls.WRITE, cls.DELETE, cls.RANGE, cls.SETUP, cls.P2POP, cls.GETLOG, cls.SECURITY]
+
+
 class Synchronization:
     INVALID_SYNCHRONIZATION = -1
     WRITETHROUGH = 1 # Sync
     WRITEBACK = 2 # Async
     FLUSH = 3
+
 
 class IntegrityAlgorithms:
     SHA1 = 1
@@ -147,6 +208,7 @@ class IntegrityAlgorithms:
     CRC64 = 5
     # 6-99 are reserverd.
     # 100-inf are private algorithms
+
 
 class LogTypes:
     INVALID_TYPE = -1
