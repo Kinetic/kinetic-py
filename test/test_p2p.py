@@ -23,7 +23,6 @@ from kinetic import baseclient
 
 from base import MultiSimulatorTestCase
 
-@unittest.skip('Need to update config to support multiple drives')
 class P2PTestCase(MultiSimulatorTestCase):
 
     def test_p2p_push(self):

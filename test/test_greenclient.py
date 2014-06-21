@@ -36,13 +36,11 @@ else:
 
 from base import BaseTestCase, MultiSimulatorTestCase
 
-
-@unittest.skip("It's blocking")
 @unittest.skipIf(not eventlet_available, 'eventlet is not installed')
 class TestGreenClient(BaseTestCase):
 
     def test_connect(self):
-        c = greenclient.GreenClient('localhost', self.port)
+        c = greenclient.GreenClient(self.host, self.port)
         c.connect()
         c.close()
 
@@ -58,10 +56,16 @@ class TestGreenClient(BaseTestCase):
             def close(mock, *args, **kwargs):
                 pass
 
+            def settimeout(mock, *args, **kwargs):
+                pass
+
+            def shutdown(mock, *args, **kwargs):
+                pass
+
         orig_socket = baseclient.socket
         try:
             baseclient.socket = MockSocket()
-            c = greenclient.GreenClient('localhost', self.port + 10000)
+            c = greenclient.GreenClient(self.host, self.port + 10000)
             self.assertRaises(socket.error, c.connect)
         finally:
             baseclient.socket = orig_socket
@@ -70,7 +74,7 @@ class TestGreenClient(BaseTestCase):
         self.assertFalse(c.isConnected)
 
     def test_put(self):
-        c = greenclient.GreenClient('localhost', self.port)
+        c = greenclient.GreenClient(self.host, self.port)
         k = self.buildKey('test')
         with c:
             resp = c.put(k, 'value')
@@ -78,7 +82,7 @@ class TestGreenClient(BaseTestCase):
             self.assertEquals(resp, True)
 
     def test_put_force(self):
-        c = greenclient.GreenClient('localhost', self.port)
+        c = greenclient.GreenClient(self.host, self.port)
         k = self.buildKey('test')
         with c:
             resp = c.put(k, 'value1', new_version='1')
@@ -93,7 +97,7 @@ class TestGreenClient(BaseTestCase):
             self.assertEquals(resp.wait().value, 'value_force')
 
     def test_get_not_found(self):
-        c = greenclient.GreenClient('localhost', self.port)
+        c = greenclient.GreenClient(self.host, self.port)
         k = self.buildKey('test')
         with c:
             resp = c.get(k)
@@ -101,7 +105,7 @@ class TestGreenClient(BaseTestCase):
             self.assert_(resp is None)
 
     def test_set_and_fetch(self):
-        c = greenclient.GreenClient('localhost', self.port)
+        c = greenclient.GreenClient(self.host, self.port)
         k = self.buildKey('test')
         with c:
             resp = c.put(k, 'value')
@@ -112,7 +116,7 @@ class TestGreenClient(BaseTestCase):
             self.assertEquals(resp.value, 'value')
 
     def test_submit_many(self):
-        c = greenclient.GreenClient('localhost', self.port)
+        c = greenclient.GreenClient(self.host, self.port)
         keys = []
         for i in range(16):
             keys.append(self.buildKey(i))
@@ -135,7 +139,7 @@ class TestGreenClient(BaseTestCase):
                 self.assertEquals(resp.wait().value, 'value-%s' % k)
 
     def test_put_entries(self):
-        c = greenclient.GreenClient('localhost', self.port)
+        c = greenclient.GreenClient(self.host, self.port)
         with c:
             entries = []
             for i in range(3):
@@ -146,7 +150,7 @@ class TestGreenClient(BaseTestCase):
                                   'value%s' % i)
 
     def test_get_keys(self):
-        c = greenclient.GreenClient('localhost', self.port)
+        c = greenclient.GreenClient(self.host, self.port)
         with c:
             keys = []
             resps = []
@@ -159,7 +163,7 @@ class TestGreenClient(BaseTestCase):
                 self.assertEquals(resp.value, 'value%s' % i)
 
     def test_delete_keys(self):
-        c = greenclient.GreenClient('localhost', self.port)
+        c = greenclient.GreenClient(self.host, self.port)
         with c:
             keys = []
             resps = []
@@ -173,7 +177,7 @@ class TestGreenClient(BaseTestCase):
                 self.assert_(c.get(key).wait() is None)
 
     def test_get_previous(self):
-        c = greenclient.GreenClient('localhost', self.port)
+        c = greenclient.GreenClient(self.host, self.port)
         with c:
             keys = []
             for i in range(3):
@@ -190,12 +194,12 @@ class TestGreenClient(BaseTestCase):
     def test_get_empty_key_range(self):
         start_key = self.buildKey('\x00')
         end_key = self.buildKey('\xff')
-        c = greenclient.GreenClient('localhost', self.port)
+        c = greenclient.GreenClient(self.host, self.port)
         with c:
             self.assertEquals([], c.getKeyRange(start_key, end_key).wait())
 
     def test_get_key_range(self):
-        c = greenclient.GreenClient('localhost', self.port)
+        c = greenclient.GreenClient(self.host, self.port)
         with c:
             keys = []
             for i in range(3):
@@ -208,7 +212,7 @@ class TestGreenClient(BaseTestCase):
         self.assertEquals(key_list, keys)
 
     def test_flush_on_close(self):
-        c = greenclient.GreenClient('localhost', self.port)
+        c = greenclient.GreenClient(self.host, self.port)
         with c:
             keys = []
             for i in range(3):
@@ -284,7 +288,7 @@ class TestGreenGets(BaseGreenTestCase):
                 values.add(value)
             self.c.wait()
             g = self.c.get_keys(keys, depth=8)
-            resp_values = set([entry.value for entry in g])
+            resp_values = set([str(entry.value) for entry in g])
         for value in values:
             self.assert_(value in resp_values)
         self.assertEquals(num_keys, len(resp_values))
@@ -302,7 +306,7 @@ class TestGreenGets(BaseGreenTestCase):
                 values.add(value)
             self.c.wait()
             g = self.c.get_keys(keys, depth=5)
-            resp_values = set([entry.value for entry in g])
+            resp_values = set([str(entry.value) for entry in g])
         for value in values:
             self.assert_(value in resp_values)
         self.assertEquals(num_keys, len(resp_values))
@@ -389,7 +393,7 @@ class TestGreenPuts(BaseGreenTestCase):
                 resp = self.c.get(entry.key).wait()
                 self.assertEquals(resp.value, entry.value)
 
-@unittest.skip("It's blocking")
+
 class TestGreenDeletes(BaseGreenTestCase):
 
     def test_single_key(self):
@@ -478,7 +482,6 @@ class TestGreenDeletes(BaseGreenTestCase):
                 self.assertEquals(None, self.c.get(key).wait())
 
 
-@unittest.skip("It's blocking")
 @unittest.skipIf(not eventlet_available, 'eventlet is not installed')
 class GreenClientPushKeysTestCase(MultiSimulatorTestCase):
 
