@@ -141,7 +141,12 @@ class BaseAsync(Client):
         # transmit
         self.network_send(header, value)
 
+    def _process(self, op, *args, **kwargs):
+        if not self.isConnected: raise common.NotConnected("Must call connect() before sending operations.")
+        super(BaseAsync, self)._process(op, *args, **kwargs)
+
     def _processAsync(self, op, onSuccess, onError, *args, **kwargs):
+        if not self.isConnected: raise common.NotConnected("Must call connect() before sending operations.")
 
         def innerSuccess(header, value):
             onSuccess(op.parse(header, value))
@@ -182,6 +187,9 @@ class BaseAsync(Client):
 
     def flushAsync(self, onSuccess, onError, *args, **kwargs):
         self._processAsync(operations.Flush, onSuccess, onError, *args, **kwargs)
+
+    def noopAsync(self, onSuccess, onError, *args, **kwargs):
+        self._processAsync(operations.Noop, onSuccess, onError, *args, **kwargs)
 
 
 
