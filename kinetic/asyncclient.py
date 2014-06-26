@@ -62,7 +62,7 @@ class AsyncClient(baseasync.BaseAsync):
 
     def close(self):
         self.shutdown()
-        self.flush()
+        self.wait()
 
     def _end_close(self):
         self.writer_thread.kill()
