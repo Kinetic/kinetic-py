@@ -111,14 +111,20 @@ class BaseClient(object):
     def connect(self):
         if self._socket:
             raise common.AlreadyConnected("Client is already connected.")
-        self._sequence = itertools.count()
-        self._socket = self.build_socket()
-        self._socket.settimeout(self.connect_timeout)
+
+        # Stage socket on a local variable first
+        s = self.build_socket()
+        s.settimeout(self.connect_timeout)
         if self.socket_address:
             LOG.debug("Client local port address bound to " + self.socket_address)
-            self._socket.bind((self.socket_address, self.socket_port))
-        self._socket.connect((self.hostname, self.port))
-        self._socket.settimeout(self.socket_timeout)
+            s.bind((self.socket_address, self.socket_port))
+        # if connect fails, there is nothing to clean up
+        s.connect((self.hostname, self.port))
+        s.settimeout(self.socket_timeout)
+
+        # We are connected now, update attributes
+        self._socket = s
+        self._sequence = itertools.count()
         self.connection_id = int(time.time())
         self._closed = False
 
@@ -129,8 +135,10 @@ class BaseClient(object):
     def close(self):
         self._closed = True
         if self._socket:
-            self._socket.shutdown(socket.SHUT_RDWR)
-            self._socket.close()
+            try:
+                self._socket.shutdown(socket.SHUT_RDWR)
+                self._socket.close()
+            except: pass # if socket wasnt connected, keep going
         self._buff = ''
         self._socket = None
         self.connection_id = None
@@ -247,6 +255,9 @@ class BaseClient(object):
         proto = messages.Message()
         proto.ParseFromString(str(raw_proto))
 
+        if self.debug:
+            print proto
+
         return (proto, value)
 
 
@@ -288,6 +299,9 @@ class BaseClient(object):
 
         resp = messages.Message()
         resp.ParseFromString(raw_proto)
+
+        if self.debug:
+            print resp
 
         if header[2] > 0:
             resp.value = buff

@@ -76,6 +76,16 @@ class AsyncClient(baseasync.BaseAsync):
     def sendAsync(self, header, value, onSuccess, onError):
         if self.closing:
             raise common.ConnectionClosed("Client is closing, can't queue more operations.")
+
+        if self.faulted:
+            self._raise(common.ConnectionFaulted("Can't send message when connection is on a faulted state."), onError)
+            return #skip the rest
+
+        # fail fast on NotConnected
+        if not self.isConnected:
+            self._raise(common.NotConnected("Not connected."), onError)
+            return #skip the rest
+
         if LOG.isEnabledFor(logging.DEBUG):
             LOG.debug("Queue: {0}".format(self.queue.qsize()))
         self.queue.put((header, value, onSuccess, onError))

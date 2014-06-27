@@ -3,6 +3,7 @@ Changes since 0.7.1
 This section will document changes to the library since the last release
 
 ## Bug Fixes
+- Fixex bug that caused close() and connect() to fail on a connection that faulted (Issue #7)
 - Fixed a bug that caused the AsyncClient to crash when calling close()
 
 Changes from 0.7.0 to 0.7.1
