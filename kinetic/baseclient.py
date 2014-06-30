@@ -68,18 +68,16 @@ class BaseClient(object):
     # defaults
     HOSTNAME = 'localhost'
     PORT = 8123
-    CHUNK_SIZE = 4096
     CLUSTER_VERSION = 0
     # development default
     USER_ID = 1
     CLIENT_SECRET = 'asdfasdf'
-    CONNECT_TIMEOUT = 0.1
-    SOCKET_TIMEOUT = 5.0
 
     def __init__(self, hostname=HOSTNAME, port=PORT, identity=USER_ID,
                  cluster_version=CLUSTER_VERSION, secret=CLIENT_SECRET,
-                 chunk_size=CHUNK_SIZE,
-                 connect_timeout=CONNECT_TIMEOUT, socket_timeout=SOCKET_TIMEOUT,
+                 chunk_size=common.DEFAULT_CHUNK_SIZE,
+                 connect_timeout=common.DEFAULT_CONNECT_TIMEOUT,
+                 socket_timeout=common.DEFAULT_SOCKET_TIMEOUT,
                  socket_address=None,
                  socket_port=0):
         self.hostname = hostname
