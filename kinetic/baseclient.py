@@ -27,6 +27,8 @@ import struct
 import common
 import kinetic_pb2 as messages
 
+ss = socket
+
 LOG = logging.getLogger(__name__)
 
 def calculate_hmac(secret, message):
@@ -105,21 +107,23 @@ class BaseClient(object):
     def isConnected(self):
         return not self._closed
 
-    def build_socket(self):
-       return socket.socket()
+    def build_socket(self, family=ss.AF_INET):
+       return socket.socket(family)
 
     def connect(self):
         if self._socket:
             raise common.AlreadyConnected("Client is already connected.")
 
+        infos = socket.getaddrinfo(self.hostname, self.port, 0, 0, socket.SOL_TCP)
+        (family,_,_,_, sockaddr) = infos[0]
         # Stage socket on a local variable first
-        s = self.build_socket()
+        s = self.build_socket(family)
         s.settimeout(self.connect_timeout)
         if self.socket_address:
             LOG.debug("Client local port address bound to " + self.socket_address)
             s.bind((self.socket_address, self.socket_port))
         # if connect fails, there is nothing to clean up
-        s.connect((self.hostname, self.port))
+        s.connect(sockaddr) # use first
         s.settimeout(self.socket_timeout)
 
         # We are connected now, update attributes
