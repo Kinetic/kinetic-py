@@ -41,8 +41,8 @@ class AsyncClient(baseasync.BaseAsync):
         self.max_pending = MAX_PENDING
         self.closing = False
 
-    def build_socket(self):
-        return socket.socket()
+    def build_socket(self, family=socket.AF_INET):
+        return socket.socket(family)
 
     def connect(self):
         super(AsyncClient, self).connect()
