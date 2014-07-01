@@ -327,10 +327,6 @@ class BaseClient(object):
     def send(self, header, value):
        self.network_send(header, value)
        resp = self.network_recv()
-
-       if (resp[0].command.status.code != messages.Message.Status.SUCCESS) :
-            raise common.KineticMessageException(resp[0].command.status)
-
        return resp
 
     ### with statement support ###

@@ -47,6 +47,8 @@ class TestGreenClient(BaseTestCase):
     def test_disconnect(self):
         class MockSocket(object):
 
+            SOL_TCP = None
+
             def socket(mock, *args, **kwargs):
                 return mock
 
@@ -61,6 +63,9 @@ class TestGreenClient(BaseTestCase):
 
             def shutdown(mock, *args, **kwargs):
                 pass
+
+            def getaddrinfo(mock, hostname, port, x, y, z):
+                return [(2, x, y, z,(hostname, port))]
 
         orig_socket = baseclient.socket
         try:
@@ -79,7 +84,7 @@ class TestGreenClient(BaseTestCase):
         with c:
             resp = c.put(k, 'value')
             resp = resp.wait()
-            self.assertEquals(resp, True)
+            self.assertEquals(resp, None)
 
     def test_put_force(self):
         c = greenclient.GreenClient(self.host, self.port)
@@ -87,12 +92,12 @@ class TestGreenClient(BaseTestCase):
         with c:
             resp = c.put(k, 'value1', new_version='1')
             resp = resp.wait()
-            self.assertEquals(resp, True)
+            self.assertEquals(resp, None)
             resp = c.put(k, 'value2', new_version='2')
             self.assertRaises(Exception, resp.wait)
             resp = c.put(k, 'value_force', force=True)
             resp = resp.wait()
-            self.assertEquals(resp, True)
+            self.assertEquals(resp, None)
             resp = c.get(k)
             self.assertEquals(resp.wait().value, 'value_force')
 
@@ -110,7 +115,7 @@ class TestGreenClient(BaseTestCase):
         with c:
             resp = c.put(k, 'value')
             resp = resp.wait()
-            self.assertEquals(resp, True)
+            self.assertEquals(resp, None)
             resp = c.get(k)
             resp = resp.wait()
             self.assertEquals(resp.value, 'value')
@@ -128,7 +133,7 @@ class TestGreenClient(BaseTestCase):
                 responses.append(c.put(k, 'value-%s' % k))
             self.assertEquals(len(responses), 16)
             for resp in responses:
-                self.assertEquals(True, resp.wait())
+                self.assertEquals(None, resp.wait())
             # get_keys
             responses = []
             for k in keys:

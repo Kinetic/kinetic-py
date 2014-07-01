@@ -4,6 +4,7 @@ This section will document changes to the library since the last release
 
 ## New features
 - Added IPv6 address support on all clients (Issue #8)
+- Added new exception type ClusterVersionFailureException (Requires drive version 2.0.4)
 
 ## Bug Fixes
 - Fixex bug that caused close() and connect() to fail on a connection that faulted (Issue #7)

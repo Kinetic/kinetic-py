@@ -25,6 +25,7 @@ DEFAULT_CONNECT_TIMEOUT = 0.1
 DEFAULT_SOCKET_TIMEOUT = 5
 DEFAULT_CHUNK_SIZE = 4096
 
+
 class Entry(object):
 
     #RPC: Note, you could build this as a class method, if you wanted the fromMessage to build
@@ -42,7 +43,7 @@ class Entry(object):
         elif (header.command.status.code == messages.Message.Status.NOT_FOUND):
             return None
         else:
-            raise KineticMessageException(header.command.status)
+            raise KineticClientException("Invalid response status, can' build entry from response.")
 
     def __init__(self, key, value, metadata=None):
         self.key = key
@@ -141,6 +142,11 @@ class KineticMessageException(KineticException):
     def __str__(self):
         return self.code + (': %s' % self.value if self.value else '')
 
+class ClusterVersionFailureException(KineticMessageException):
+
+    def __init__(self, status, cluster_version):
+        super(ClusterVersionFailureException, self).__init__(status)
+        self.cluster_version = cluster_version
 
 class HmacAlgorithms:
     INVALID_HMAC_ALGORITHM = -1 # Must come first, so default is invalid

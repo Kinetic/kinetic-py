@@ -121,7 +121,7 @@ class GreenClient(BaseAsync):
             if len(pending) >= depth:
                 # we have to wait on something, may as well be the oldest?
                 pending.popleft().wait()
-            pending.append(self.put(entry.key, entry.value, synchronization=Synchronization.WRITEBACK))
+            pending.append(self.put(entry.key, entry.value, synchronization=common.Synchronization.WRITEBACK))
         for resp in pending:
             resp.wait()
 

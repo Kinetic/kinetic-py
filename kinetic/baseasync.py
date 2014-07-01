@@ -127,10 +127,11 @@ class BaseAsync(Client):
             return #skip the rest
 
         def innerSuccess(header, value):
-            if (header.command.status.code != messages.Message.Status.SUCCESS) :
-                onError(common.KineticMessageException(header.command.status))
-            else:
+            try:
+                operations._check_status(header)
                 onSuccess(header, value)
+            except Exception as ex:
+                onError(ex)
 
         # get sequence
         self.update_header(header)

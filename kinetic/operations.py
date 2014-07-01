@@ -25,6 +25,16 @@ import logging
 
 LOG = logging.getLogger(__name__)
 
+
+def _check_status(proto):
+    if (proto.command.status.code == messages.Message.Status.SUCCESS):
+        return
+    elif(proto.command.status.code == messages.Message.Status.VERSION_FAILURE):
+        raise common.ClusterVersionFailureException(proto.command.status, proto.command.header.clusterVersion)
+    else:
+        raise KineticMessageException(proto.command.status)
+
+
 def _buildMessage(messageType, key, data=None, version='', new_version='',
                   force=False, tag=None, algorithm=None, synchronization=None):
     m = messages.Message()
@@ -61,8 +71,7 @@ class Noop(object):
 
     @staticmethod
     def parse(m, value):
-        Entry.fromResponse(m, value)
-        return True
+        return
 
     @staticmethod
     def onError(e):
@@ -76,8 +85,7 @@ class Put(object):
 
     @staticmethod
     def parse(m, value):
-        Entry.fromResponse(m, value)
-        return True
+        return
 
     @staticmethod
     def onError(e):
@@ -91,13 +99,7 @@ class Get(object):
 
     @staticmethod
     def parse(m, value):
-        try:
-            return Entry.fromResponse(m, value)
-        except KineticMessageException as e:
-            if e.code == 'NOT_FOUND':
-                # return None on NOT_FOUND; 'cause dict.get
-                return None
-            raise
+        return Entry.fromResponse(m, value)
 
     @staticmethod
     def onError(e):
@@ -130,7 +132,7 @@ class Delete(object):
 
     @staticmethod
     def parse(m, value):
-        return Entry.fromResponse(m, value) and True
+        return True
 
     @staticmethod
     def onError(e):
@@ -203,14 +205,7 @@ class GetVersion(object):
 
     @staticmethod
     def parse(m, value):
-        try:
-            Entry.fromResponse(m, value)
-            return m.command.body.keyValue.dbVersion
-        except KineticMessageException as e:
-            if e.code == 'NOT_FOUND':
-                # return None on NOT_FOUND; 'cause dict.get
-                return None
-            raise
+        return m.command.body.keyValue.dbVersion
 
     @staticmethod
     def onError(e):
@@ -250,8 +245,6 @@ class P2pPush(object):
 
     @staticmethod
     def parse(m, value):
-        if (m.command.status.code != messages.Message.Status.SUCCESS):
-            raise KineticMessageException(m.command.status)
         return [op for op in m.command.body.p2pOperation.operation]
 
     @staticmethod
@@ -315,8 +308,6 @@ class P2pPipedPush(object):
 
     @staticmethod
     def parse(m, value):
-        if (m.command.status.code != messages.Message.Status.SUCCESS):
-            raise KineticMessageException(m.command.status)
         return [op for op in m.command.body.p2pOperation.operation]
 
     @staticmethod
@@ -340,8 +331,6 @@ class PushKeys(object):
 
     @staticmethod
     def parse(m, value):
-        if (m.command.status.code != messages.Message.Status.SUCCESS):
-            raise KineticMessageException(m.command.status)
         return [op for op in m.command.body.p2pOperation.operation]
 
     @staticmethod
@@ -359,8 +348,7 @@ class Flush(object):
 
     @staticmethod
     def parse(m, value):
-        Entry.fromResponse(m, value)
-        return None
+        return
 
 
     @staticmethod
@@ -421,7 +409,6 @@ class Setup(object):
 
     @staticmethod
     def parse(m, value):
-        Entry.fromResponse(m, value)
         return
 
     @staticmethod
@@ -466,7 +453,6 @@ class Security(object):
 
     @staticmethod
     def parse(m, value):
-        Entry.fromResponse(m, value)
         return
 
     @staticmethod
