@@ -79,7 +79,8 @@ class BaseClient(object):
                  connect_timeout=common.DEFAULT_CONNECT_TIMEOUT,
                  socket_timeout=common.DEFAULT_SOCKET_TIMEOUT,
                  socket_address=None,
-                 socket_port=0):
+                 socket_port=0,
+                 defer_read=False):
         self.hostname = hostname
         self.port = port
         self.identity = identity
@@ -94,6 +95,8 @@ class BaseClient(object):
         self.socket_timeout = socket_timeout
         self.socket_address = socket_address
         self.socket_port = socket_port
+        self.defer_read = defer_read
+        self.wait_on_read = None
 
     @property
     def socket(self):
@@ -179,16 +182,21 @@ class BaseClient(object):
         # 4. write protobuf message byte[]
         self.socket.send(out)
 
-        # 5 (optional) write attached value if any
-        if value_ln  > 0:
-            # write value
-            to_send = len(value)
-            i = 0
-            while i < to_send:
-                nbytes = self.socket.send(value[i:i + self.chunk_size])
-                if not nbytes:
-                    raise common.ServerDisconnect('Server send disconnect')
-                i += nbytes
+        # 5. (optional) write attached value if any
+        send_op = getattr(value, "send", None)
+        if callable(send_op): # if value has custom logic for sending over network, delegate
+            send_op(self.socket)
+        else:
+            # 5 (optional) write attached value if any
+            if value_ln  > 0:
+                # write value
+                to_send = len(value)
+                i = 0
+                while i < to_send:
+                    nbytes = self.socket.send(value[i:i + self.chunk_size])
+                    if not nbytes:
+                        raise common.ServerDisconnect('Server send disconnect')
+                    i += nbytes
 
 
     def network_send(self, header, value):
@@ -207,7 +215,6 @@ class BaseClient(object):
         if self.debug:
             print header
 
-#         LOG.debug("Sending message: %s" % message)
         self._send_delimited_v2(header, value)
 
         return header
@@ -232,6 +239,10 @@ class BaseClient(object):
     def _recv_delimited_v2(self):
         # receive the leading 9 bytes
 
+        if self.wait_on_read:
+            self.wait_on_read.wait()
+            self.wait_on_read = None
+
         msg = self.fast_read(9)
 
         magic, proto_ln, value_ln = struct.unpack_from(">bii", buffer(msg))
@@ -240,19 +251,18 @@ class BaseClient(object):
             LOG.warn("Magic number = {0}".format(self.bytearray_to_hex(buff)))
             raise common.KineticClientException("Invalid Magic Value!") # 70 = 'F'
 
-        if self.debug:
-            print "Proto.size={0}".format(proto_ln)
-
         # read proto message
         raw_proto = self.fast_read(proto_ln)
 
-        if self.debug:
-            print "Proto.read={0}".format(len(raw_proto))
-
         value = None
         if value_ln > 0:
-            # read value
-            value = self.fast_read(value_ln)
+            if self.defer_read:
+                # let user handle the read from socket
+                value = common.DeferedValue(self.socket, value_ln)
+                self.wait_on_read = value
+            else:
+                # normal code path, read value
+                value = self.fast_read(value_ln)
 
         proto = messages.Message()
         proto.ParseFromString(str(raw_proto))
@@ -261,54 +271,6 @@ class BaseClient(object):
             print proto
 
         return (proto, value)
-
-
-    def _recv_delimited_v2_old(self):
-        # receive the leading 9 bytes
-        buff = ''
-        while len(buff) < 9:
-            buff += self.socket.recv(9 - len(buff))
-        header = struct.unpack(">bii", buff)
-
-        if header[0] != 70:
-            LOG.warn("Header:{0}".format(self.toHexString(buff)))
-            raise common.KineticClientException("Invalid Magic Value!") # 70 = 'F'
-
-        if self.debug:
-            print "Proto.size={0}".format(header[1])
-
-        # read proto message
-        raw_proto = ''
-        while len(raw_proto) < header[1]:
-            raw_proto += self.socket.recv(header[1] -  len(raw_proto))
-
-        if self.debug:
-            print "Proto.read={0}".format(len(raw_proto))
-
-        if header[2] > 0:
-            # read value
-            buff = ''
-            bytes_remaining = header[2]
-            while bytes_remaining > 0:
-                if bytes_remaining < self.chunk_size:
-                    chunk = self.socket.recv(bytes_remaining)
-                else:
-                    chunk = self.socket.recv(self.chunk_size)
-                if not chunk:
-                    raise common.ServerDisconnect('Server recv disconnect')
-                bytes_remaining -= len(chunk)
-                buff += chunk
-
-        resp = messages.Message()
-        resp.ParseFromString(raw_proto)
-
-        if self.debug:
-            print resp
-
-        if header[2] > 0:
-            resp.value = buff
-
-        return resp
 
     def network_recv(self):
         """
@@ -321,7 +283,7 @@ class BaseClient(object):
 
         # update connectionId to whatever the drive said.
         self.connection_id = resp[0].command.header.connectionID
-#         LOG.debug("Received response: %s" % resp)
+
         return resp
 
     def send(self, header, value):

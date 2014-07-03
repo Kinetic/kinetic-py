@@ -3,6 +3,7 @@ Changes since 0.7.1
 This section will document changes to the library since the last release
 
 ## New features
+- Added zero copy support on puts and gets (Requires splice system call)
 - Added IPv6 address support on all clients (Issue #8)
 - Added new exception type ClusterVersionFailureException (Requires drive version 2.0.4)
 

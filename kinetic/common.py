@@ -17,13 +17,28 @@
 #@author: Ignacio Corderi
 
 import kinetic_pb2 as messages
+import eventlet
 
 MAX_KEY_SIZE = 4*1024
 MAX_VALUE_SIZE = 1024*1024
 
 DEFAULT_CONNECT_TIMEOUT = 0.1
 DEFAULT_SOCKET_TIMEOUT = 5
-DEFAULT_CHUNK_SIZE = 4096
+DEFAULT_CHUNK_SIZE = 64*1024
+
+
+class DeferedValue():
+
+    def __init__(self, socket, value_ln):
+        self.socket = socket
+        self.length = value_ln
+        self._evt = eventlet.event.Event()
+
+    def set(self):
+        self._evt.send()
+
+    def wait(self):
+        self._evt.wait()
 
 
 class Entry(object):
