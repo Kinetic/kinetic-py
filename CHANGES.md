@@ -2,12 +2,17 @@ Changes since 0.7.1
 ===========================
 This section will document changes to the library since the last release
 
+## Important
+Kinetic Protocol version updated to 2.0.5
+
 ## New features
 - Added zero copy support on puts and gets (Requires splice system call)
 - Added IPv6 address support on all clients (Issue #8)
 - Added new exception type ClusterVersionFailureException (Requires drive version 2.0.4)
+- Added new Device specific GetLog (Requires protocol 2.0.5)
 
 ## Bug Fixes
+- Fixed bug on invalid magix number (PR #11 contributed by @rpcope1, ASOKVAD-313)
 - Fixex bug that caused close() and connect() to fail on a connection that faulted (Issue #7)
 - Fixed a bug that caused the AsyncClient to crash when calling close()
 

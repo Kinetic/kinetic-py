@@ -350,7 +350,6 @@ class Flush(object):
     def parse(m, value):
         return
 
-
     @staticmethod
     def onError(e):
         raise e
@@ -361,18 +360,24 @@ class Flush(object):
 class GetLog(object):
 
     @staticmethod
-    def build(types):
+    def build(types, device=None):
         m = messages.Message()
         m.command.header.messageType = messages.Message.GETLOG
 
         log = m.command.body.getLog
         log.type.extend(types) #type is actually a repeatable field
 
+        if device:
+            log.device.name = device
+
         return (m, None)
 
     @staticmethod
     def parse(m, value):
-        return m.command.body.getLog
+        if value:
+            (m.command.body.getLog, value)
+        else:
+            return m.command.body.getLog
 
     @staticmethod
     def onError(e):
