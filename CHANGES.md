@@ -1,6 +1,9 @@
-Changes since 0.7.1
+Changes since 0.7.2
 ===========================
 This section will document changes to the library since the last release
+
+Changes from 0.7.1 to 0.7.2
+===========================
 
 ## Important
 Kinetic Protocol version updated to 2.0.5

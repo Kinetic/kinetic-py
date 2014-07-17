@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 with open('requirements.txt', 'r') as f:
     requires = [x.strip() for x in f if x.strip()]
 
-version = '0.7.1'
+version = '0.7.2'
 
 setup(
     name='kinetic',
