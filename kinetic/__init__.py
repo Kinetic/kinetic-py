@@ -17,7 +17,7 @@
 #@author: Ignacio Corderi
 
 # Protocol version
-protocol_version = '2.0.3'
+protocol_version = '2.0.5'
 version = '0.7.1'
 
 #utils
