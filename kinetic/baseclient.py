@@ -26,6 +26,7 @@ import hmac
 import struct
 import common
 import kinetic_pb2 as messages
+import ssl
 
 ss = socket
 
@@ -80,7 +81,8 @@ class BaseClient(object):
                  socket_timeout=common.DEFAULT_SOCKET_TIMEOUT,
                  socket_address=None,
                  socket_port=0,
-                 defer_read=False):
+                 defer_read=False,
+                 use_ssl=False):
         self.hostname = hostname
         self.port = port
         self.identity = identity
@@ -97,6 +99,7 @@ class BaseClient(object):
         self.socket_port = socket_port
         self.defer_read = defer_read
         self.wait_on_read = None
+        self.use_ssl = use_ssl
 
     @property
     def socket(self):
@@ -119,6 +122,9 @@ class BaseClient(object):
         (family,_,_,_, sockaddr) = infos[0]
         # Stage socket on a local variable first
         s = self.build_socket(family)
+        if self.use_ssl:
+            s = ssl.wrap_socket(s)
+
         s.settimeout(self.connect_timeout)
         if self.socket_address:
             LOG.debug("Client local port address bound to " + self.socket_address)

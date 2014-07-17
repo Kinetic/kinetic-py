@@ -10,6 +10,7 @@ Kinetic Protocol version updated to 2.0.5
 - Added IPv6 address support on all clients (Issue #8)
 - Added new exception type ClusterVersionFailureException (Requires drive version 2.0.4)
 - Added new Device specific GetLog (Requires protocol 2.0.5)
+- Added SSL/TLS support on all clients
 
 ## Bug Fixes
 - Fixed bug on invalid magix number (PR #11 contributed by @rpcope1, ASOKVAD-313)
