@@ -375,12 +375,15 @@ class GetLog(object):
     @staticmethod
     def parse(m, value):
         if value:
-            (m.command.body.getLog, value)
+            return (m.command.body.getLog, value)
         else:
             return m.command.body.getLog
 
     @staticmethod
     def onError(e):
+        if isinstance(e,KineticMessageException):
+            if e.code and e.code == 'NOT_FOUND':
+                return None
         raise e
 
 class Setup(object):
