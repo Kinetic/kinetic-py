@@ -17,8 +17,6 @@ Running Tests
 Installing from Source
 ======================
 
-    pip install -r requirements.txt
-    sh compile_proto.sh
     python setup.py develop
 
 Getting Started with Client API

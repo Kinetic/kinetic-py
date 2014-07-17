@@ -4,6 +4,7 @@ This section will document changes to the library since the last release
 
 ## Important
 Kinetic Protocol version updated to 2.0.5
+The compiled python proto kinetic/kinetic_pb2.py is now included on the repo
 
 ## New features
 - Added zero copy support on puts and gets (Requires splice system call)
