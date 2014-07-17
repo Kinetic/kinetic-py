@@ -6,8 +6,8 @@ Changes from 0.7.1 to 0.7.2
 ===========================
 
 ## Important
-Kinetic Protocol version updated to 2.0.5
-The compiled python proto kinetic/kinetic_pb2.py is now included on the repo
+- Kinetic Protocol version updated to 2.0.5
+- The compiled python proto kinetic/kinetic_pb2.py is now included on the repo
 
 ## New features
 - Added zero copy support on puts and gets (Requires splice system call)
