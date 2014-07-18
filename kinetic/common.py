@@ -243,6 +243,7 @@ class LogTypes:
     STATISTICS = 4
     MESSAGES = 5
     LIMITS = 6
+    DEVICE = 7
 
     @classmethod
     def all(cls):
@@ -252,4 +253,5 @@ class LogTypes:
             2->Drive Capacity, 3-> Drive Configuration, 4->Drive usage statistics, and 5-> Drive messages). This can be passed as
             the sole argument to the AdminClient.getLog function.
         """
-        return [cls.UTILIZATIONS, cls.TEMPERATURES, cls.CAPACITIES, cls.CONFIGURATION, cls.STATISTICS, cls.MESSAGES, cls.LIMITS]
+        return [cls.UTILIZATIONS, cls.TEMPERATURES, cls.CAPACITIES, cls.CONFIGURATION, cls.STATISTICS, cls.MESSAGES,
+                cls.LIMITS, cls.DEVICE]
