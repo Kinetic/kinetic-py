@@ -2,6 +2,9 @@ Changes since 0.7.2
 ===========================
 This section will document changes to the library since the last release
 
+## Bug Fixes
+- Fixed problem with status validation on the AdminClient
+
 Changes from 0.7.1 to 0.7.2
 ===========================
 

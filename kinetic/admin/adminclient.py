@@ -32,11 +32,13 @@ class AdminClient(baseclient.BaseClient):
     def _process(self, op, *args, **kwargs):
         header, value = op.build(*args, **kwargs)
         try:
+            r = None
             with self:
                 # update header
                 self.update_header(header)
                 # send message synchronously
                 r, v = self.send(header, value)
+            operations._check_status(r)
             return op.parse(r,v)
         except Exception as e:
             return op.onError(e)
