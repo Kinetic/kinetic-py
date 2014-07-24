@@ -2,6 +2,9 @@ Changes since 0.7.2
 ===========================
 This section will document changes to the library since the last release
 
+## Important
+- Kinetic Protocol version updated to 2.0.6
+
 ## Bug Fixes
 - Fixed problem with status validation on the AdminClient
 
