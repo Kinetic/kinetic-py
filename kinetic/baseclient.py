@@ -48,18 +48,6 @@ def calculate_hmac(secret, message):
     # always add command
     update(message.command)
 
-    # skip value if message.command.body has a tag
-
-    # Value dropped from HMAC on Dec 17
-
-#     try:
-#         skipValue = bool(message.command.body.keyValue.tag)
-#     except AttributeError:
-#         skipValue = False
-#
-#     if not skipValue:
-#         update(message.value)
-
     d = mac.digest()
     if LOG.isEnabledFor(logging.DEBUG):
         LOG.debug('message hmac: %s' % hexlify(d))
@@ -148,7 +136,6 @@ class BaseClient(object):
         self.update_header(h)
         self.network_send(h,v)
         r = self.network_recv()
-        print "Connection: " + str(self.connection_id)
 
     def has_data_available(self):
         tmp = self._socket.recv(1, socket.MSG_PEEK)
