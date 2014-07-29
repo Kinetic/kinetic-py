@@ -27,6 +27,7 @@ import struct
 import common
 import kinetic_pb2 as messages
 import ssl
+import operations
 
 ss = socket
 
@@ -138,6 +139,16 @@ class BaseClient(object):
         self._sequence = itertools.count()
         self.connection_id = int(time.time())
         self._closed = False
+
+        self._handshake()
+
+    def _handshake(self):
+        # Connection id handshake
+        h,v = operations.Noop.build()
+        self.update_header(h)
+        self.network_send(h,v)
+        r = self.network_recv()
+        print "Connection: " + str(self.connection_id)
 
     def has_data_available(self):
         tmp = self._socket.recv(1, socket.MSG_PEEK)
@@ -288,7 +299,8 @@ class BaseClient(object):
         resp = self._recv_delimited_v2()
 
         # update connectionId to whatever the drive said.
-        self.connection_id = resp[0].command.header.connectionID
+        if resp[0].command.header.connectionID:
+            self.connection_id = resp[0].command.header.connectionID
 
         return resp
 
