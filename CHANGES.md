@@ -5,6 +5,9 @@ This section will document changes to the library since the last release
 ## Important
 - Kinetic Protocol version updated to 2.0.6
 
+## New features
+- Added handshake to negotiate connection id during connect
+
 ## Bug Fixes
 - Fixed problem with status validation on the AdminClient
 
