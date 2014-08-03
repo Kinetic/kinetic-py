@@ -7,6 +7,7 @@ This section will document changes to the library since the last release
 
 ## New features
 - Added handshake to negotiate connection id during connect
+- Added TCP_NODELAY socket option to improve performance
 
 ## Bug Fixes
 - Fixed problem with status validation on the AdminClient

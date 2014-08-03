@@ -121,6 +121,7 @@ class BaseClient(object):
         # if connect fails, there is nothing to clean up
         s.connect(sockaddr) # use first
         s.settimeout(self.socket_timeout)
+        s.setsockopt(ss.IPPROTO_TCP, ss.TCP_NODELAY, 1)
 
         # We are connected now, update attributes
         self._socket = s
@@ -132,10 +133,15 @@ class BaseClient(object):
 
     def _handshake(self):
         # Connection id handshake
-        h,v = operations.Noop.build()
+        # any message works, a NOOP should be slighly faster
+        # might as well get something back
+        h,v = operations.GetLog.build([common.LogTypes.CONFIGURATION])
         self.update_header(h)
         self.network_send(h,v)
-        r = self.network_recv()
+        h,v = self.network_recv()
+        operations._check_status(h)
+        log = operations.GetLog.parse(h,v)
+        self.config = log.configuration
 
     def has_data_available(self):
         tmp = self._socket.recv(1, socket.MSG_PEEK)
@@ -180,11 +186,14 @@ class BaseClient(object):
         # 1. write magic number
         # 2. write protobuf message message size, 4 bytes
         # 3. write attached value size, 4 bytes
-        buff = struct.pack(">Bii",ord('F'), len(out), value_ln)
-        self.socket.send(buff)
-
         # 4. write protobuf message byte[]
-        self.socket.send(out)
+
+        buff = struct.pack(">Bii",ord('F'), len(out), value_ln)
+
+        # Send it all in one packet
+        aux = bytearray(buff)
+        aux.extend(out)
+        self.socket.send(aux)
 
         # 5. (optional) write attached value if any
         send_op = getattr(value, "send", None)
