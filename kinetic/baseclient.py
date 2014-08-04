@@ -133,15 +133,11 @@ class BaseClient(object):
 
     def _handshake(self):
         # Connection id handshake
-        # any message works, a NOOP should be slighly faster
-        # might as well get something back
-        h,v = operations.GetLog.build([common.LogTypes.CONFIGURATION])
+        h,v = operations.Noop.build()
         self.update_header(h)
         self.network_send(h,v)
         h,v = self.network_recv()
         operations._check_status(h)
-        log = operations.GetLog.parse(h,v)
-        self.config = log.configuration
 
     def has_data_available(self):
         tmp = self._socket.recv(1, socket.MSG_PEEK)
