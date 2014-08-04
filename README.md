@@ -9,15 +9,26 @@ Initial Setup
     git submodule init
     git submodule update
 
-Running Tests
-=============
-
-    python test/
-
 Installing from Source
 ======================
 
     python setup.py develop
+
+Running Tests
+=============
+The tests need a Kinetic device to run. You can use the simulator available at https://github.com/Seagate/kinetic-java.
+To configure the test environment:
+
+    export KINETIC_HOST=192.168.0.20
+    export KINETIC_PORT=8123
+
+Optionally you can point the tests to the simulator jar:
+
+    export KINETIC_JAR=kinetic-simulator-<currentversion>-jar-with-dependencies.jar
+
+Then to run the tests:
+
+    python test/
 
 Getting Started with Client API
 ========================
