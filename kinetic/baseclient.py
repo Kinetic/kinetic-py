@@ -257,7 +257,7 @@ class BaseClient(object):
         magic, proto_ln, value_ln = struct.unpack_from(">bii", buffer(msg))
 
         if magic!= 70:
-            LOG.warn("Magic number = {0}".format(self.bytearray_to_hex(magic)))
+            LOG.warn("Magic number = {0}".format(magic))
             raise common.KineticClientException("Invalid Magic Value!") # 70 = 'F'
 
         # read proto message
