@@ -9,6 +9,9 @@ This section will document changes to the library since the last release
 - Added handshake to negotiate connection id during connect
 - Added TCP_NODELAY socket option to improve performance
 
+## Behavior changes
+- Removed DEVICE log from LogTypes.add() (Issue #15)
+
 ## Bug Fixes
 - Fixed problem with status validation on the AdminClient
 - Fixed error message when MAgic number is invalid

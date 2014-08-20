@@ -254,4 +254,4 @@ class LogTypes:
             the sole argument to the AdminClient.getLog function.
         """
         return [cls.UTILIZATIONS, cls.TEMPERATURES, cls.CAPACITIES, cls.CONFIGURATION, cls.STATISTICS, cls.MESSAGES,
-                cls.LIMITS, cls.DEVICE]
+                cls.LIMITS]
