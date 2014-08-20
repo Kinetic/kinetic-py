@@ -1,9 +1,12 @@
-Changes since 0.7.2
+Changes since 0.7.3
 ===========================
 This section will document changes to the library since the last release
 
+Changes from 0.7.2 to 0.7.3
+===========================
+
 ## Important
-- Kinetic Protocol version updated to 2.0.6
+- Kinetic Protocol version updated to [2.0.6](https://github.com/Seagate/kinetic-protocol/tree/2.0.6)
 
 ## New features
 - Added handshake to negotiate connection id during connect
@@ -15,7 +18,7 @@ This section will document changes to the library since the last release
 
 ## Bug Fixes
 - Fixed problem with status validation on the AdminClient
-- Fixed error message when MAgic number is invalid
+- Fixed error message when Magic number is invalid
 
 Changes from 0.7.1 to 0.7.2
 ===========================
