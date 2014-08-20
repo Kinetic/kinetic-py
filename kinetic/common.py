@@ -26,6 +26,7 @@ DEFAULT_CONNECT_TIMEOUT = 0.1
 DEFAULT_SOCKET_TIMEOUT = 5
 DEFAULT_CHUNK_SIZE = 64*1024
 
+local = messages.Local()
 
 class DeferedValue():
 

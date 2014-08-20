@@ -17,8 +17,22 @@
 #@author: Ignacio Corderi
 
 # Protocol version
-protocol_version = '2.0.6'
-version = '0.7.3'
+from common import local
+
+protocol_version = local.protocolVersion
+
+from pkg_resources import get_distribution, DistributionNotFound
+import os.path
+
+try:
+    _dist = get_distribution('kinetic')
+    if not __file__.startswith(os.path.join(_dist.location, 'kinetic')):
+        # not installed, but there is another version that *is*
+        raise DistributionNotFound
+except DistributionNotFound:
+    __version__ = 'Please install this project with setup.py'
+else:
+    __version__ = _dist.version
 
 #utils
 from utils import buildRange
