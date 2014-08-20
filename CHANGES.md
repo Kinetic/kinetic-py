@@ -8,6 +8,7 @@ This section will document changes to the library since the last release
 ## New features
 - Added handshake to negotiate connection id during connect
 - Added TCP_NODELAY socket option to improve performance
+- GetKeyRange operations now accept None arguments on keys (Issue #10)
 
 ## Behavior changes
 - Removed DEVICE log from LogTypes.add() (Issue #15)
