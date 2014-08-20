@@ -1,17 +1,18 @@
 Introduction
 ============
-This repository hosts the preliminary phase of the Kinetic Python Client source code. Improvements of this repo will be added in the near future to provide examples and documentation.
+The [kinetic-protocol](https://github.com/Seagate/kinetic-protocol) python client.
 
-Initial Setup
-=============
+Installing latest stable release
+================================
+    pip install kinetic
 
-    git clone https://github.com/Seagate/kinetic-py.git
-    git submodule init
-    git submodule update
 
 Installing from Source
 ======================
 
+    git clone https://github.com/Seagate/kinetic-py.git
+    cd kinetic-py
+    git submodule update --init
     python setup.py develop
 
 Running Tests
@@ -30,8 +31,8 @@ Then to run the tests:
 
     python test/
 
-Getting Started with Client API
-========================
+Getting Started with the basic client
+=====================================
 
 ```python
 from kinetic import Client
