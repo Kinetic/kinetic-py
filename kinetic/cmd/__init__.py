@@ -26,13 +26,16 @@ import shlex
 import socket
 import sys
 
+import kinetic
 from kinetic import client
 from kinetic import PipelinedClient
 
 preparser = argparse.ArgumentParser(add_help=False)
 preparser.add_argument('-H', '--hostname', default='localhost')
 preparser.add_argument('-P', '--port', type=int, default=8123)
-preparser.add_argument('-v', '--verbose', action='count',
+preparser.add_argument('-v', '--version', action='store_true',
+                       help='Show kinetic version')
+preparser.add_argument('-vb', '--verbose', action='count',
                        help='output more info (can stack)')
 parser = argparse.ArgumentParser(parents=[preparser])
 command_parsers = parser.add_subparsers()
@@ -142,13 +145,14 @@ class Cmd(cmd.Cmd, object):
 
     prompt = 'kinetic> '
     intro = """
-    The Kinetic Drive Command Line Interface Tools
+    The Kinetic Protocol Command Line Interface Tools
 
     type help for commands
     """
 
     def __init__(self, **options):
         cmd.Cmd.__init__(self)
+
         hostname = options.get('hostname', 'localhost')
         port = options.get('port', 8123)
         self.client = PipelinedClient(hostname, port)
@@ -276,7 +280,13 @@ def main(args=None):
         args = sys.argv[1:]
     preparse_args, extra_args = preparser.parse_known_args(args)
     configure_logging(preparse_args.verbose)
-    if extra_args:
+
+    if preparse_args.version:
+        # print version and leave
+        print 'kinetic library version "%s"' % kinetic.__version__
+        print 'protocol version "%s"' % kinetic.protocol_version
+        errorcode = 0
+    elif extra_args:
         errorcode = handle_command(args)
     else:
         errorcode = handle_loop(**vars(preparse_args))

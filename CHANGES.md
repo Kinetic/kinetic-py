@@ -2,6 +2,12 @@ Changes since 0.7.3
 ===========================
 This section will document changes to the library since the last release
 
+## Important
+- Kinetic Protocol version updated to 3.0.0
+
+## New features
+- Added `--version` to cmd line tool
+
 Changes from 0.7.2 to 0.7.3
 ===========================
 
