@@ -33,7 +33,7 @@ ss = socket
 
 LOG = logging.getLogger(__name__)
 
-def calculate_hmac(secret, message):
+def calculate_hmac(secret, command):
     mac = hmac.new(secret, digestmod=sha1)
 
     def update(entity):
@@ -45,12 +45,11 @@ def calculate_hmac(secret, message):
         mac.update(struct.pack(">I", len(entity)))
         mac.update(entity)
 
-    # always add command
-    update(message.command)
+    update(command)
 
     d = mac.digest()
     if LOG.isEnabledFor(logging.DEBUG):
-        LOG.debug('message hmac: %s' % hexlify(d))
+        LOG.debug('command hmac: %s' % hexlify(d))
     return d
 
 class BaseClient(object):
@@ -156,16 +155,15 @@ class BaseClient(object):
         self._sequence = itertools.count()
 
 
-    def update_header(self, message):
+    def update_header(self, command):
         """
         Updates the message header with connection specific information.
         The unique sequence is assigned by this method.
 
         :param message: message to be modified (message is modified in place)
         """
-        header = message.command.header
+        header = command.header
         header.clusterVersion = self.cluster_version
-        header.identity = self.identity
         header.connectionID = self.connection_id
         header.sequence = self._sequence.next()
         if LOG.isEnabledFor(logging.DEBUG):
@@ -207,8 +205,17 @@ class BaseClient(object):
                         raise common.ServerDisconnect('Server send disconnect')
                     i += nbytes
 
+    def authenticate(self, command):
+        m = messages.Message()
+        m.commandBytes = command.SerializeToString()
 
-    def network_send(self, header, value):
+        m.authType = messages.Message.HMACAUTH
+        m.hmacAuth.identity = self.identity
+        m.hmacAuth.hmac = calculate_hmac(self.secret, command)
+
+        return m
+
+    def network_send(self, command, value):
         """
         Sends a raw message.
         The HMAC is calculated and added to the message.
@@ -219,14 +226,14 @@ class BaseClient(object):
         # fail fast on NotConnected
         self.socket
 
-        header.hmac = calculate_hmac(self.secret, header)
+        m = self.authenticate(command)
 
         if self.debug:
-            print header
+            print command
 
-        self._send_delimited_v2(header, value)
+        self._send_delimited_v2(m, value)
 
-        return header
+        return m
 
     def toHexString(self, array):
         return ''.join('%02x ' % ord(byte) for byte in array)
@@ -276,9 +283,6 @@ class BaseClient(object):
         proto = messages.Message()
         proto.ParseFromString(str(raw_proto))
 
-        if self.debug:
-            print proto
-
         return (proto, value)
 
     def network_recv(self):
@@ -288,13 +292,27 @@ class BaseClient(object):
         return: the message received
         """
 
-        resp = self._recv_delimited_v2()
+        (m, value) = self._recv_delimited_v2()
+
+        if m.authType == messages.Message.HMACAUTH:
+            if m.hmacAuth.identity == self.identity:
+                hmac = calculate_hmac(self.secret, m.commandBytes)
+                if not hmac == m.hmacAuth.hmac:
+                    raise Exception('Hmac does not match')
+            else:
+                raise Exception('Wrong identity received!')
+
+        resp = messages.Command()
+        resp.ParseFromString(m.commandBytes)
+
+        if self.debug:
+            print resp
 
         # update connectionId to whatever the drive said.
-        if resp[0].command.header.connectionID:
-            self.connection_id = resp[0].command.header.connectionID
+        if resp.header.connectionID:
+            self.connection_id = resp.header.connectionID
 
-        return resp
+        return (resp, value)
 
     def send(self, header, value):
        self.network_send(header, value)

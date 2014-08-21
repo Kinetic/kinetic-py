@@ -75,13 +75,13 @@ class BaseAsync(Client):
             raise common.ConnectionFaulted("Connection {0} is faulted. Can't receive message when connection is on a faulted state.".format(self))
 
         try:
-            header,value = self.network_recv()
-            seq = header.command.header.ackSequence
+            resp,value = self.network_recv()
+            seq = resp.header.ackSequence
             LOG.debug("Received message with ackSequence={0} on connection {1}.".format(seq,self))
             onSuccess,_ = self._pending[seq]
             del self._pending[seq]
             try:
-                self.dispatch(onSuccess,header,value)
+                self.dispatch(onSuccess,resp,value)
             except Exception as e:
                 self._raise(e)
         except Exception as e:
@@ -93,22 +93,22 @@ class BaseAsync(Client):
 
     ### Override BaseClient methods
 
-    def send(self, header, value):
+    def send(self, command, value):
         done = threading.Event()
         class Dummy : pass
         d = Dummy()
         d.error = None
         d.result = None
 
-        def innerSuccess(header, value):
-            d.result = (header, value)
+        def innerSuccess(response, value):
+            d.result = (response, value)
             done.set()
 
         def innerError(e):
             d.error = e
             done.set()
 
-        self.sendAsync(header, value, innerSuccess, innerError)
+        self.sendAsync(command, value, innerSuccess, innerError)
 
         done.wait() # TODO(Nacho): should be add a default timeout?
         if d.error: raise d.error
@@ -116,7 +116,7 @@ class BaseAsync(Client):
 
     ###
 
-    def sendAsync(self, header, value, onSuccess, onError):
+    def sendAsync(self, command, value, onSuccess, onError):
         if self.faulted: # TODO(Nacho): should we fault through onError on fault or bow up on the callers face?
             self._raise(common.ConnectionFaulted("Can't send message when connection is on a faulted state."), onError)
             return #skip the rest
@@ -126,21 +126,21 @@ class BaseAsync(Client):
             self._raise(common.NotConnected("Not connected."), onError)
             return #skip the rest
 
-        def innerSuccess(header, value):
+        def innerSuccess(response, value):
             try:
-                operations._check_status(header)
-                onSuccess(header, value)
+                operations._check_status(response)
+                onSuccess(response, value)
             except Exception as ex:
                 onError(ex)
 
         # get sequence
-        self.update_header(header)
+        self.update_header(command)
 
         # add callback to pending dictionary
-        self._pending[header.command.header.sequence] = (innerSuccess, onError)
+        self._pending[command.header.sequence] = (innerSuccess, onError)
 
         # transmit
-        self.network_send(header, value)
+        self.network_send(command, value)
 
     def _process(self, op, *args, **kwargs):
         if not self.isConnected: raise common.NotConnected("Must call connect() before sending operations.")
