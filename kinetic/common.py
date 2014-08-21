@@ -48,15 +48,15 @@ class Entry(object):
     #the subclass on a fromMessage. I suspect you always want to generate Entry objects,
     #in which case, a staticmethod is appropriate as a factory.
     @staticmethod
-    def fromMessage(header, value):
-        if not header: return None
-        return Entry(header.command.body.keyValue.key, value, EntryMetadata.fromMessage(header))
+    def fromMessage(command, value):
+        if not command: return None
+        return Entry(command.body.keyValue.key, value, EntryMetadata.fromMessage(command))
 
     @staticmethod
-    def fromResponse(header, value):
-        if (header.command.status.code == messages.Message.Status.SUCCESS):
-            return Entry.fromMessage(header, value)
-        elif (header.command.status.code == messages.Message.Status.NOT_FOUND):
+    def fromResponse(response, value):
+        if (response.status.code == messages.Command.Status.SUCCESS):
+            return Entry.fromMessage(response, value)
+        elif (response.status.code == messages.Command.Status.NOT_FOUND):
             return None
         else:
             raise KineticClientException("Invalid response status, can' build entry from response.")
@@ -76,10 +76,10 @@ class Entry(object):
 class EntryMetadata(object):
 
     @staticmethod
-    def fromMessage(msg):
-        if not msg: return None
-        return EntryMetadata(msg.command.body.keyValue.dbVersion, msg.command.body.keyValue.tag,
-                             msg.command.body.keyValue.algorithm)
+    def fromMessage(command):
+        if not command: return None
+        return EntryMetadata(command.body.keyValue.dbVersion, command.body.keyValue.tag,
+                             command.body.keyValue.algorithm)
 
     def __init__(self, version=None, tag=None, algorithm=None):
         self.version = version
