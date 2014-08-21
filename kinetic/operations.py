@@ -370,7 +370,7 @@ class GetLog(object):
         m.header.messageType = messages.Command.GETLOG
 
         log = m.body.getLog
-        log.type.extend(types) #type is actually a repeatable field
+        log.types.extend(types) #type is actually a repeatable field
 
         if device:
             log.device.name = device
