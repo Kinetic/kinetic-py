@@ -3,10 +3,16 @@ Changes since 0.7.3
 This section will document changes to the library since the last release
 
 ## Important
-- Kinetic Protocol version updated to 3.0.0
+- Kinetic Protocol version updated to [3.0.0](https://github.com/Seagate/kinetic-protocol/tree/3.0.0)
 
 ## New features
 - Added `--version` to cmd line tool
+- Added background operations Scan and Optimize (Requires proto 3.0.0)
+
+## Behavior changes
+- Removed GreenClient (Feature overlap with AsyncClient)
+- Removed PipelinedClient (Only used internally by the kineticc)
+
 
 Changes from 0.7.2 to 0.7.3
 ===========================
@@ -30,7 +36,7 @@ Changes from 0.7.1 to 0.7.2
 ===========================
 
 ## Important
-- Kinetic Protocol version updated to 2.0.5
+- Kinetic Protocol version updated to [2.0.5](https://github.com/Seagate/kinetic-protocol/tree/2.0.5)
 - The compiled python proto kinetic/kinetic_pb2.py is now included on the repo
 
 ## New features

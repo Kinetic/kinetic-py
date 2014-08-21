@@ -471,3 +471,40 @@ class Security(object):
     @staticmethod
     def onError(e):
         raise e
+
+###########################
+#  Background operations  #
+###########################
+class MediaScan(object):
+
+    @staticmethod
+    def build(startKey=None, endKey=None, startKeyInclusive=True, endKeyInclusive=True, maxReturned=200):
+        if not startKey:
+            startKey = ''
+        if not endKey:
+            endKey = '\xFF' * common.MAX_KEY_SIZE
+
+        m = messages.Command()
+
+        m.header.messageType = messages.Command.BACKOP
+
+        op = m.body.backgroundOperation
+        op.backOpType = messages.Command.BackgroundOperation.MEDIASCAN
+
+        kr = op.range
+        kr.startKey = startKey
+        kr.endKey = endKey
+        kr.startKeyInclusive = startKeyInclusive
+        kr.endKeyInclusive = endKeyInclusive
+        kr.maxReturned = maxReturned
+
+        return (m, None)
+
+    @staticmethod
+    def parse(m, value):
+        r = m.body.backgroundOperation.range
+        return ([k for k in r.keys], r.endKey)
+
+    @staticmethod
+    def onError(e):
+        raise e

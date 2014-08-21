@@ -87,6 +87,10 @@ class Client(BaseClient):
     def flush(self, *args, **kwargs):
         return self._process(operations.Flush, *args, **kwargs)
 
+    # @RequiresProtocol('3.0.0')
+    def media_scan(self, *args, **kwargs):
+        return self._process(operations.MediaScan, *args, **kwargs)
+
 class KineticRangeIter(object):
 
     def __init__(self, client, startKey, endKey, startKeyInclusive,endKeyInclusive, prefetch):
