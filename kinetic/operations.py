@@ -391,34 +391,20 @@ class GetLog(object):
                 return None
         raise e
 
-class Setup(object):
+
+######################
+#  Setup operations  #
+######################
+class SetClusterVersion(object):
 
     @staticmethod
-    def build(**kwargs):
+    def build(version):
         m = messages.Command()
         m.header.messageType = messages.Command.SETUP
 
-        op = m.body.setup
+        m.body.setup.newClusterVersion = version
 
-        value = None
-
-        if "newClusterVersion" in kwargs:
-            op.newClusterVersion = kwargs["newClusterVersion"]
-
-        if "instantSecureErase" in kwargs:
-            op.instantSecureErase = kwargs["instantSecureErase"]
-
-        if "pin" in kwargs and kwargs["pin"] is not None:
-            op.pin = kwargs["pin"]
-
-        if "setPin" in kwargs:
-            op.setPin = kwargs["setPin"]
-
-        if "firmware" in kwargs:
-            op.firmwareDownload = True
-            value = kwargs['firmware']
-
-        return (m, value)
+        return (m, None)
 
     @staticmethod
     def parse(m, value):
@@ -428,39 +414,71 @@ class Setup(object):
     def onError(e):
         raise e
 
+
+class UpdateFirmware(object):
+
+    @staticmethod
+    def build(firmware):
+        m = messages.Command()
+        m.header.messageType = messages.Command.SETUP
+
+        m.body.setup.firmwareDownload = True
+
+        return (m, firmware)
+
+    @staticmethod
+    def parse(m, value):
+        return
+
+    @staticmethod
+    def onError(e):
+        raise e
+
+
+########################
+#  Security operations #
+########################
 class Security(object):
 
     @staticmethod
-    def build(acls):
+    def build(acls=None, old_erase_pin=None, new_erase_pin=None, old_lock_pin=None, new_lock_pin=None):
         m = messages.Command()
         m.header.messageType = messages.Command.SECURITY
+        op = m.body.security
 
-        proto_acls = []
+        if acls:
+            proto_acls = []
 
-        for acl in acls:
-            proto_acl = messages.Command.Security.ACL(identity=acl.identity,
-                                                      key=acl.key,
-                                                      hmacAlgorithm=acl.hmacAlgorithm)
+            for acl in acls:
+                proto_acl = messages.Command.Security.ACL(identity=acl.identity,
+                                                          key=acl.key,
+                                                          hmacAlgorithm=acl.hmacAlgorithm,
+                                                          maxPriority=acl.max_priority)
 
-            proto_domains = []
+                proto_domains = []
 
-            for domain in acl.domains:
-                proto_d = messages.Command.Security.ACL.Scope(
-                            TlsRequired=domain.tlsRequired)
+                for domain in acl.domains:
+                    proto_d = messages.Command.Security.ACL.Scope(
+                                TlsRequired=domain.tlsRequired)
 
-                proto_d.permission.extend(domain.roles)
+                    proto_d.permission.extend(domain.roles)
 
-                if domain.offset:
-                    proto_d.offset = domain.offset
-                if domain.value:
-                    proto_d.value = domain.value
+                    if domain.offset:
+                        proto_d.offset = domain.offset
+                    if domain.value:
+                        proto_d.value = domain.value
 
-                proto_domains.append(proto_d)
+                    proto_domains.append(proto_d)
 
-            proto_acl.scope.extend(proto_domains)
-            proto_acls.append(proto_acl)
+                proto_acl.scope.extend(proto_domains)
+                proto_acls.append(proto_acl)
 
-        m.body.security.acl.extend(proto_acls)
+            op.acl.extend(proto_acls)
+
+        if old_lock_pin: op.oldLockPIN = old_lock_pin
+        if new_lock_pin: op.newLockPIN = new_lock_pin
+        if old_erase_pin: op.oldErasePIN = old_erase_pin
+        if new_erase_pin: op.newErasePIN = new_erase_pin
 
         return (m, None)
 
@@ -544,6 +562,92 @@ class MediaOptimize(object):
     def parse(m, value):
         r = m.body.backgroundOperation.range
         return ([k for k in r.keys], r.endKey)
+
+    @staticmethod
+    def onError(e):
+        raise e
+
+####################
+#  Pin operations  #
+####################
+class UnlockDevice(object):
+
+    @staticmethod
+    def build():
+        m = messages.Command()
+
+        m.header.messageType = messages.Command.PINOP
+
+        m.body.pinOp.pinOpType = messages.Command.PinOperation.UNLOCK_PINOP
+
+        return (m, None)
+
+    @staticmethod
+    def parse(m, value):
+        return
+
+    @staticmethod
+    def onError(e):
+        raise e
+
+
+class LockDevice(object):
+
+    @staticmethod
+    def build():
+        m = messages.Command()
+
+        m.header.messageType = messages.Command.PINOP
+
+        m.body.pinOp.pinOpType = messages.Command.PinOperation.LOCK_PINOP
+
+        return (m, None)
+
+    @staticmethod
+    def parse(m, value):
+        return
+
+    @staticmethod
+    def onError(e):
+        raise e
+
+
+class EraseDevice(object):
+
+    @staticmethod
+    def build():
+        m = messages.Command()
+
+        m.header.messageType = messages.Command.PINOP
+
+        m.body.pinOp.pinOpType = messages.Command.PinOperation.ERASE_PINOP
+
+        return (m, None)
+
+    @staticmethod
+    def parse(m, value):
+        return
+
+    @staticmethod
+    def onError(e):
+        raise e
+
+
+class SecureEraseDevice(object):
+
+    @staticmethod
+    def build():
+        m = messages.Command()
+
+        m.header.messageType = messages.Command.PINOP
+
+        m.body.pinOp.pinOpType = messages.Command.PinOperation.SECURE_ERASE_PINOP
+
+        return (m, None)
+
+    @staticmethod
+    def parse(m, value):
+        return
 
     @staticmethod
     def onError(e):

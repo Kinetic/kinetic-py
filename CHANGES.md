@@ -4,15 +4,16 @@ This section will document changes to the library since the last release
 
 ## Important
 - Kinetic Protocol version updated to [3.0.0](https://github.com/Seagate/kinetic-protocol/tree/3.0.0)
+- Everything requires requires proto 3.0.0 or higher on the device
 
 ## New features
 - Added `--version` to cmd line tool
-- Added background operations Scan and Optimize (Requires proto 3.0.0)
+- Added background operations Scan and Optimize
+- Added pin operations
 
 ## Behavior changes
 - Removed GreenClient (Feature overlap with AsyncClient)
 - Removed PipelinedClient (Only used internally by the kineticc)
-
 
 Changes from 0.7.2 to 0.7.3
 ===========================

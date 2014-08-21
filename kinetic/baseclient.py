@@ -67,10 +67,9 @@ class BaseClient(object):
                  chunk_size=common.DEFAULT_CHUNK_SIZE,
                  connect_timeout=common.DEFAULT_CONNECT_TIMEOUT,
                  socket_timeout=common.DEFAULT_SOCKET_TIMEOUT,
-                 socket_address=None,
-                 socket_port=0,
+                 socket_address=None, socket_port=0,
                  defer_read=False,
-                 use_ssl=False):
+                 use_ssl=False, pin=None):
         self.hostname = hostname
         self.port = port
         self.identity = identity
@@ -88,6 +87,7 @@ class BaseClient(object):
         self.defer_read = defer_read
         self.wait_on_read = None
         self.use_ssl = use_ssl
+        self.pin = pin
 
     @property
     def socket(self):
@@ -169,6 +169,7 @@ class BaseClient(object):
         if LOG.isEnabledFor(logging.DEBUG):
             LOG.debug("Header updated. Connection=%s, Sequence=%s" % (header.connectionID, header.sequence))
 
+
     def _send_delimited_v2(self, header, value):
         # build message (without value) to write
         out = header.SerializeToString()
@@ -209,9 +210,13 @@ class BaseClient(object):
         m = messages.Message()
         m.commandBytes = command.SerializeToString()
 
-        m.authType = messages.Message.HMACAUTH
-        m.hmacAuth.identity = self.identity
-        m.hmacAuth.hmac = calculate_hmac(self.secret, command)
+        if self.pin:
+            m.authType = messages.Message.PINAUTH
+            m.pinAuth.pin = self.pin
+        else: # Hmac
+            m.authType = messages.Message.HMACAUTH
+            m.hmacAuth.identity = self.identity
+            m.hmacAuth.hmac = calculate_hmac(self.secret, command)
 
         return m
 

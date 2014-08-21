@@ -164,9 +164,18 @@ class ClusterVersionFailureException(KineticMessageException):
         super(ClusterVersionFailureException, self).__init__(status)
         self.cluster_version = cluster_version
 
+
 class HmacAlgorithms:
     INVALID_HMAC_ALGORITHM = -1 # Must come first, so default is invalid
     HmacSHA1 = 1 # this is the default
+
+
+class Priority:
+    NORMAL = 5
+    LOWEST = 1
+    LOWER = 3
+    HIGHER = 7
+    HIGHEST = 9
 
 
 class ACL(object):
@@ -174,11 +183,12 @@ class ACL(object):
     DEFAULT_IDENTITY=1
     DEFAULT_KEY = "asdfasdf"
 
-    def __init__(self, identity=DEFAULT_IDENTITY, key=DEFAULT_KEY, algorithm=HmacAlgorithms.HmacSHA1):
+    def __init__(self, identity=DEFAULT_IDENTITY, key=DEFAULT_KEY, algorithm=HmacAlgorithms.HmacSHA1, max_priority=Priority.NORMAL):
         self.identity = identity
         self.key = key
         self.hmacAlgorithm = algorithm
         self.domains = set()
+        self.max_priority = max_priority
 
 
 class Domain(object):

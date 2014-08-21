@@ -39,7 +39,9 @@ class BaseAsync(Client):
          # start background workers
         self._initialize()
 
+
     def _initialize(self): pass
+
 
     def _raise(self, e, onError=None):
         if onError:
@@ -56,8 +58,10 @@ class BaseAsync(Client):
                 LOG.warn("Unhandled exception when handling unhandled exception. " + str(e))
                 # just swallow it (the other option is faulting)
 
+
     def dispatch(self, fn, *args, **kwargs):
         fn(*args,**kwargs)
+
 
     def _fault_client(self, e):
         self.error = e
@@ -69,6 +73,7 @@ class BaseAsync(Client):
             except Exception as e2:
                 LOG.error("Unhandled exception on callers code when reporting internal error. {0}".format(e2))
         self._pending = {}
+
 
     def _async_recv(self):
         if self.faulted:
@@ -116,6 +121,7 @@ class BaseAsync(Client):
 
     ###
 
+
     def sendAsync(self, command, value, onSuccess, onError):
         if self.faulted: # TODO(Nacho): should we fault through onError on fault or bow up on the callers face?
             self._raise(common.ConnectionFaulted("Can't send message when connection is on a faulted state."), onError)
@@ -142,9 +148,11 @@ class BaseAsync(Client):
         # transmit
         self.network_send(command, value)
 
+
     def _process(self, op, *args, **kwargs):
         if not self.isConnected: raise common.NotConnected("Must call connect() before sending operations.")
         return super(BaseAsync, self)._process(op, *args, **kwargs)
+
 
     def _processAsync(self, op, onSuccess, onError, *args, **kwargs):
         if not self.isConnected: raise common.NotConnected("Must call connect() before sending operations.")
@@ -162,6 +170,7 @@ class BaseAsync(Client):
         header, value = op.build(*args, **kwargs)
         self.sendAsync(header, value, innerSuccess, innerError)
 
+
     def putAsync(self, onSuccess, onError, *args, **kwargs):
         self._processAsync(operations.Put, onSuccess, onError, *args, **kwargs)
 
@@ -169,38 +178,32 @@ class BaseAsync(Client):
         self._processAsync(operations.Get, onSuccess, onError, *args, **kwargs)
 
     def getMetadataAsync(self, onSuccess, onError, *args, **kwargs):
-        return self._processAsync(operations.GetMetadata, onSuccess, onError, *args, **kwargs)
+        self._processAsync(operations.GetMetadata, onSuccess, onError, *args, **kwargs)
 
     def deleteAsync(self, onSuccess, onError, *args, **kwargs):
-        return self._processAsync(operations.Delete, onSuccess, onError, *args, **kwargs)
+        self._processAsync(operations.Delete, onSuccess, onError, *args, **kwargs)
 
     def getNextAsync(self, onSuccess, onError, *args, **kwargs):
-        return self._processAsync(operations.GetNext, onSuccess, onError, *args, **kwargs)
+        self._processAsync(operations.GetNext, onSuccess, onError, *args, **kwargs)
 
     def getPreviousAsync(self, onSuccess, onError, *args, **kwargs):
-        return self._processAsync(operations.GetPrevious, onSuccess, onError, *args, **kwargs)
+        self._processAsync(operations.GetPrevious, onSuccess, onError, *args, **kwargs)
 
     def getKeyRangeAsync(self, onSuccess, onError, *args, **kwargs):
-        return self._processAsync(operations.GetKeyRange, onSuccess, onError, *args, **kwargs)
+        self._processAsync(operations.GetKeyRange, onSuccess, onError, *args, **kwargs)
 
     def getVersionAsync(self, onSuccess, onError, *args, **kwargs):
-        return self._processAsync(operations.GetVersion, onSuccess, onError, *args, **kwargs)
+        self._processAsync(operations.GetVersion, onSuccess, onError, *args, **kwargs)
 
-    # @RequiresProtocol('2.0.3')
     def flushAsync(self, onSuccess, onError, *args, **kwargs):
         self._processAsync(operations.Flush, onSuccess, onError, *args, **kwargs)
 
     def noopAsync(self, onSuccess, onError, *args, **kwargs):
         self._processAsync(operations.Noop, onSuccess, onError, *args, **kwargs)
 
-    # @RequiresProtocol('3.0.0')
     def mediaScanAsync(self, onSuccess, onError, *args, **kwargs):
         self._processAsync(operations.MediaScan, onSuccess, onError, *args, **kwargs)
 
-    # @RequiresProtocol('3.0.0')
     def mediaOptimizeAsync(self, onSuccess, onError, *args, **kwargs):
         self._processAsync(operations.MediaOptimize, onSuccess, onError, *args, **kwargs)
-
-
-
 

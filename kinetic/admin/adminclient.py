@@ -27,6 +27,7 @@ class AdminClient(baseclient.BaseClient):
             kwargs['socket_timeout'] = 60.0
         super(AdminClient, self).__init__(*args, **kwargs)
 
+
     # TODO(Nacho): this code is duplicated with client... not sure if its worth refactoring
     # it's pretty generic, maybe we can move it to the baseclient or something
     def _process(self, op, *args, **kwargs):
@@ -43,25 +44,32 @@ class AdminClient(baseclient.BaseClient):
         except Exception as e:
             return op.onError(e)
 
-    def getLog(self,*args, **kwargs):
+
+    def getLog(self, *args, **kwargs):
         return self._process(operations.GetLog, *args, **kwargs)
 
-    def setPin(self, new_pin, pin=None):
-        return self._process(operations.Setup, pin=pin, setPin=new_pin)
+    def setClusterVersion(self, *args, **kwargs):
+        return self._process(operations.SetClusterVersion, *args, **kwargs)
 
-    def instantSecureErase(self, pin=None):
-        return self._process(operations.Setup, instantSecureErase=True, pin=pin)
+    def updateFirmware(self, *args, **kwargs):
+        return self._process(operations.UpdateFirmware, *args, **kwargs)
 
-    def setClusterVersion(self, cluster_version, pin=None):
-        return self._process(operations.Setup, newClusterVersion=cluster_version, pin=pin)
+    def unlock(self, *args, **kwargs):
+        return self._process(operations.UnlockDevice, *args, **kwargs)
 
-    def updateFirmware(self, binary, pin=None):
-        return self._process(operations.Setup, firmware=binary, pin=pin)
+    def lock(self, *args, **kwargs):
+        return self._process(operations.LockDevice, *args, **kwargs)
 
-    def setSecurity(self, acls):
+    def erase(self, *args, **kwargs):
+        return self._process(operations.EraseDevice, *args, **kwargs)
+
+    def instantSecureErase(self, *args, **kwargs):
+        return self._process(operations.SecureEraseDevice, *args, **kwargs)
+
+    def setSecurity(self, *args, **kwargs):
         """
             Set the access control lists to lock users out of different permissions.
             Arguments: aclList -> A list of ACL (Access Control List) objects.
         """
-        return self._process(operations.Security, acls=acls)
+        return self._process(operations.Security, *args, **kwargs)
 
