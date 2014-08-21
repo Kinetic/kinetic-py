@@ -39,7 +39,6 @@ from utils import buildRange
 
 # client
 from client import Client
-from pipelinedclient import PipelinedClient
 from asyncclient import AsyncClient
 from threadedclient import ThreadedClient
 
