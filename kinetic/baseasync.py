@@ -186,11 +186,20 @@ class BaseAsync(Client):
     def getVersionAsync(self, onSuccess, onError, *args, **kwargs):
         return self._processAsync(operations.GetVersion, onSuccess, onError, *args, **kwargs)
 
+    # @RequiresProtocol('2.0.3')
     def flushAsync(self, onSuccess, onError, *args, **kwargs):
         self._processAsync(operations.Flush, onSuccess, onError, *args, **kwargs)
 
     def noopAsync(self, onSuccess, onError, *args, **kwargs):
         self._processAsync(operations.Noop, onSuccess, onError, *args, **kwargs)
+
+    # @RequiresProtocol('3.0.0')
+    def mediaScanAsync(self, onSuccess, onError, *args, **kwargs):
+        self._processAsync(operations.MediaScan, onSuccess, onError, *args, **kwargs)
+
+    # @RequiresProtocol('3.0.0')
+    def mediaOptimizeAsync(self, onSuccess, onError, *args, **kwargs):
+        self._processAsync(operations.MediaOptimize, onSuccess, onError, *args, **kwargs)
 
 
 
