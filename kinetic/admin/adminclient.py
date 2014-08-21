@@ -65,31 +65,3 @@ class AdminClient(baseclient.BaseClient):
         """
         return self._process(operations.Security, acls=acls)
 
-
-def main():
-    from kinetic.common import LogTypes
-    from kinetic import Client
-
-    logging.basicConfig(format='%(levelname)s: %(message)s', level=logging.INFO)
-
-    client = AdminClient("localhost",8123)
-    client.connect()
-
-    #print client.getLog([LogTypes.Utilization, LogTypes.Temperature, LogTypes.Capacity])
-    #print client.getLog(LogTypes.all())
-
-    with Client("localhost",8123) as nc:
-        nc.delete("id")
-        nc.put("id","1234")
-        print nc.get("id")
-        #client.setPin("111")
-        print client.instantSecureErase("111")
-        #print client.setClusterVersion(1200,"111")
-        print nc.get("id")
-
-    try:
-        input("Press [Enter] to exit.\n")
-    except: None
-
-if __name__ == "__main__":
-    main()
