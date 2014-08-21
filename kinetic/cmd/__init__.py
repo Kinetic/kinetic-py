@@ -27,8 +27,7 @@ import socket
 import sys
 
 import kinetic
-from kinetic import client
-from kinetic import PipelinedClient
+from kinetic import AsyncClient
 
 preparser = argparse.ArgumentParser(add_help=False)
 preparser.add_argument('-H', '--hostname', default='localhost')
@@ -155,8 +154,9 @@ class Cmd(cmd.Cmd, object):
 
         hostname = options.get('hostname', 'localhost')
         port = options.get('port', 8123)
-        self.client = PipelinedClient(hostname, port)
         self.verbose = options.get('verbose') or 0
+        self.client = AsyncClient(hostname, port)
+        self.client.connect()
 
     def do_verbose(self, line):
         """Set active verbosity level [0-3]"""
@@ -230,10 +230,10 @@ class Cmd(cmd.Cmd, object):
 
     @add_parser(getr_parser)
     def do_getr(self, args):
-        keys = self._list(args)
-        if not keys:
-            return 1
-        for entry in self.client.gets(keys):
+        # behave like a prefix
+        if not args.end:
+            args.end = args.start + '\xff'
+        for entry in self.client.getRange(args.start, args.end):
             if args.verbose:
                 print >> sys.stderr, 'key:', entry.key
             sys.stdout.write(entry.value)
@@ -241,9 +241,12 @@ class Cmd(cmd.Cmd, object):
 
     @add_parser(deleter_parser)
     def do_deleter(self, args):
+        def on_success(m): pass
+        def on_error(ex): pass
         keys = self._list(args)
-        if not self.client.deletes(keys):
-            return 1
+        for k in keys:
+            self.client.deleteAsync(on_success, on_error, k, force=True)
+        self.client.wait()
 
 
 def handle_loop(**options):

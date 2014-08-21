@@ -257,7 +257,7 @@ class TestCommand(BaseCommandTestCase):
         # put something there
         self.client.put(self.test_key, 'myvalue')
         # try a short offset to value from command line
-        args = '-v next %s' % self.test_key[:-1]
+        args = '-vb next %s' % self.test_key[:-1]
         with self.capture_stdio() as stdio:
             errorcode = cmd.main(self.conn_args + args)
             stdout, stderr = stdio
@@ -331,7 +331,7 @@ class TestCommand(BaseCommandTestCase):
         # put something there
         self.client.put(self.test_key, 'myvalue')
         # try a short offset to value from command line
-        args = '-v prev %s~' % self.test_key
+        args = '-vb prev %s~' % self.test_key
         with self.capture_stdio() as stdio:
             errorcode = cmd.main(self.conn_args + args)
             stdout, stderr = stdio
@@ -358,8 +358,8 @@ class TestGetRangeCommand(BaseCommandTestCase):
     def test_missing_keys(self):
         args = 'getr %s' % self.test_key
         errorcode, output = self.run_cmd(args)
-        self.assertTrue(errorcode)
-        self.assertEquals('', output)
+        self.assertFalse(errorcode)
+        self.assertEquals('\n', output)
 
     def test_explicit_range(self):
         num_keys = 10
@@ -394,7 +394,7 @@ class TestDeleteRangeCommand(BaseCommandTestCase):
     def test_missing_keys(self):
         args = 'deleter %s' % self.test_key
         errorcode, output = self.run_cmd(args)
-        self.assertTrue(errorcode)
+        self.assertFalse(errorcode)
         self.assertEquals('', output)
 
     def test_explicit_range(self):
