@@ -13,46 +13,42 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='kinetic.proto',
   package='com.seagate.kinetic.proto',
-  serialized_pb='\n\rkinetic.proto\x12\x19\x63om.seagate.kinetic.proto\"\'\n\x05Local\x12\x1e\n\x0fprotocolVersion\x18\x01 \x01(\t:\x05\x33.0.0\"\xad\x36\n\x07Message\x12=\n\x08\x61uthType\x18\x04 \x01(\x0e\x32+.com.seagate.kinetic.proto.Message.AuthType\x12=\n\x08hmacAuth\x18\x05 \x01(\x0b\x32+.com.seagate.kinetic.proto.Message.HMACauth\x12;\n\x07pinAuth\x18\x06 \x01(\x0b\x32*.com.seagate.kinetic.proto.Message.PINauth\x12\x14\n\x0c\x63ommandBytes\x18\x07 \x01(\x0c\x1a*\n\x08HMACauth\x12\x10\n\x08identity\x18\x01 \x01(\x03\x12\x0c\n\x04hmac\x18\x02 \x01(\x0c\x1a\xc7\x01\n\x07PINauth\x12?\n\x05pinOp\x18\x01 \x01(\x0e\x32\x30.com.seagate.kinetic.proto.Message.PINauth.PinOp\x12\x0b\n\x03pin\x18\x02 \x01(\x0c\"n\n\x05PinOp\x12\x1a\n\rINVALID_PINOP\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x10\n\x0cUNLOCK_PINOP\x10\x01\x12\x0e\n\nLOCK_PINOP\x10\x02\x12\x0f\n\x0b\x45RASE_PINOP\x10\x03\x12\x16\n\x12SECURE_ERASE_PINOP\x10\x04\x1a\xfc\x31\n\x07\x43ommand\x12\x41\n\x06header\x18\x01 \x01(\x0b\x32\x31.com.seagate.kinetic.proto.Message.Command.Header\x12=\n\x04\x62ody\x18\x02 \x01(\x0b\x32/.com.seagate.kinetic.proto.Message.Command.Body\x12\x41\n\x06status\x18\x03 \x01(\x0b\x32\x31.com.seagate.kinetic.proto.Message.Command.Status\x1a\xa9\x02\n\x06Header\x12\x16\n\x0e\x63lusterVersion\x18\x01 \x01(\x03\x12\x14\n\x0c\x63onnectionID\x18\x03 \x01(\x03\x12\x10\n\x08sequence\x18\x04 \x01(\x03\x12\x13\n\x0b\x61\x63kSequence\x18\x06 \x01(\x03\x12K\n\x0bmessageType\x18\x07 \x01(\x0e\x32\x36.com.seagate.kinetic.proto.Message.Command.MessageType\x12\x0f\n\x07timeout\x18\t \x01(\x03\x12\x11\n\tearlyExit\x18\n \x01(\x08\x12\x45\n\x08priority\x18\x0c \x01(\x0e\x32\x33.com.seagate.kinetic.proto.Message.Command.Priority\x12\x12\n\nTimeQuanta\x18\r \x01(\x03\x1a\x85\x04\n\x04\x42ody\x12\x45\n\x08keyValue\x18\x01 \x01(\x0b\x32\x33.com.seagate.kinetic.proto.Message.Command.KeyValue\x12?\n\x05range\x18\x02 \x01(\x0b\x32\x30.com.seagate.kinetic.proto.Message.Command.Range\x12?\n\x05setup\x18\x03 \x01(\x0b\x32\x30.com.seagate.kinetic.proto.Message.Command.Setup\x12M\n\x0cp2pOperation\x18\x04 \x01(\x0b\x32\x37.com.seagate.kinetic.proto.Message.Command.P2POperation\x12\x41\n\x06getLog\x18\x06 \x01(\x0b\x32\x31.com.seagate.kinetic.proto.Message.Command.GetLog\x12\x45\n\x08security\x18\x07 \x01(\x0b\x32\x33.com.seagate.kinetic.proto.Message.Command.Security\x12[\n\x13\x62\x61\x63kgroundOperation\x18\x05 \x01(\x0b\x32>.com.seagate.kinetic.proto.Message.Command.BackgroundOperation\x1a\xe6\x04\n\x06Status\x12J\n\x04\x63ode\x18\x01 \x01(\x0e\x32<.com.seagate.kinetic.proto.Message.Command.Status.StatusCode\x12\x15\n\rstatusMessage\x18\x02 \x01(\t\x12\x17\n\x0f\x64\x65tailedMessage\x18\x03 \x01(\x0c\"\xdf\x03\n\nStatusCode\x12 \n\x13INVALID_STATUS_CODE\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x11\n\rNOT_ATTEMPTED\x10\x00\x12\x0b\n\x07SUCCESS\x10\x01\x12\x10\n\x0cHMAC_FAILURE\x10\x02\x12\x12\n\x0eNOT_AUTHORIZED\x10\x03\x12\x13\n\x0fVERSION_FAILURE\x10\x04\x12\x12\n\x0eINTERNAL_ERROR\x10\x05\x12\x13\n\x0fHEADER_REQUIRED\x10\x06\x12\r\n\tNOT_FOUND\x10\x07\x12\x14\n\x10VERSION_MISMATCH\x10\x08\x12\x10\n\x0cSERVICE_BUSY\x10\t\x12\x0b\n\x07\x45XPIRED\x10\n\x12\x0e\n\nDATA_ERROR\x10\x0b\x12\x13\n\x0fPERM_DATA_ERROR\x10\x0c\x12\x1b\n\x17REMOTE_CONNECTION_ERROR\x10\r\x12\x0c\n\x08NO_SPACE\x10\x0e\x12\x1a\n\x16NO_SUCH_HMAC_ALGORITHM\x10\x0f\x12\x13\n\x0fINVALID_REQUEST\x10\x10\x12\x1b\n\x17NESTED_OPERATION_ERRORS\x10\x11\x12\x11\n\rDEVICE_LOCKED\x10\x12\x12\x1b\n\x17\x44\x45VICE_ALREADY_UNLOCKED\x10\x13\x12\x19\n\x15\x43ONNECTION_TERMINATED\x10\x14\x1a\x8e\x02\n\x08KeyValue\x12\x12\n\nnewVersion\x18\x02 \x01(\x0c\x12\r\n\x05\x66orce\x18\x08 \x01(\x08\x12\x0b\n\x03key\x18\x03 \x01(\x0c\x12\x11\n\tdbVersion\x18\x04 \x01(\x0c\x12\x0b\n\x03tag\x18\x05 \x01(\x0c\x12G\n\talgorithm\x18\x06 \x01(\x0e\x32\x34.com.seagate.kinetic.proto.Message.Command.Algorithm\x12\x14\n\x0cmetadataOnly\x18\x07 \x01(\x08\x12S\n\x0fsynchronization\x18\t \x01(\x0e\x32:.com.seagate.kinetic.proto.Message.Command.Synchronization\x1a\x91\x01\n\x05Range\x12\x10\n\x08startKey\x18\x01 \x01(\x0c\x12\x0e\n\x06\x65ndKey\x18\x02 \x01(\x0c\x12\x19\n\x11startKeyInclusive\x18\x03 \x01(\x08\x12\x17\n\x0f\x65ndKeyInclusive\x18\x04 \x01(\x08\x12\x13\n\x0bmaxReturned\x18\x05 \x01(\x05\x12\x0f\n\x07reverse\x18\x06 \x01(\x08\x12\x0c\n\x04keys\x18\x08 \x03(\x0c\x1a\x65\n\x05Setup\x12\x19\n\x11newClusterVersion\x18\x01 \x01(\x03\x12\x18\n\x10\x66irmwareDownload\x18\x05 \x01(\x08\x12\x13\n\x0bnewErasePin\x18\x06 \x01(\x0c\x12\x12\n\nnewLockPin\x18\x07 \x01(\x0c\x1a\xe0\x03\n\x0cP2POperation\x12J\n\x04peer\x18\x01 \x01(\x0b\x32<.com.seagate.kinetic.proto.Message.Command.P2POperation.Peer\x12T\n\toperation\x18\x02 \x03(\x0b\x32\x41.com.seagate.kinetic.proto.Message.Command.P2POperation.Operation\x12#\n\x1b\x61llChildOperationsSucceeded\x18\x03 \x01(\x08\x1a\xd3\x01\n\tOperation\x12\x0b\n\x03key\x18\x03 \x01(\x0c\x12\x0f\n\x07version\x18\x04 \x01(\x0c\x12\x0e\n\x06newKey\x18\x05 \x01(\x0c\x12\r\n\x05\x66orce\x18\x06 \x01(\x08\x12\x41\n\x06status\x18\x07 \x01(\x0b\x32\x31.com.seagate.kinetic.proto.Message.Command.Status\x12\x46\n\x05p2pop\x18\x08 \x01(\x0b\x32\x37.com.seagate.kinetic.proto.Message.Command.P2POperation\x1a\x33\n\x04Peer\x12\x10\n\x08hostname\x18\x01 \x01(\t\x12\x0c\n\x04port\x18\x02 \x01(\x05\x12\x0b\n\x03tls\x18\x03 \x01(\x08\x1a\x8b\x0f\n\x06GetLog\x12\x45\n\x05types\x18\x01 \x03(\x0e\x32\x36.com.seagate.kinetic.proto.Message.Command.GetLog.Type\x12S\n\x0cutilizations\x18\x02 \x03(\x0b\x32=.com.seagate.kinetic.proto.Message.Command.GetLog.Utilization\x12S\n\x0ctemperatures\x18\x03 \x03(\x0b\x32=.com.seagate.kinetic.proto.Message.Command.GetLog.Temperature\x12L\n\x08\x63\x61pacity\x18\x04 \x01(\x0b\x32:.com.seagate.kinetic.proto.Message.Command.GetLog.Capacity\x12V\n\rconfiguration\x18\x05 \x01(\x0b\x32?.com.seagate.kinetic.proto.Message.Command.GetLog.Configuration\x12P\n\nstatistics\x18\x06 \x03(\x0b\x32<.com.seagate.kinetic.proto.Message.Command.GetLog.Statistics\x12\x10\n\x08messages\x18\x07 \x01(\x0c\x12H\n\x06limits\x18\x08 \x01(\x0b\x32\x38.com.seagate.kinetic.proto.Message.Command.GetLog.Limits\x12H\n\x06\x64\x65vice\x18\t \x01(\x0b\x32\x38.com.seagate.kinetic.proto.Message.Command.GetLog.Device\x1a*\n\x0bUtilization\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x02\x1a^\n\x0bTemperature\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07\x63urrent\x18\x02 \x01(\x02\x12\x0f\n\x07minimum\x18\x03 \x01(\x02\x12\x0f\n\x07maximum\x18\x04 \x01(\x02\x12\x0e\n\x06target\x18\x05 \x01(\x02\x1a?\n\x08\x43\x61pacity\x12\x1e\n\x16nominalCapacityInBytes\x18\x04 \x01(\x04\x12\x13\n\x0bportionFull\x18\x05 \x01(\x02\x1a\xe4\x03\n\rConfiguration\x12\x0e\n\x06vendor\x18\x05 \x01(\t\x12\r\n\x05model\x18\x06 \x01(\t\x12\x14\n\x0cserialNumber\x18\x07 \x01(\x0c\x12\x15\n\rworldWideName\x18\x0e \x01(\x0c\x12\x0f\n\x07version\x18\x08 \x01(\t\x12\x17\n\x0f\x63ompilationDate\x18\x0c \x01(\t\x12\x12\n\nsourceHash\x18\r \x01(\t\x12\x17\n\x0fprotocolVersion\x18\x0f \x01(\t\x12\x1f\n\x17protocolCompilationDate\x18\x10 \x01(\t\x12\x1a\n\x12protocolSourceHash\x18\x11 \x01(\t\x12\\\n\tinterface\x18\t \x03(\x0b\x32I.com.seagate.kinetic.proto.Message.Command.GetLog.Configuration.Interface\x12\x0c\n\x04port\x18\n \x01(\x05\x12\x0f\n\x07tlsPort\x18\x0b \x01(\x05\x12\x0f\n\x07Locking\x18\x12 \x01(\x08\x12\x13\n\x0bSecureErase\x18\x13 \x01(\x08\x1aP\n\tInterface\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0b\n\x03MAC\x18\x02 \x01(\x0c\x12\x13\n\x0bipv4Address\x18\x03 \x01(\x0c\x12\x13\n\x0bipv6Address\x18\x04 \x01(\x0c\x1aw\n\nStatistics\x12K\n\x0bmessageType\x18\x01 \x01(\x0e\x32\x36.com.seagate.kinetic.proto.Message.Command.MessageType\x12\r\n\x05\x63ount\x18\x04 \x01(\x04\x12\r\n\x05\x62ytes\x18\x05 \x01(\x04\x1a\x8b\x02\n\x06Limits\x12\x12\n\nmaxKeySize\x18\x01 \x01(\r\x12\x14\n\x0cmaxValueSize\x18\x02 \x01(\r\x12\x16\n\x0emaxVersionSize\x18\x03 \x01(\r\x12\x12\n\nmaxTagSize\x18\x04 \x01(\r\x12\x16\n\x0emaxConnections\x18\x05 \x01(\r\x12\"\n\x1amaxOutstandingReadRequests\x18\x06 \x01(\r\x12#\n\x1bmaxOutstandingWriteRequests\x18\x07 \x01(\r\x12\x16\n\x0emaxMessageSize\x18\x08 \x01(\r\x12\x18\n\x10maxKeyRangeCount\x18\t \x01(\r\x12\x18\n\x10maxIdentityCount\x18\n \x01(\r\x1a\x16\n\x06\x44\x65vice\x12\x0c\n\x04name\x18\x01 \x01(\x0c\"\x9e\x01\n\x04Type\x12\x19\n\x0cINVALID_TYPE\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x10\n\x0cUTILIZATIONS\x10\x00\x12\x10\n\x0cTEMPERATURES\x10\x01\x12\x0e\n\nCAPACITIES\x10\x02\x12\x11\n\rCONFIGURATION\x10\x03\x12\x0e\n\nSTATISTICS\x10\x04\x12\x0c\n\x08MESSAGES\x10\x05\x12\n\n\x06LIMITS\x10\x06\x12\n\n\x06\x44\x45VICE\x10\x07\x1a\xd3\x05\n\x08Security\x12\x44\n\x03\x61\x63l\x18\x02 \x03(\x0b\x32\x37.com.seagate.kinetic.proto.Message.Command.Security.ACL\x1a\x80\x05\n\x03\x41\x43L\x12\x10\n\x08identity\x18\x01 \x01(\x03\x12\x0b\n\x03key\x18\x02 \x01(\x0c\x12\\\n\rhmacAlgorithm\x18\x03 \x01(\x0e\x32\x45.com.seagate.kinetic.proto.Message.Command.Security.ACL.HMACAlgorithm\x12L\n\x05scope\x18\x04 \x03(\x0b\x32=.com.seagate.kinetic.proto.Message.Command.Security.ACL.Scope\x12H\n\x0bmaxPriority\x18\x05 \x01(\x0e\x32\x33.com.seagate.kinetic.proto.Message.Command.Priority\x1a\x93\x01\n\x05Scope\x12\x0e\n\x06offset\x18\x01 \x01(\x03\x12\r\n\x05value\x18\x02 \x01(\x0c\x12V\n\npermission\x18\x03 \x03(\x0e\x32\x42.com.seagate.kinetic.proto.Message.Command.Security.ACL.Permission\x12\x13\n\x0bTlsRequired\x18\x04 \x01(\x08\"B\n\rHMACAlgorithm\x12#\n\x16INVALID_HMAC_ALGORITHM\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x0c\n\x08HmacSHA1\x10\x01\"\x89\x01\n\nPermission\x12\x1f\n\x12INVALID_PERMISSION\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x08\n\x04READ\x10\x00\x12\t\n\x05WRITE\x10\x01\x12\n\n\x06\x44\x45LETE\x10\x02\x12\t\n\x05RANGE\x10\x03\x12\t\n\x05SETUP\x10\x04\x12\t\n\x05P2POP\x10\x05\x12\n\n\x06GETLOG\x10\x07\x12\x0c\n\x08SECURITY\x10\x08\x1a\x82\x02\n\x13\x42\x61\x63kgroundOperation\x12]\n\nbackOpType\x18\x01 \x01(\x0e\x32I.com.seagate.kinetic.proto.Message.Command.BackgroundOperation.BackOpType\x12?\n\x05range\x18\x02 \x01(\x0b\x32\x30.com.seagate.kinetic.proto.Message.Command.Range\"K\n\nBackOpType\x12\x1b\n\x0eINVALID_BACKOP\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\r\n\tMEDIASCAN\x10\x01\x12\x11\n\rMEDIAOPTIMIZE\x10\x02\"c\n\x0fSynchronization\x12$\n\x17INVALID_SYNCHRONIZATION\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x10\n\x0cWRITETHROUGH\x10\x01\x12\r\n\tWRITEBACK\x10\x02\x12\t\n\x05\x46LUSH\x10\x03\"F\n\x08Priority\x12\n\n\x06NORMAL\x10\x05\x12\n\n\x06LOWEST\x10\x01\x12\t\n\x05LOWER\x10\x03\x12\n\n\x06HIGHER\x10\x07\x12\x0b\n\x07HIGHEST\x10\t\"_\n\tAlgorithm\x12\x1e\n\x11INVALID_ALGORITHM\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x08\n\x04SHA1\x10\x01\x12\x08\n\x04SHA2\x10\x02\x12\x08\n\x04SHA3\x10\x03\x12\t\n\x05\x43RC32\x10\x04\x12\t\n\x05\x43RC64\x10\x05\"\xa8\x04\n\x0bMessageType\x12!\n\x14INVALID_MESSAGE_TYPE\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x07\n\x03GET\x10\x02\x12\x10\n\x0cGET_RESPONSE\x10\x01\x12\x07\n\x03PUT\x10\x04\x12\x10\n\x0cPUT_RESPONSE\x10\x03\x12\n\n\x06\x44\x45LETE\x10\x06\x12\x13\n\x0f\x44\x45LETE_RESPONSE\x10\x05\x12\x0b\n\x07GETNEXT\x10\x08\x12\x14\n\x10GETNEXT_RESPONSE\x10\x07\x12\x0f\n\x0bGETPREVIOUS\x10\n\x12\x18\n\x14GETPREVIOUS_RESPONSE\x10\t\x12\x0f\n\x0bGETKEYRANGE\x10\x0c\x12\x18\n\x14GETKEYRANGE_RESPONSE\x10\x0b\x12\x0e\n\nGETVERSION\x10\x10\x12\x17\n\x13GETVERSION_RESPONSE\x10\x0f\x12\t\n\x05SETUP\x10\x16\x12\x12\n\x0eSETUP_RESPONSE\x10\x15\x12\n\n\x06GETLOG\x10\x18\x12\x13\n\x0fGETLOG_RESPONSE\x10\x17\x12\x0c\n\x08SECURITY\x10\x1a\x12\x15\n\x11SECURITY_RESPONSE\x10\x19\x12\x11\n\rPEER2PEERPUSH\x10\x1c\x12\x1a\n\x16PEER2PEERPUSH_RESPONSE\x10\x1b\x12\x08\n\x04NOOP\x10\x1e\x12\x11\n\rNOOP_RESPONSE\x10\x1d\x12\x10\n\x0c\x46LUSHALLDATA\x10 \x12\x19\n\x15\x46LUSHALLDATA_RESPONSE\x10\x1f\x12\n\n\x06\x42\x41\x43KOP\x10\"\x12\x13\n\x0f\x42\x41\x43KOP_RESPONSE\x10!\"\\\n\x08\x41uthType\x12\x1e\n\x11INVALID_AUTH_TYPE\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x0c\n\x08HMACAUTH\x10\x01\x12\x0b\n\x07PINAUTH\x10\x02\x12\x15\n\x11UNSOLICITEDSTATUS\x10\x03\x42\tB\x07Kinetic')
+  serialized_pb='\n\rkinetic.proto\x12\x19\x63om.seagate.kinetic.proto\"\'\n\x05Local\x12\x1e\n\x0fprotocolVersion\x18\x01 \x01(\t:\x05\x33.0.0\"\xfc\x02\n\x07Message\x12=\n\x08\x61uthType\x18\x04 \x01(\x0e\x32+.com.seagate.kinetic.proto.Message.AuthType\x12=\n\x08hmacAuth\x18\x05 \x01(\x0b\x32+.com.seagate.kinetic.proto.Message.HMACauth\x12;\n\x07pinAuth\x18\x06 \x01(\x0b\x32*.com.seagate.kinetic.proto.Message.PINauth\x12\x14\n\x0c\x63ommandBytes\x18\x07 \x01(\x0c\x1a*\n\x08HMACauth\x12\x10\n\x08identity\x18\x01 \x01(\x03\x12\x0c\n\x04hmac\x18\x02 \x01(\x0c\x1a\x16\n\x07PINauth\x12\x0b\n\x03pin\x18\x01 \x01(\x0c\"\\\n\x08\x41uthType\x12\x1e\n\x11INVALID_AUTH_TYPE\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x0c\n\x08HMACAUTH\x10\x01\x12\x0b\n\x07PINAUTH\x10\x02\x12\x15\n\x11UNSOLICITEDSTATUS\x10\x03\"\x91\x32\n\x07\x43ommand\x12\x39\n\x06header\x18\x01 \x01(\x0b\x32).com.seagate.kinetic.proto.Command.Header\x12\x35\n\x04\x62ody\x18\x02 \x01(\x0b\x32\'.com.seagate.kinetic.proto.Command.Body\x12\x39\n\x06status\x18\x03 \x01(\x0b\x32).com.seagate.kinetic.proto.Command.Status\x1a\x99\x02\n\x06Header\x12\x16\n\x0e\x63lusterVersion\x18\x01 \x01(\x03\x12\x14\n\x0c\x63onnectionID\x18\x03 \x01(\x03\x12\x10\n\x08sequence\x18\x04 \x01(\x03\x12\x13\n\x0b\x61\x63kSequence\x18\x06 \x01(\x03\x12\x43\n\x0bmessageType\x18\x07 \x01(\x0e\x32..com.seagate.kinetic.proto.Command.MessageType\x12\x0f\n\x07timeout\x18\t \x01(\x03\x12\x11\n\tearlyExit\x18\n \x01(\x08\x12=\n\x08priority\x18\x0c \x01(\x0e\x32+.com.seagate.kinetic.proto.Command.Priority\x12\x12\n\nTimeQuanta\x18\r \x01(\x03\x1a\x8d\x04\n\x04\x42ody\x12=\n\x08keyValue\x18\x01 \x01(\x0b\x32+.com.seagate.kinetic.proto.Command.KeyValue\x12\x37\n\x05range\x18\x02 \x01(\x0b\x32(.com.seagate.kinetic.proto.Command.Range\x12\x37\n\x05setup\x18\x03 \x01(\x0b\x32(.com.seagate.kinetic.proto.Command.Setup\x12\x45\n\x0cp2pOperation\x18\x04 \x01(\x0b\x32/.com.seagate.kinetic.proto.Command.P2POperation\x12\x39\n\x06getLog\x18\x06 \x01(\x0b\x32).com.seagate.kinetic.proto.Command.GetLog\x12=\n\x08security\x18\x07 \x01(\x0b\x32+.com.seagate.kinetic.proto.Command.Security\x12S\n\x13\x62\x61\x63kgroundOperation\x18\x05 \x01(\x0b\x32\x36.com.seagate.kinetic.proto.Command.BackgroundOperation\x12>\n\x05pinOp\x18\x08 \x01(\x0b\x32/.com.seagate.kinetic.proto.Command.PinOperation\x1a\xde\x04\n\x06Status\x12\x42\n\x04\x63ode\x18\x01 \x01(\x0e\x32\x34.com.seagate.kinetic.proto.Command.Status.StatusCode\x12\x15\n\rstatusMessage\x18\x02 \x01(\t\x12\x17\n\x0f\x64\x65tailedMessage\x18\x03 \x01(\x0c\"\xdf\x03\n\nStatusCode\x12 \n\x13INVALID_STATUS_CODE\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x11\n\rNOT_ATTEMPTED\x10\x00\x12\x0b\n\x07SUCCESS\x10\x01\x12\x10\n\x0cHMAC_FAILURE\x10\x02\x12\x12\n\x0eNOT_AUTHORIZED\x10\x03\x12\x13\n\x0fVERSION_FAILURE\x10\x04\x12\x12\n\x0eINTERNAL_ERROR\x10\x05\x12\x13\n\x0fHEADER_REQUIRED\x10\x06\x12\r\n\tNOT_FOUND\x10\x07\x12\x14\n\x10VERSION_MISMATCH\x10\x08\x12\x10\n\x0cSERVICE_BUSY\x10\t\x12\x0b\n\x07\x45XPIRED\x10\n\x12\x0e\n\nDATA_ERROR\x10\x0b\x12\x13\n\x0fPERM_DATA_ERROR\x10\x0c\x12\x1b\n\x17REMOTE_CONNECTION_ERROR\x10\r\x12\x0c\n\x08NO_SPACE\x10\x0e\x12\x1a\n\x16NO_SUCH_HMAC_ALGORITHM\x10\x0f\x12\x13\n\x0fINVALID_REQUEST\x10\x10\x12\x1b\n\x17NESTED_OPERATION_ERRORS\x10\x11\x12\x11\n\rDEVICE_LOCKED\x10\x12\x12\x1b\n\x17\x44\x45VICE_ALREADY_UNLOCKED\x10\x13\x12\x19\n\x15\x43ONNECTION_TERMINATED\x10\x14\x1a\xfe\x01\n\x08KeyValue\x12\x12\n\nnewVersion\x18\x02 \x01(\x0c\x12\r\n\x05\x66orce\x18\x08 \x01(\x08\x12\x0b\n\x03key\x18\x03 \x01(\x0c\x12\x11\n\tdbVersion\x18\x04 \x01(\x0c\x12\x0b\n\x03tag\x18\x05 \x01(\x0c\x12?\n\talgorithm\x18\x06 \x01(\x0e\x32,.com.seagate.kinetic.proto.Command.Algorithm\x12\x14\n\x0cmetadataOnly\x18\x07 \x01(\x08\x12K\n\x0fsynchronization\x18\t \x01(\x0e\x32\x32.com.seagate.kinetic.proto.Command.Synchronization\x1a\x91\x01\n\x05Range\x12\x10\n\x08startKey\x18\x01 \x01(\x0c\x12\x0e\n\x06\x65ndKey\x18\x02 \x01(\x0c\x12\x19\n\x11startKeyInclusive\x18\x03 \x01(\x08\x12\x17\n\x0f\x65ndKeyInclusive\x18\x04 \x01(\x08\x12\x13\n\x0bmaxReturned\x18\x05 \x01(\x05\x12\x0f\n\x07reverse\x18\x06 \x01(\x08\x12\x0c\n\x04keys\x18\x08 \x03(\x0c\x1a<\n\x05Setup\x12\x19\n\x11newClusterVersion\x18\x01 \x01(\x03\x12\x18\n\x10\x66irmwareDownload\x18\x05 \x01(\x08\x1a\xc0\x03\n\x0cP2POperation\x12\x42\n\x04peer\x18\x01 \x01(\x0b\x32\x34.com.seagate.kinetic.proto.Command.P2POperation.Peer\x12L\n\toperation\x18\x02 \x03(\x0b\x32\x39.com.seagate.kinetic.proto.Command.P2POperation.Operation\x12#\n\x1b\x61llChildOperationsSucceeded\x18\x03 \x01(\x08\x1a\xc3\x01\n\tOperation\x12\x0b\n\x03key\x18\x03 \x01(\x0c\x12\x0f\n\x07version\x18\x04 \x01(\x0c\x12\x0e\n\x06newKey\x18\x05 \x01(\x0c\x12\r\n\x05\x66orce\x18\x06 \x01(\x08\x12\x39\n\x06status\x18\x07 \x01(\x0b\x32).com.seagate.kinetic.proto.Command.Status\x12>\n\x05p2pop\x18\x08 \x01(\x0b\x32/.com.seagate.kinetic.proto.Command.P2POperation\x1a\x33\n\x04Peer\x12\x10\n\x08hostname\x18\x01 \x01(\t\x12\x0c\n\x04port\x18\x02 \x01(\x05\x12\x0b\n\x03tls\x18\x03 \x01(\x08\x1a\x95\x0e\n\x06GetLog\x12=\n\x05types\x18\x01 \x03(\x0e\x32..com.seagate.kinetic.proto.Command.GetLog.Type\x12K\n\x0cutilizations\x18\x02 \x03(\x0b\x32\x35.com.seagate.kinetic.proto.Command.GetLog.Utilization\x12K\n\x0ctemperatures\x18\x03 \x03(\x0b\x32\x35.com.seagate.kinetic.proto.Command.GetLog.Temperature\x12\x44\n\x08\x63\x61pacity\x18\x04 \x01(\x0b\x32\x32.com.seagate.kinetic.proto.Command.GetLog.Capacity\x12N\n\rconfiguration\x18\x05 \x01(\x0b\x32\x37.com.seagate.kinetic.proto.Command.GetLog.Configuration\x12H\n\nstatistics\x18\x06 \x03(\x0b\x32\x34.com.seagate.kinetic.proto.Command.GetLog.Statistics\x12\x10\n\x08messages\x18\x07 \x01(\x0c\x12@\n\x06limits\x18\x08 \x01(\x0b\x32\x30.com.seagate.kinetic.proto.Command.GetLog.Limits\x12@\n\x06\x64\x65vice\x18\t \x01(\x0b\x32\x30.com.seagate.kinetic.proto.Command.GetLog.Device\x1a*\n\x0bUtilization\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x02\x1a^\n\x0bTemperature\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07\x63urrent\x18\x02 \x01(\x02\x12\x0f\n\x07minimum\x18\x03 \x01(\x02\x12\x0f\n\x07maximum\x18\x04 \x01(\x02\x12\x0e\n\x06target\x18\x05 \x01(\x02\x1a?\n\x08\x43\x61pacity\x12\x1e\n\x16nominalCapacityInBytes\x18\x04 \x01(\x04\x12\x13\n\x0bportionFull\x18\x05 \x01(\x02\x1a\xb6\x03\n\rConfiguration\x12\x0e\n\x06vendor\x18\x05 \x01(\t\x12\r\n\x05model\x18\x06 \x01(\t\x12\x14\n\x0cserialNumber\x18\x07 \x01(\x0c\x12\x15\n\rworldWideName\x18\x0e \x01(\x0c\x12\x0f\n\x07version\x18\x08 \x01(\t\x12\x17\n\x0f\x63ompilationDate\x18\x0c \x01(\t\x12\x12\n\nsourceHash\x18\r \x01(\t\x12\x17\n\x0fprotocolVersion\x18\x0f \x01(\t\x12\x1f\n\x17protocolCompilationDate\x18\x10 \x01(\t\x12\x1a\n\x12protocolSourceHash\x18\x11 \x01(\t\x12T\n\tinterface\x18\t \x03(\x0b\x32\x41.com.seagate.kinetic.proto.Command.GetLog.Configuration.Interface\x12\x0c\n\x04port\x18\n \x01(\x05\x12\x0f\n\x07tlsPort\x18\x0b \x01(\x05\x1aP\n\tInterface\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0b\n\x03MAC\x18\x02 \x01(\x0c\x12\x13\n\x0bipv4Address\x18\x03 \x01(\x0c\x12\x13\n\x0bipv6Address\x18\x04 \x01(\x0c\x1ao\n\nStatistics\x12\x43\n\x0bmessageType\x18\x01 \x01(\x0e\x32..com.seagate.kinetic.proto.Command.MessageType\x12\r\n\x05\x63ount\x18\x04 \x01(\x04\x12\r\n\x05\x62ytes\x18\x05 \x01(\x04\x1a\x8b\x02\n\x06Limits\x12\x12\n\nmaxKeySize\x18\x01 \x01(\r\x12\x14\n\x0cmaxValueSize\x18\x02 \x01(\r\x12\x16\n\x0emaxVersionSize\x18\x03 \x01(\r\x12\x12\n\nmaxTagSize\x18\x04 \x01(\r\x12\x16\n\x0emaxConnections\x18\x05 \x01(\r\x12\"\n\x1amaxOutstandingReadRequests\x18\x06 \x01(\r\x12#\n\x1bmaxOutstandingWriteRequests\x18\x07 \x01(\r\x12\x16\n\x0emaxMessageSize\x18\x08 \x01(\r\x12\x18\n\x10maxKeyRangeCount\x18\t \x01(\r\x12\x18\n\x10maxIdentityCount\x18\n \x01(\r\x1a\x16\n\x06\x44\x65vice\x12\x0c\n\x04name\x18\x01 \x01(\x0c\"\x9e\x01\n\x04Type\x12\x19\n\x0cINVALID_TYPE\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x10\n\x0cUTILIZATIONS\x10\x00\x12\x10\n\x0cTEMPERATURES\x10\x01\x12\x0e\n\nCAPACITIES\x10\x02\x12\x11\n\rCONFIGURATION\x10\x03\x12\x0e\n\nSTATISTICS\x10\x04\x12\x0c\n\x08MESSAGES\x10\x05\x12\n\n\x06LIMITS\x10\x06\x12\n\n\x06\x44\x45VICE\x10\x07\x1a\xfd\x05\n\x08Security\x12<\n\x03\x61\x63l\x18\x02 \x03(\x0b\x32/.com.seagate.kinetic.proto.Command.Security.ACL\x12\x12\n\noldLockPIN\x18\x03 \x01(\x0c\x12\x12\n\nnewLockPIN\x18\x04 \x01(\x0c\x12\x13\n\x0boldErasePIN\x18\x05 \x01(\x0c\x12\x13\n\x0bnewErasePIN\x18\x06 \x01(\x0c\x1a\xe0\x04\n\x03\x41\x43L\x12\x10\n\x08identity\x18\x01 \x01(\x03\x12\x0b\n\x03key\x18\x02 \x01(\x0c\x12T\n\rhmacAlgorithm\x18\x03 \x01(\x0e\x32=.com.seagate.kinetic.proto.Command.Security.ACL.HMACAlgorithm\x12\x44\n\x05scope\x18\x04 \x03(\x0b\x32\x35.com.seagate.kinetic.proto.Command.Security.ACL.Scope\x12@\n\x0bmaxPriority\x18\x05 \x01(\x0e\x32+.com.seagate.kinetic.proto.Command.Priority\x1a\x8b\x01\n\x05Scope\x12\x0e\n\x06offset\x18\x01 \x01(\x03\x12\r\n\x05value\x18\x02 \x01(\x0c\x12N\n\npermission\x18\x03 \x03(\x0e\x32:.com.seagate.kinetic.proto.Command.Security.ACL.Permission\x12\x13\n\x0bTlsRequired\x18\x04 \x01(\x08\"B\n\rHMACAlgorithm\x12#\n\x16INVALID_HMAC_ALGORITHM\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x0c\n\x08HmacSHA1\x10\x01\"\x89\x01\n\nPermission\x12\x1f\n\x12INVALID_PERMISSION\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x08\n\x04READ\x10\x00\x12\t\n\x05WRITE\x10\x01\x12\n\n\x06\x44\x45LETE\x10\x02\x12\t\n\x05RANGE\x10\x03\x12\t\n\x05SETUP\x10\x04\x12\t\n\x05P2POP\x10\x05\x12\n\n\x06GETLOG\x10\x07\x12\x0c\n\x08SECURITY\x10\x08\x1a\xf2\x01\n\x13\x42\x61\x63kgroundOperation\x12U\n\nbackOpType\x18\x01 \x01(\x0e\x32\x41.com.seagate.kinetic.proto.Command.BackgroundOperation.BackOpType\x12\x37\n\x05range\x18\x02 \x01(\x0b\x32(.com.seagate.kinetic.proto.Command.Range\"K\n\nBackOpType\x12\x1b\n\x0eINVALID_BACKOP\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\r\n\tMEDIASCAN\x10\x01\x12\x11\n\rMEDIAOPTIMIZE\x10\x02\x1a\xd0\x01\n\x0cPinOperation\x12L\n\tpinOpType\x18\x01 \x01(\x0e\x32\x39.com.seagate.kinetic.proto.Command.PinOperation.PinOpType\"r\n\tPinOpType\x12\x1a\n\rINVALID_PINOP\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x10\n\x0cUNLOCK_PINOP\x10\x01\x12\x0e\n\nLOCK_PINOP\x10\x02\x12\x0f\n\x0b\x45RASE_PINOP\x10\x03\x12\x16\n\x12SECURE_ERASE_PINOP\x10\x04\"c\n\x0fSynchronization\x12$\n\x17INVALID_SYNCHRONIZATION\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x10\n\x0cWRITETHROUGH\x10\x01\x12\r\n\tWRITEBACK\x10\x02\x12\t\n\x05\x46LUSH\x10\x03\"F\n\x08Priority\x12\n\n\x06NORMAL\x10\x05\x12\n\n\x06LOWEST\x10\x01\x12\t\n\x05LOWER\x10\x03\x12\n\n\x06HIGHER\x10\x07\x12\x0b\n\x07HIGHEST\x10\t\"_\n\tAlgorithm\x12\x1e\n\x11INVALID_ALGORITHM\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x08\n\x04SHA1\x10\x01\x12\x08\n\x04SHA2\x10\x02\x12\x08\n\x04SHA3\x10\x03\x12\t\n\x05\x43RC32\x10\x04\x12\t\n\x05\x43RC64\x10\x05\"\xc7\x04\n\x0bMessageType\x12!\n\x14INVALID_MESSAGE_TYPE\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x07\n\x03GET\x10\x02\x12\x10\n\x0cGET_RESPONSE\x10\x01\x12\x07\n\x03PUT\x10\x04\x12\x10\n\x0cPUT_RESPONSE\x10\x03\x12\n\n\x06\x44\x45LETE\x10\x06\x12\x13\n\x0f\x44\x45LETE_RESPONSE\x10\x05\x12\x0b\n\x07GETNEXT\x10\x08\x12\x14\n\x10GETNEXT_RESPONSE\x10\x07\x12\x0f\n\x0bGETPREVIOUS\x10\n\x12\x18\n\x14GETPREVIOUS_RESPONSE\x10\t\x12\x0f\n\x0bGETKEYRANGE\x10\x0c\x12\x18\n\x14GETKEYRANGE_RESPONSE\x10\x0b\x12\x0e\n\nGETVERSION\x10\x10\x12\x17\n\x13GETVERSION_RESPONSE\x10\x0f\x12\t\n\x05SETUP\x10\x16\x12\x12\n\x0eSETUP_RESPONSE\x10\x15\x12\n\n\x06GETLOG\x10\x18\x12\x13\n\x0fGETLOG_RESPONSE\x10\x17\x12\x0c\n\x08SECURITY\x10\x1a\x12\x15\n\x11SECURITY_RESPONSE\x10\x19\x12\x11\n\rPEER2PEERPUSH\x10\x1c\x12\x1a\n\x16PEER2PEERPUSH_RESPONSE\x10\x1b\x12\x08\n\x04NOOP\x10\x1e\x12\x11\n\rNOOP_RESPONSE\x10\x1d\x12\x10\n\x0c\x46LUSHALLDATA\x10 \x12\x19\n\x15\x46LUSHALLDATA_RESPONSE\x10\x1f\x12\n\n\x06\x42\x41\x43KOP\x10\"\x12\x13\n\x0f\x42\x41\x43KOP_RESPONSE\x10!\x12\t\n\x05PINOP\x10$\x12\x12\n\x0ePINOP_RESPONSE\x10#B\tB\x07Kinetic')
 
 
 
-_MESSAGE_PINAUTH_PINOP = _descriptor.EnumDescriptor(
-  name='PinOp',
-  full_name='com.seagate.kinetic.proto.Message.PINauth.PinOp',
+_MESSAGE_AUTHTYPE = _descriptor.EnumDescriptor(
+  name='AuthType',
+  full_name='com.seagate.kinetic.proto.Message.AuthType',
   filename=None,
   file=DESCRIPTOR,
   values=[
     _descriptor.EnumValueDescriptor(
-      name='INVALID_PINOP', index=0, number=-1,
+      name='INVALID_AUTH_TYPE', index=0, number=-1,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='UNLOCK_PINOP', index=1, number=1,
+      name='HMACAUTH', index=1, number=1,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='LOCK_PINOP', index=2, number=2,
+      name='PINAUTH', index=2, number=2,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='ERASE_PINOP', index=3, number=3,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='SECURE_ERASE_PINOP', index=4, number=4,
+      name='UNSOLICITEDSTATUS', index=3, number=3,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=440,
-  serialized_end=550,
+  serialized_start=374,
+  serialized_end=466,
 )
 
-_MESSAGE_COMMAND_STATUS_STATUSCODE = _descriptor.EnumDescriptor(
+_COMMAND_STATUS_STATUSCODE = _descriptor.EnumDescriptor(
   name='StatusCode',
-  full_name='com.seagate.kinetic.proto.Message.Command.Status.StatusCode',
+  full_name='com.seagate.kinetic.proto.Command.Status.StatusCode',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -147,13 +143,13 @@ _MESSAGE_COMMAND_STATUS_STATUSCODE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=1717,
-  serialized_end=2196,
+  serialized_start=1593,
+  serialized_end=2072,
 )
 
-_MESSAGE_COMMAND_GETLOG_TYPE = _descriptor.EnumDescriptor(
+_COMMAND_GETLOG_TYPE = _descriptor.EnumDescriptor(
   name='Type',
-  full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Type',
+  full_name='com.seagate.kinetic.proto.Command.GetLog.Type',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -196,13 +192,13 @@ _MESSAGE_COMMAND_GETLOG_TYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=4979,
-  serialized_end=5137,
+  serialized_start=4648,
+  serialized_end=4806,
 )
 
-_MESSAGE_COMMAND_SECURITY_ACL_HMACALGORITHM = _descriptor.EnumDescriptor(
+_COMMAND_SECURITY_ACL_HMACALGORITHM = _descriptor.EnumDescriptor(
   name='HMACAlgorithm',
-  full_name='com.seagate.kinetic.proto.Message.Command.Security.ACL.HMACAlgorithm',
+  full_name='com.seagate.kinetic.proto.Command.Security.ACL.HMACAlgorithm',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -217,13 +213,13 @@ _MESSAGE_COMMAND_SECURITY_ACL_HMACALGORITHM = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=5657,
-  serialized_end=5723,
+  serialized_start=5368,
+  serialized_end=5434,
 )
 
-_MESSAGE_COMMAND_SECURITY_ACL_PERMISSION = _descriptor.EnumDescriptor(
+_COMMAND_SECURITY_ACL_PERMISSION = _descriptor.EnumDescriptor(
   name='Permission',
-  full_name='com.seagate.kinetic.proto.Message.Command.Security.ACL.Permission',
+  full_name='com.seagate.kinetic.proto.Command.Security.ACL.Permission',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -266,13 +262,13 @@ _MESSAGE_COMMAND_SECURITY_ACL_PERMISSION = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=5726,
-  serialized_end=5863,
+  serialized_start=5437,
+  serialized_end=5574,
 )
 
-_MESSAGE_COMMAND_BACKGROUNDOPERATION_BACKOPTYPE = _descriptor.EnumDescriptor(
+_COMMAND_BACKGROUNDOPERATION_BACKOPTYPE = _descriptor.EnumDescriptor(
   name='BackOpType',
-  full_name='com.seagate.kinetic.proto.Message.Command.BackgroundOperation.BackOpType',
+  full_name='com.seagate.kinetic.proto.Command.BackgroundOperation.BackOpType',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -291,13 +287,46 @@ _MESSAGE_COMMAND_BACKGROUNDOPERATION_BACKOPTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=6049,
-  serialized_end=6124,
+  serialized_start=5744,
+  serialized_end=5819,
 )
 
-_MESSAGE_COMMAND_SYNCHRONIZATION = _descriptor.EnumDescriptor(
+_COMMAND_PINOPERATION_PINOPTYPE = _descriptor.EnumDescriptor(
+  name='PinOpType',
+  full_name='com.seagate.kinetic.proto.Command.PinOperation.PinOpType',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='INVALID_PINOP', index=0, number=-1,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='UNLOCK_PINOP', index=1, number=1,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='LOCK_PINOP', index=2, number=2,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ERASE_PINOP', index=3, number=3,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='SECURE_ERASE_PINOP', index=4, number=4,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=5916,
+  serialized_end=6030,
+)
+
+_COMMAND_SYNCHRONIZATION = _descriptor.EnumDescriptor(
   name='Synchronization',
-  full_name='com.seagate.kinetic.proto.Message.Command.Synchronization',
+  full_name='com.seagate.kinetic.proto.Command.Synchronization',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -320,13 +349,13 @@ _MESSAGE_COMMAND_SYNCHRONIZATION = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=6126,
-  serialized_end=6225,
+  serialized_start=6032,
+  serialized_end=6131,
 )
 
-_MESSAGE_COMMAND_PRIORITY = _descriptor.EnumDescriptor(
+_COMMAND_PRIORITY = _descriptor.EnumDescriptor(
   name='Priority',
-  full_name='com.seagate.kinetic.proto.Message.Command.Priority',
+  full_name='com.seagate.kinetic.proto.Command.Priority',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -353,13 +382,13 @@ _MESSAGE_COMMAND_PRIORITY = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=6227,
-  serialized_end=6297,
+  serialized_start=6133,
+  serialized_end=6203,
 )
 
-_MESSAGE_COMMAND_ALGORITHM = _descriptor.EnumDescriptor(
+_COMMAND_ALGORITHM = _descriptor.EnumDescriptor(
   name='Algorithm',
-  full_name='com.seagate.kinetic.proto.Message.Command.Algorithm',
+  full_name='com.seagate.kinetic.proto.Command.Algorithm',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -390,13 +419,13 @@ _MESSAGE_COMMAND_ALGORITHM = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=6299,
-  serialized_end=6394,
+  serialized_start=6205,
+  serialized_end=6300,
 )
 
-_MESSAGE_COMMAND_MESSAGETYPE = _descriptor.EnumDescriptor(
+_COMMAND_MESSAGETYPE = _descriptor.EnumDescriptor(
   name='MessageType',
-  full_name='com.seagate.kinetic.proto.Message.Command.MessageType',
+  full_name='com.seagate.kinetic.proto.Command.MessageType',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -516,40 +545,19 @@ _MESSAGE_COMMAND_MESSAGETYPE = _descriptor.EnumDescriptor(
       name='BACKOP_RESPONSE', index=28, number=33,
       options=None,
       type=None),
-  ],
-  containing_type=None,
-  options=None,
-  serialized_start=6397,
-  serialized_end=6949,
-)
-
-_MESSAGE_AUTHTYPE = _descriptor.EnumDescriptor(
-  name='AuthType',
-  full_name='com.seagate.kinetic.proto.Message.AuthType',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
     _descriptor.EnumValueDescriptor(
-      name='INVALID_AUTH_TYPE', index=0, number=-1,
+      name='PINOP', index=29, number=36,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='HMACAUTH', index=1, number=1,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='PINAUTH', index=2, number=2,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='UNSOLICITEDSTATUS', index=3, number=3,
+      name='PINOP_RESPONSE', index=30, number=35,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=6951,
-  serialized_end=7043,
+  serialized_start=6303,
+  serialized_end=6886,
 )
 
 
@@ -623,1000 +631,7 @@ _MESSAGE_PINAUTH = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='pinOp', full_name='com.seagate.kinetic.proto.Message.PINauth.pinOp', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=-1,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='pin', full_name='com.seagate.kinetic.proto.Message.PINauth.pin', index=1,
-      number=2, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value="",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-    _MESSAGE_PINAUTH_PINOP,
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=351,
-  serialized_end=550,
-)
-
-_MESSAGE_COMMAND_HEADER = _descriptor.Descriptor(
-  name='Header',
-  full_name='com.seagate.kinetic.proto.Message.Command.Header',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='clusterVersion', full_name='com.seagate.kinetic.proto.Message.Command.Header.clusterVersion', index=0,
-      number=1, type=3, cpp_type=2, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='connectionID', full_name='com.seagate.kinetic.proto.Message.Command.Header.connectionID', index=1,
-      number=3, type=3, cpp_type=2, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='sequence', full_name='com.seagate.kinetic.proto.Message.Command.Header.sequence', index=2,
-      number=4, type=3, cpp_type=2, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='ackSequence', full_name='com.seagate.kinetic.proto.Message.Command.Header.ackSequence', index=3,
-      number=6, type=3, cpp_type=2, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='messageType', full_name='com.seagate.kinetic.proto.Message.Command.Header.messageType', index=4,
-      number=7, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=-1,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='timeout', full_name='com.seagate.kinetic.proto.Message.Command.Header.timeout', index=5,
-      number=9, type=3, cpp_type=2, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='earlyExit', full_name='com.seagate.kinetic.proto.Message.Command.Header.earlyExit', index=6,
-      number=10, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='priority', full_name='com.seagate.kinetic.proto.Message.Command.Header.priority', index=7,
-      number=12, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=5,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='TimeQuanta', full_name='com.seagate.kinetic.proto.Message.Command.Header.TimeQuanta', index=8,
-      number=13, type=3, cpp_type=2, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=762,
-  serialized_end=1059,
-)
-
-_MESSAGE_COMMAND_BODY = _descriptor.Descriptor(
-  name='Body',
-  full_name='com.seagate.kinetic.proto.Message.Command.Body',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='keyValue', full_name='com.seagate.kinetic.proto.Message.Command.Body.keyValue', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='range', full_name='com.seagate.kinetic.proto.Message.Command.Body.range', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='setup', full_name='com.seagate.kinetic.proto.Message.Command.Body.setup', index=2,
-      number=3, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='p2pOperation', full_name='com.seagate.kinetic.proto.Message.Command.Body.p2pOperation', index=3,
-      number=4, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='getLog', full_name='com.seagate.kinetic.proto.Message.Command.Body.getLog', index=4,
-      number=6, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='security', full_name='com.seagate.kinetic.proto.Message.Command.Body.security', index=5,
-      number=7, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='backgroundOperation', full_name='com.seagate.kinetic.proto.Message.Command.Body.backgroundOperation', index=6,
-      number=5, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=1062,
-  serialized_end=1579,
-)
-
-_MESSAGE_COMMAND_STATUS = _descriptor.Descriptor(
-  name='Status',
-  full_name='com.seagate.kinetic.proto.Message.Command.Status',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='code', full_name='com.seagate.kinetic.proto.Message.Command.Status.code', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=-1,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='statusMessage', full_name='com.seagate.kinetic.proto.Message.Command.Status.statusMessage', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='detailedMessage', full_name='com.seagate.kinetic.proto.Message.Command.Status.detailedMessage', index=2,
-      number=3, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value="",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-    _MESSAGE_COMMAND_STATUS_STATUSCODE,
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=1582,
-  serialized_end=2196,
-)
-
-_MESSAGE_COMMAND_KEYVALUE = _descriptor.Descriptor(
-  name='KeyValue',
-  full_name='com.seagate.kinetic.proto.Message.Command.KeyValue',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='newVersion', full_name='com.seagate.kinetic.proto.Message.Command.KeyValue.newVersion', index=0,
-      number=2, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value="",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='force', full_name='com.seagate.kinetic.proto.Message.Command.KeyValue.force', index=1,
-      number=8, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='key', full_name='com.seagate.kinetic.proto.Message.Command.KeyValue.key', index=2,
-      number=3, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value="",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='dbVersion', full_name='com.seagate.kinetic.proto.Message.Command.KeyValue.dbVersion', index=3,
-      number=4, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value="",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='tag', full_name='com.seagate.kinetic.proto.Message.Command.KeyValue.tag', index=4,
-      number=5, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value="",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='algorithm', full_name='com.seagate.kinetic.proto.Message.Command.KeyValue.algorithm', index=5,
-      number=6, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=-1,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='metadataOnly', full_name='com.seagate.kinetic.proto.Message.Command.KeyValue.metadataOnly', index=6,
-      number=7, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='synchronization', full_name='com.seagate.kinetic.proto.Message.Command.KeyValue.synchronization', index=7,
-      number=9, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=-1,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=2199,
-  serialized_end=2469,
-)
-
-_MESSAGE_COMMAND_RANGE = _descriptor.Descriptor(
-  name='Range',
-  full_name='com.seagate.kinetic.proto.Message.Command.Range',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='startKey', full_name='com.seagate.kinetic.proto.Message.Command.Range.startKey', index=0,
-      number=1, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value="",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='endKey', full_name='com.seagate.kinetic.proto.Message.Command.Range.endKey', index=1,
-      number=2, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value="",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='startKeyInclusive', full_name='com.seagate.kinetic.proto.Message.Command.Range.startKeyInclusive', index=2,
-      number=3, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='endKeyInclusive', full_name='com.seagate.kinetic.proto.Message.Command.Range.endKeyInclusive', index=3,
-      number=4, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='maxReturned', full_name='com.seagate.kinetic.proto.Message.Command.Range.maxReturned', index=4,
-      number=5, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='reverse', full_name='com.seagate.kinetic.proto.Message.Command.Range.reverse', index=5,
-      number=6, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='keys', full_name='com.seagate.kinetic.proto.Message.Command.Range.keys', index=6,
-      number=8, type=12, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=2472,
-  serialized_end=2617,
-)
-
-_MESSAGE_COMMAND_SETUP = _descriptor.Descriptor(
-  name='Setup',
-  full_name='com.seagate.kinetic.proto.Message.Command.Setup',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='newClusterVersion', full_name='com.seagate.kinetic.proto.Message.Command.Setup.newClusterVersion', index=0,
-      number=1, type=3, cpp_type=2, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='firmwareDownload', full_name='com.seagate.kinetic.proto.Message.Command.Setup.firmwareDownload', index=1,
-      number=5, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='newErasePin', full_name='com.seagate.kinetic.proto.Message.Command.Setup.newErasePin', index=2,
-      number=6, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value="",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='newLockPin', full_name='com.seagate.kinetic.proto.Message.Command.Setup.newLockPin', index=3,
-      number=7, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value="",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=2619,
-  serialized_end=2720,
-)
-
-_MESSAGE_COMMAND_P2POPERATION_OPERATION = _descriptor.Descriptor(
-  name='Operation',
-  full_name='com.seagate.kinetic.proto.Message.Command.P2POperation.Operation',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='key', full_name='com.seagate.kinetic.proto.Message.Command.P2POperation.Operation.key', index=0,
-      number=3, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value="",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='version', full_name='com.seagate.kinetic.proto.Message.Command.P2POperation.Operation.version', index=1,
-      number=4, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value="",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='newKey', full_name='com.seagate.kinetic.proto.Message.Command.P2POperation.Operation.newKey', index=2,
-      number=5, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value="",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='force', full_name='com.seagate.kinetic.proto.Message.Command.P2POperation.Operation.force', index=3,
-      number=6, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='status', full_name='com.seagate.kinetic.proto.Message.Command.P2POperation.Operation.status', index=4,
-      number=7, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='p2pop', full_name='com.seagate.kinetic.proto.Message.Command.P2POperation.Operation.p2pop', index=5,
-      number=8, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=2939,
-  serialized_end=3150,
-)
-
-_MESSAGE_COMMAND_P2POPERATION_PEER = _descriptor.Descriptor(
-  name='Peer',
-  full_name='com.seagate.kinetic.proto.Message.Command.P2POperation.Peer',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='hostname', full_name='com.seagate.kinetic.proto.Message.Command.P2POperation.Peer.hostname', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='port', full_name='com.seagate.kinetic.proto.Message.Command.P2POperation.Peer.port', index=1,
-      number=2, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='tls', full_name='com.seagate.kinetic.proto.Message.Command.P2POperation.Peer.tls', index=2,
-      number=3, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=3152,
-  serialized_end=3203,
-)
-
-_MESSAGE_COMMAND_P2POPERATION = _descriptor.Descriptor(
-  name='P2POperation',
-  full_name='com.seagate.kinetic.proto.Message.Command.P2POperation',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='peer', full_name='com.seagate.kinetic.proto.Message.Command.P2POperation.peer', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='operation', full_name='com.seagate.kinetic.proto.Message.Command.P2POperation.operation', index=1,
-      number=2, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='allChildOperationsSucceeded', full_name='com.seagate.kinetic.proto.Message.Command.P2POperation.allChildOperationsSucceeded', index=2,
-      number=3, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[_MESSAGE_COMMAND_P2POPERATION_OPERATION, _MESSAGE_COMMAND_P2POPERATION_PEER, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=2723,
-  serialized_end=3203,
-)
-
-_MESSAGE_COMMAND_GETLOG_UTILIZATION = _descriptor.Descriptor(
-  name='Utilization',
-  full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Utilization',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='name', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Utilization.name', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='value', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Utilization.value', index=1,
-      number=2, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=3871,
-  serialized_end=3913,
-)
-
-_MESSAGE_COMMAND_GETLOG_TEMPERATURE = _descriptor.Descriptor(
-  name='Temperature',
-  full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Temperature',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='name', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Temperature.name', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='current', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Temperature.current', index=1,
-      number=2, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='minimum', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Temperature.minimum', index=2,
-      number=3, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='maximum', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Temperature.maximum', index=3,
-      number=4, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='target', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Temperature.target', index=4,
-      number=5, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=3915,
-  serialized_end=4009,
-)
-
-_MESSAGE_COMMAND_GETLOG_CAPACITY = _descriptor.Descriptor(
-  name='Capacity',
-  full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Capacity',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='nominalCapacityInBytes', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Capacity.nominalCapacityInBytes', index=0,
-      number=4, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='portionFull', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Capacity.portionFull', index=1,
-      number=5, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=4011,
-  serialized_end=4074,
-)
-
-_MESSAGE_COMMAND_GETLOG_CONFIGURATION_INTERFACE = _descriptor.Descriptor(
-  name='Interface',
-  full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Configuration.Interface',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='name', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Configuration.Interface.name', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='MAC', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Configuration.Interface.MAC', index=1,
-      number=2, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value="",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='ipv4Address', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Configuration.Interface.ipv4Address', index=2,
-      number=3, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value="",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='ipv6Address', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Configuration.Interface.ipv6Address', index=3,
-      number=4, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value="",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=4481,
-  serialized_end=4561,
-)
-
-_MESSAGE_COMMAND_GETLOG_CONFIGURATION = _descriptor.Descriptor(
-  name='Configuration',
-  full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Configuration',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='vendor', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Configuration.vendor', index=0,
-      number=5, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='model', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Configuration.model', index=1,
-      number=6, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='serialNumber', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Configuration.serialNumber', index=2,
-      number=7, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value="",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='worldWideName', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Configuration.worldWideName', index=3,
-      number=14, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value="",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='version', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Configuration.version', index=4,
-      number=8, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='compilationDate', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Configuration.compilationDate', index=5,
-      number=12, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='sourceHash', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Configuration.sourceHash', index=6,
-      number=13, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='protocolVersion', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Configuration.protocolVersion', index=7,
-      number=15, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='protocolCompilationDate', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Configuration.protocolCompilationDate', index=8,
-      number=16, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='protocolSourceHash', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Configuration.protocolSourceHash', index=9,
-      number=17, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='interface', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Configuration.interface', index=10,
-      number=9, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='port', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Configuration.port', index=11,
-      number=10, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='tlsPort', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Configuration.tlsPort', index=12,
-      number=11, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='Locking', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Configuration.Locking', index=13,
-      number=18, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='SecureErase', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Configuration.SecureErase', index=14,
-      number=19, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[_MESSAGE_COMMAND_GETLOG_CONFIGURATION_INTERFACE, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=4077,
-  serialized_end=4561,
-)
-
-_MESSAGE_COMMAND_GETLOG_STATISTICS = _descriptor.Descriptor(
-  name='Statistics',
-  full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Statistics',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='messageType', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Statistics.messageType', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=-1,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='count', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Statistics.count', index=1,
-      number=4, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='bytes', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Statistics.bytes', index=2,
-      number=5, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=4563,
-  serialized_end=4682,
-)
-
-_MESSAGE_COMMAND_GETLOG_LIMITS = _descriptor.Descriptor(
-  name='Limits',
-  full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Limits',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='maxKeySize', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Limits.maxKeySize', index=0,
-      number=1, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='maxValueSize', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Limits.maxValueSize', index=1,
-      number=2, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='maxVersionSize', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Limits.maxVersionSize', index=2,
-      number=3, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='maxTagSize', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Limits.maxTagSize', index=3,
-      number=4, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='maxConnections', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Limits.maxConnections', index=4,
-      number=5, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='maxOutstandingReadRequests', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Limits.maxOutstandingReadRequests', index=5,
-      number=6, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='maxOutstandingWriteRequests', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Limits.maxOutstandingWriteRequests', index=6,
-      number=7, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='maxMessageSize', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Limits.maxMessageSize', index=7,
-      number=8, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='maxKeyRangeCount', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Limits.maxKeyRangeCount', index=8,
-      number=9, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='maxIdentityCount', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Limits.maxIdentityCount', index=9,
-      number=10, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=4685,
-  serialized_end=4952,
-)
-
-_MESSAGE_COMMAND_GETLOG_DEVICE = _descriptor.Descriptor(
-  name='Device',
-  full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Device',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='name', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.Device.name', index=0,
+      name='pin', full_name='com.seagate.kinetic.proto.Message.PINauth.pin', index=0,
       number=1, type=12, cpp_type=9, label=1,
       has_default_value=False, default_value="",
       message_type=None, enum_type=None, containing_type=None,
@@ -1631,304 +646,8 @@ _MESSAGE_COMMAND_GETLOG_DEVICE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=4954,
-  serialized_end=4976,
-)
-
-_MESSAGE_COMMAND_GETLOG = _descriptor.Descriptor(
-  name='GetLog',
-  full_name='com.seagate.kinetic.proto.Message.Command.GetLog',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='types', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.types', index=0,
-      number=1, type=14, cpp_type=8, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='utilizations', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.utilizations', index=1,
-      number=2, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='temperatures', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.temperatures', index=2,
-      number=3, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='capacity', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.capacity', index=3,
-      number=4, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='configuration', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.configuration', index=4,
-      number=5, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='statistics', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.statistics', index=5,
-      number=6, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='messages', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.messages', index=6,
-      number=7, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value="",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='limits', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.limits', index=7,
-      number=8, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='device', full_name='com.seagate.kinetic.proto.Message.Command.GetLog.device', index=8,
-      number=9, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[_MESSAGE_COMMAND_GETLOG_UTILIZATION, _MESSAGE_COMMAND_GETLOG_TEMPERATURE, _MESSAGE_COMMAND_GETLOG_CAPACITY, _MESSAGE_COMMAND_GETLOG_CONFIGURATION, _MESSAGE_COMMAND_GETLOG_STATISTICS, _MESSAGE_COMMAND_GETLOG_LIMITS, _MESSAGE_COMMAND_GETLOG_DEVICE, ],
-  enum_types=[
-    _MESSAGE_COMMAND_GETLOG_TYPE,
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=3206,
-  serialized_end=5137,
-)
-
-_MESSAGE_COMMAND_SECURITY_ACL_SCOPE = _descriptor.Descriptor(
-  name='Scope',
-  full_name='com.seagate.kinetic.proto.Message.Command.Security.ACL.Scope',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='offset', full_name='com.seagate.kinetic.proto.Message.Command.Security.ACL.Scope.offset', index=0,
-      number=1, type=3, cpp_type=2, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='value', full_name='com.seagate.kinetic.proto.Message.Command.Security.ACL.Scope.value', index=1,
-      number=2, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value="",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='permission', full_name='com.seagate.kinetic.proto.Message.Command.Security.ACL.Scope.permission', index=2,
-      number=3, type=14, cpp_type=8, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='TlsRequired', full_name='com.seagate.kinetic.proto.Message.Command.Security.ACL.Scope.TlsRequired', index=3,
-      number=4, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=5508,
-  serialized_end=5655,
-)
-
-_MESSAGE_COMMAND_SECURITY_ACL = _descriptor.Descriptor(
-  name='ACL',
-  full_name='com.seagate.kinetic.proto.Message.Command.Security.ACL',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='identity', full_name='com.seagate.kinetic.proto.Message.Command.Security.ACL.identity', index=0,
-      number=1, type=3, cpp_type=2, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='key', full_name='com.seagate.kinetic.proto.Message.Command.Security.ACL.key', index=1,
-      number=2, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value="",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='hmacAlgorithm', full_name='com.seagate.kinetic.proto.Message.Command.Security.ACL.hmacAlgorithm', index=2,
-      number=3, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=-1,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='scope', full_name='com.seagate.kinetic.proto.Message.Command.Security.ACL.scope', index=3,
-      number=4, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='maxPriority', full_name='com.seagate.kinetic.proto.Message.Command.Security.ACL.maxPriority', index=4,
-      number=5, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=5,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[_MESSAGE_COMMAND_SECURITY_ACL_SCOPE, ],
-  enum_types=[
-    _MESSAGE_COMMAND_SECURITY_ACL_HMACALGORITHM,
-    _MESSAGE_COMMAND_SECURITY_ACL_PERMISSION,
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=5223,
-  serialized_end=5863,
-)
-
-_MESSAGE_COMMAND_SECURITY = _descriptor.Descriptor(
-  name='Security',
-  full_name='com.seagate.kinetic.proto.Message.Command.Security',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='acl', full_name='com.seagate.kinetic.proto.Message.Command.Security.acl', index=0,
-      number=2, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[_MESSAGE_COMMAND_SECURITY_ACL, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=5140,
-  serialized_end=5863,
-)
-
-_MESSAGE_COMMAND_BACKGROUNDOPERATION = _descriptor.Descriptor(
-  name='BackgroundOperation',
-  full_name='com.seagate.kinetic.proto.Message.Command.BackgroundOperation',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='backOpType', full_name='com.seagate.kinetic.proto.Message.Command.BackgroundOperation.backOpType', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=-1,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='range', full_name='com.seagate.kinetic.proto.Message.Command.BackgroundOperation.range', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-    _MESSAGE_COMMAND_BACKGROUNDOPERATION_BACKOPTYPE,
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=5866,
-  serialized_end=6124,
-)
-
-_MESSAGE_COMMAND = _descriptor.Descriptor(
-  name='Command',
-  full_name='com.seagate.kinetic.proto.Message.Command',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='header', full_name='com.seagate.kinetic.proto.Message.Command.header', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='body', full_name='com.seagate.kinetic.proto.Message.Command.body', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='status', full_name='com.seagate.kinetic.proto.Message.Command.status', index=2,
-      number=3, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[_MESSAGE_COMMAND_HEADER, _MESSAGE_COMMAND_BODY, _MESSAGE_COMMAND_STATUS, _MESSAGE_COMMAND_KEYVALUE, _MESSAGE_COMMAND_RANGE, _MESSAGE_COMMAND_SETUP, _MESSAGE_COMMAND_P2POPERATION, _MESSAGE_COMMAND_GETLOG, _MESSAGE_COMMAND_SECURITY, _MESSAGE_COMMAND_BACKGROUNDOPERATION, ],
-  enum_types=[
-    _MESSAGE_COMMAND_SYNCHRONIZATION,
-    _MESSAGE_COMMAND_PRIORITY,
-    _MESSAGE_COMMAND_ALGORITHM,
-    _MESSAGE_COMMAND_MESSAGETYPE,
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=553,
-  serialized_end=6949,
+  serialized_start=350,
+  serialized_end=372,
 )
 
 _MESSAGE = _descriptor.Descriptor(
@@ -1969,7 +688,7 @@ _MESSAGE = _descriptor.Descriptor(
   ],
   extensions=[
   ],
-  nested_types=[_MESSAGE_HMACAUTH, _MESSAGE_PINAUTH, _MESSAGE_COMMAND, ],
+  nested_types=[_MESSAGE_HMACAUTH, _MESSAGE_PINAUTH, ],
   enum_types=[
     _MESSAGE_AUTHTYPE,
   ],
@@ -1977,87 +696,1406 @@ _MESSAGE = _descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=86,
-  serialized_end=7043,
+  serialized_end=466,
+)
+
+
+_COMMAND_HEADER = _descriptor.Descriptor(
+  name='Header',
+  full_name='com.seagate.kinetic.proto.Command.Header',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='clusterVersion', full_name='com.seagate.kinetic.proto.Command.Header.clusterVersion', index=0,
+      number=1, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='connectionID', full_name='com.seagate.kinetic.proto.Command.Header.connectionID', index=1,
+      number=3, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='sequence', full_name='com.seagate.kinetic.proto.Command.Header.sequence', index=2,
+      number=4, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='ackSequence', full_name='com.seagate.kinetic.proto.Command.Header.ackSequence', index=3,
+      number=6, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='messageType', full_name='com.seagate.kinetic.proto.Command.Header.messageType', index=4,
+      number=7, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=-1,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='timeout', full_name='com.seagate.kinetic.proto.Command.Header.timeout', index=5,
+      number=9, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='earlyExit', full_name='com.seagate.kinetic.proto.Command.Header.earlyExit', index=6,
+      number=10, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='priority', full_name='com.seagate.kinetic.proto.Command.Header.priority', index=7,
+      number=12, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=5,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='TimeQuanta', full_name='com.seagate.kinetic.proto.Command.Header.TimeQuanta', index=8,
+      number=13, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=654,
+  serialized_end=935,
+)
+
+_COMMAND_BODY = _descriptor.Descriptor(
+  name='Body',
+  full_name='com.seagate.kinetic.proto.Command.Body',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='keyValue', full_name='com.seagate.kinetic.proto.Command.Body.keyValue', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='range', full_name='com.seagate.kinetic.proto.Command.Body.range', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='setup', full_name='com.seagate.kinetic.proto.Command.Body.setup', index=2,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='p2pOperation', full_name='com.seagate.kinetic.proto.Command.Body.p2pOperation', index=3,
+      number=4, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='getLog', full_name='com.seagate.kinetic.proto.Command.Body.getLog', index=4,
+      number=6, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='security', full_name='com.seagate.kinetic.proto.Command.Body.security', index=5,
+      number=7, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='backgroundOperation', full_name='com.seagate.kinetic.proto.Command.Body.backgroundOperation', index=6,
+      number=5, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='pinOp', full_name='com.seagate.kinetic.proto.Command.Body.pinOp', index=7,
+      number=8, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=938,
+  serialized_end=1463,
+)
+
+_COMMAND_STATUS = _descriptor.Descriptor(
+  name='Status',
+  full_name='com.seagate.kinetic.proto.Command.Status',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='code', full_name='com.seagate.kinetic.proto.Command.Status.code', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=-1,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='statusMessage', full_name='com.seagate.kinetic.proto.Command.Status.statusMessage', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='detailedMessage', full_name='com.seagate.kinetic.proto.Command.Status.detailedMessage', index=2,
+      number=3, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+    _COMMAND_STATUS_STATUSCODE,
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=1466,
+  serialized_end=2072,
+)
+
+_COMMAND_KEYVALUE = _descriptor.Descriptor(
+  name='KeyValue',
+  full_name='com.seagate.kinetic.proto.Command.KeyValue',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='newVersion', full_name='com.seagate.kinetic.proto.Command.KeyValue.newVersion', index=0,
+      number=2, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='force', full_name='com.seagate.kinetic.proto.Command.KeyValue.force', index=1,
+      number=8, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='key', full_name='com.seagate.kinetic.proto.Command.KeyValue.key', index=2,
+      number=3, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='dbVersion', full_name='com.seagate.kinetic.proto.Command.KeyValue.dbVersion', index=3,
+      number=4, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='tag', full_name='com.seagate.kinetic.proto.Command.KeyValue.tag', index=4,
+      number=5, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='algorithm', full_name='com.seagate.kinetic.proto.Command.KeyValue.algorithm', index=5,
+      number=6, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=-1,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='metadataOnly', full_name='com.seagate.kinetic.proto.Command.KeyValue.metadataOnly', index=6,
+      number=7, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='synchronization', full_name='com.seagate.kinetic.proto.Command.KeyValue.synchronization', index=7,
+      number=9, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=-1,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=2075,
+  serialized_end=2329,
+)
+
+_COMMAND_RANGE = _descriptor.Descriptor(
+  name='Range',
+  full_name='com.seagate.kinetic.proto.Command.Range',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='startKey', full_name='com.seagate.kinetic.proto.Command.Range.startKey', index=0,
+      number=1, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='endKey', full_name='com.seagate.kinetic.proto.Command.Range.endKey', index=1,
+      number=2, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='startKeyInclusive', full_name='com.seagate.kinetic.proto.Command.Range.startKeyInclusive', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='endKeyInclusive', full_name='com.seagate.kinetic.proto.Command.Range.endKeyInclusive', index=3,
+      number=4, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='maxReturned', full_name='com.seagate.kinetic.proto.Command.Range.maxReturned', index=4,
+      number=5, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='reverse', full_name='com.seagate.kinetic.proto.Command.Range.reverse', index=5,
+      number=6, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='keys', full_name='com.seagate.kinetic.proto.Command.Range.keys', index=6,
+      number=8, type=12, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=2332,
+  serialized_end=2477,
+)
+
+_COMMAND_SETUP = _descriptor.Descriptor(
+  name='Setup',
+  full_name='com.seagate.kinetic.proto.Command.Setup',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='newClusterVersion', full_name='com.seagate.kinetic.proto.Command.Setup.newClusterVersion', index=0,
+      number=1, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='firmwareDownload', full_name='com.seagate.kinetic.proto.Command.Setup.firmwareDownload', index=1,
+      number=5, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=2479,
+  serialized_end=2539,
+)
+
+_COMMAND_P2POPERATION_OPERATION = _descriptor.Descriptor(
+  name='Operation',
+  full_name='com.seagate.kinetic.proto.Command.P2POperation.Operation',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='key', full_name='com.seagate.kinetic.proto.Command.P2POperation.Operation.key', index=0,
+      number=3, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='version', full_name='com.seagate.kinetic.proto.Command.P2POperation.Operation.version', index=1,
+      number=4, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='newKey', full_name='com.seagate.kinetic.proto.Command.P2POperation.Operation.newKey', index=2,
+      number=5, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='force', full_name='com.seagate.kinetic.proto.Command.P2POperation.Operation.force', index=3,
+      number=6, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='status', full_name='com.seagate.kinetic.proto.Command.P2POperation.Operation.status', index=4,
+      number=7, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='p2pop', full_name='com.seagate.kinetic.proto.Command.P2POperation.Operation.p2pop', index=5,
+      number=8, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=2742,
+  serialized_end=2937,
+)
+
+_COMMAND_P2POPERATION_PEER = _descriptor.Descriptor(
+  name='Peer',
+  full_name='com.seagate.kinetic.proto.Command.P2POperation.Peer',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='hostname', full_name='com.seagate.kinetic.proto.Command.P2POperation.Peer.hostname', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='port', full_name='com.seagate.kinetic.proto.Command.P2POperation.Peer.port', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='tls', full_name='com.seagate.kinetic.proto.Command.P2POperation.Peer.tls', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=2939,
+  serialized_end=2990,
+)
+
+_COMMAND_P2POPERATION = _descriptor.Descriptor(
+  name='P2POperation',
+  full_name='com.seagate.kinetic.proto.Command.P2POperation',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='peer', full_name='com.seagate.kinetic.proto.Command.P2POperation.peer', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='operation', full_name='com.seagate.kinetic.proto.Command.P2POperation.operation', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='allChildOperationsSucceeded', full_name='com.seagate.kinetic.proto.Command.P2POperation.allChildOperationsSucceeded', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[_COMMAND_P2POPERATION_OPERATION, _COMMAND_P2POPERATION_PEER, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=2542,
+  serialized_end=2990,
+)
+
+_COMMAND_GETLOG_UTILIZATION = _descriptor.Descriptor(
+  name='Utilization',
+  full_name='com.seagate.kinetic.proto.Command.GetLog.Utilization',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='name', full_name='com.seagate.kinetic.proto.Command.GetLog.Utilization.name', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='value', full_name='com.seagate.kinetic.proto.Command.GetLog.Utilization.value', index=1,
+      number=2, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=3594,
+  serialized_end=3636,
+)
+
+_COMMAND_GETLOG_TEMPERATURE = _descriptor.Descriptor(
+  name='Temperature',
+  full_name='com.seagate.kinetic.proto.Command.GetLog.Temperature',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='name', full_name='com.seagate.kinetic.proto.Command.GetLog.Temperature.name', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='current', full_name='com.seagate.kinetic.proto.Command.GetLog.Temperature.current', index=1,
+      number=2, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='minimum', full_name='com.seagate.kinetic.proto.Command.GetLog.Temperature.minimum', index=2,
+      number=3, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='maximum', full_name='com.seagate.kinetic.proto.Command.GetLog.Temperature.maximum', index=3,
+      number=4, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='target', full_name='com.seagate.kinetic.proto.Command.GetLog.Temperature.target', index=4,
+      number=5, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=3638,
+  serialized_end=3732,
+)
+
+_COMMAND_GETLOG_CAPACITY = _descriptor.Descriptor(
+  name='Capacity',
+  full_name='com.seagate.kinetic.proto.Command.GetLog.Capacity',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='nominalCapacityInBytes', full_name='com.seagate.kinetic.proto.Command.GetLog.Capacity.nominalCapacityInBytes', index=0,
+      number=4, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='portionFull', full_name='com.seagate.kinetic.proto.Command.GetLog.Capacity.portionFull', index=1,
+      number=5, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=3734,
+  serialized_end=3797,
+)
+
+_COMMAND_GETLOG_CONFIGURATION_INTERFACE = _descriptor.Descriptor(
+  name='Interface',
+  full_name='com.seagate.kinetic.proto.Command.GetLog.Configuration.Interface',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='name', full_name='com.seagate.kinetic.proto.Command.GetLog.Configuration.Interface.name', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='MAC', full_name='com.seagate.kinetic.proto.Command.GetLog.Configuration.Interface.MAC', index=1,
+      number=2, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='ipv4Address', full_name='com.seagate.kinetic.proto.Command.GetLog.Configuration.Interface.ipv4Address', index=2,
+      number=3, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='ipv6Address', full_name='com.seagate.kinetic.proto.Command.GetLog.Configuration.Interface.ipv6Address', index=3,
+      number=4, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=4158,
+  serialized_end=4238,
+)
+
+_COMMAND_GETLOG_CONFIGURATION = _descriptor.Descriptor(
+  name='Configuration',
+  full_name='com.seagate.kinetic.proto.Command.GetLog.Configuration',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='vendor', full_name='com.seagate.kinetic.proto.Command.GetLog.Configuration.vendor', index=0,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='model', full_name='com.seagate.kinetic.proto.Command.GetLog.Configuration.model', index=1,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='serialNumber', full_name='com.seagate.kinetic.proto.Command.GetLog.Configuration.serialNumber', index=2,
+      number=7, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='worldWideName', full_name='com.seagate.kinetic.proto.Command.GetLog.Configuration.worldWideName', index=3,
+      number=14, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='version', full_name='com.seagate.kinetic.proto.Command.GetLog.Configuration.version', index=4,
+      number=8, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='compilationDate', full_name='com.seagate.kinetic.proto.Command.GetLog.Configuration.compilationDate', index=5,
+      number=12, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='sourceHash', full_name='com.seagate.kinetic.proto.Command.GetLog.Configuration.sourceHash', index=6,
+      number=13, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='protocolVersion', full_name='com.seagate.kinetic.proto.Command.GetLog.Configuration.protocolVersion', index=7,
+      number=15, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='protocolCompilationDate', full_name='com.seagate.kinetic.proto.Command.GetLog.Configuration.protocolCompilationDate', index=8,
+      number=16, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='protocolSourceHash', full_name='com.seagate.kinetic.proto.Command.GetLog.Configuration.protocolSourceHash', index=9,
+      number=17, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='interface', full_name='com.seagate.kinetic.proto.Command.GetLog.Configuration.interface', index=10,
+      number=9, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='port', full_name='com.seagate.kinetic.proto.Command.GetLog.Configuration.port', index=11,
+      number=10, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='tlsPort', full_name='com.seagate.kinetic.proto.Command.GetLog.Configuration.tlsPort', index=12,
+      number=11, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[_COMMAND_GETLOG_CONFIGURATION_INTERFACE, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=3800,
+  serialized_end=4238,
+)
+
+_COMMAND_GETLOG_STATISTICS = _descriptor.Descriptor(
+  name='Statistics',
+  full_name='com.seagate.kinetic.proto.Command.GetLog.Statistics',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='messageType', full_name='com.seagate.kinetic.proto.Command.GetLog.Statistics.messageType', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=-1,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='count', full_name='com.seagate.kinetic.proto.Command.GetLog.Statistics.count', index=1,
+      number=4, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='bytes', full_name='com.seagate.kinetic.proto.Command.GetLog.Statistics.bytes', index=2,
+      number=5, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=4240,
+  serialized_end=4351,
+)
+
+_COMMAND_GETLOG_LIMITS = _descriptor.Descriptor(
+  name='Limits',
+  full_name='com.seagate.kinetic.proto.Command.GetLog.Limits',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='maxKeySize', full_name='com.seagate.kinetic.proto.Command.GetLog.Limits.maxKeySize', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='maxValueSize', full_name='com.seagate.kinetic.proto.Command.GetLog.Limits.maxValueSize', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='maxVersionSize', full_name='com.seagate.kinetic.proto.Command.GetLog.Limits.maxVersionSize', index=2,
+      number=3, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='maxTagSize', full_name='com.seagate.kinetic.proto.Command.GetLog.Limits.maxTagSize', index=3,
+      number=4, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='maxConnections', full_name='com.seagate.kinetic.proto.Command.GetLog.Limits.maxConnections', index=4,
+      number=5, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='maxOutstandingReadRequests', full_name='com.seagate.kinetic.proto.Command.GetLog.Limits.maxOutstandingReadRequests', index=5,
+      number=6, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='maxOutstandingWriteRequests', full_name='com.seagate.kinetic.proto.Command.GetLog.Limits.maxOutstandingWriteRequests', index=6,
+      number=7, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='maxMessageSize', full_name='com.seagate.kinetic.proto.Command.GetLog.Limits.maxMessageSize', index=7,
+      number=8, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='maxKeyRangeCount', full_name='com.seagate.kinetic.proto.Command.GetLog.Limits.maxKeyRangeCount', index=8,
+      number=9, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='maxIdentityCount', full_name='com.seagate.kinetic.proto.Command.GetLog.Limits.maxIdentityCount', index=9,
+      number=10, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=4354,
+  serialized_end=4621,
+)
+
+_COMMAND_GETLOG_DEVICE = _descriptor.Descriptor(
+  name='Device',
+  full_name='com.seagate.kinetic.proto.Command.GetLog.Device',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='name', full_name='com.seagate.kinetic.proto.Command.GetLog.Device.name', index=0,
+      number=1, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=4623,
+  serialized_end=4645,
+)
+
+_COMMAND_GETLOG = _descriptor.Descriptor(
+  name='GetLog',
+  full_name='com.seagate.kinetic.proto.Command.GetLog',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='types', full_name='com.seagate.kinetic.proto.Command.GetLog.types', index=0,
+      number=1, type=14, cpp_type=8, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='utilizations', full_name='com.seagate.kinetic.proto.Command.GetLog.utilizations', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='temperatures', full_name='com.seagate.kinetic.proto.Command.GetLog.temperatures', index=2,
+      number=3, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='capacity', full_name='com.seagate.kinetic.proto.Command.GetLog.capacity', index=3,
+      number=4, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='configuration', full_name='com.seagate.kinetic.proto.Command.GetLog.configuration', index=4,
+      number=5, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='statistics', full_name='com.seagate.kinetic.proto.Command.GetLog.statistics', index=5,
+      number=6, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='messages', full_name='com.seagate.kinetic.proto.Command.GetLog.messages', index=6,
+      number=7, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='limits', full_name='com.seagate.kinetic.proto.Command.GetLog.limits', index=7,
+      number=8, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='device', full_name='com.seagate.kinetic.proto.Command.GetLog.device', index=8,
+      number=9, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[_COMMAND_GETLOG_UTILIZATION, _COMMAND_GETLOG_TEMPERATURE, _COMMAND_GETLOG_CAPACITY, _COMMAND_GETLOG_CONFIGURATION, _COMMAND_GETLOG_STATISTICS, _COMMAND_GETLOG_LIMITS, _COMMAND_GETLOG_DEVICE, ],
+  enum_types=[
+    _COMMAND_GETLOG_TYPE,
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=2993,
+  serialized_end=4806,
+)
+
+_COMMAND_SECURITY_ACL_SCOPE = _descriptor.Descriptor(
+  name='Scope',
+  full_name='com.seagate.kinetic.proto.Command.Security.ACL.Scope',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='offset', full_name='com.seagate.kinetic.proto.Command.Security.ACL.Scope.offset', index=0,
+      number=1, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='value', full_name='com.seagate.kinetic.proto.Command.Security.ACL.Scope.value', index=1,
+      number=2, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='permission', full_name='com.seagate.kinetic.proto.Command.Security.ACL.Scope.permission', index=2,
+      number=3, type=14, cpp_type=8, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='TlsRequired', full_name='com.seagate.kinetic.proto.Command.Security.ACL.Scope.TlsRequired', index=3,
+      number=4, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=5227,
+  serialized_end=5366,
+)
+
+_COMMAND_SECURITY_ACL = _descriptor.Descriptor(
+  name='ACL',
+  full_name='com.seagate.kinetic.proto.Command.Security.ACL',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='identity', full_name='com.seagate.kinetic.proto.Command.Security.ACL.identity', index=0,
+      number=1, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='key', full_name='com.seagate.kinetic.proto.Command.Security.ACL.key', index=1,
+      number=2, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='hmacAlgorithm', full_name='com.seagate.kinetic.proto.Command.Security.ACL.hmacAlgorithm', index=2,
+      number=3, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=-1,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='scope', full_name='com.seagate.kinetic.proto.Command.Security.ACL.scope', index=3,
+      number=4, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='maxPriority', full_name='com.seagate.kinetic.proto.Command.Security.ACL.maxPriority', index=4,
+      number=5, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=5,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[_COMMAND_SECURITY_ACL_SCOPE, ],
+  enum_types=[
+    _COMMAND_SECURITY_ACL_HMACALGORITHM,
+    _COMMAND_SECURITY_ACL_PERMISSION,
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=4966,
+  serialized_end=5574,
+)
+
+_COMMAND_SECURITY = _descriptor.Descriptor(
+  name='Security',
+  full_name='com.seagate.kinetic.proto.Command.Security',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='acl', full_name='com.seagate.kinetic.proto.Command.Security.acl', index=0,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='oldLockPIN', full_name='com.seagate.kinetic.proto.Command.Security.oldLockPIN', index=1,
+      number=3, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='newLockPIN', full_name='com.seagate.kinetic.proto.Command.Security.newLockPIN', index=2,
+      number=4, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='oldErasePIN', full_name='com.seagate.kinetic.proto.Command.Security.oldErasePIN', index=3,
+      number=5, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='newErasePIN', full_name='com.seagate.kinetic.proto.Command.Security.newErasePIN', index=4,
+      number=6, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value="",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[_COMMAND_SECURITY_ACL, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=4809,
+  serialized_end=5574,
+)
+
+_COMMAND_BACKGROUNDOPERATION = _descriptor.Descriptor(
+  name='BackgroundOperation',
+  full_name='com.seagate.kinetic.proto.Command.BackgroundOperation',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='backOpType', full_name='com.seagate.kinetic.proto.Command.BackgroundOperation.backOpType', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=-1,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='range', full_name='com.seagate.kinetic.proto.Command.BackgroundOperation.range', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+    _COMMAND_BACKGROUNDOPERATION_BACKOPTYPE,
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=5577,
+  serialized_end=5819,
+)
+
+_COMMAND_PINOPERATION = _descriptor.Descriptor(
+  name='PinOperation',
+  full_name='com.seagate.kinetic.proto.Command.PinOperation',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='pinOpType', full_name='com.seagate.kinetic.proto.Command.PinOperation.pinOpType', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=-1,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+    _COMMAND_PINOPERATION_PINOPTYPE,
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=5822,
+  serialized_end=6030,
+)
+
+_COMMAND = _descriptor.Descriptor(
+  name='Command',
+  full_name='com.seagate.kinetic.proto.Command',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='header', full_name='com.seagate.kinetic.proto.Command.header', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='body', full_name='com.seagate.kinetic.proto.Command.body', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='status', full_name='com.seagate.kinetic.proto.Command.status', index=2,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[_COMMAND_HEADER, _COMMAND_BODY, _COMMAND_STATUS, _COMMAND_KEYVALUE, _COMMAND_RANGE, _COMMAND_SETUP, _COMMAND_P2POPERATION, _COMMAND_GETLOG, _COMMAND_SECURITY, _COMMAND_BACKGROUNDOPERATION, _COMMAND_PINOPERATION, ],
+  enum_types=[
+    _COMMAND_SYNCHRONIZATION,
+    _COMMAND_PRIORITY,
+    _COMMAND_ALGORITHM,
+    _COMMAND_MESSAGETYPE,
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=469,
+  serialized_end=6886,
 )
 
 _MESSAGE_HMACAUTH.containing_type = _MESSAGE;
-_MESSAGE_PINAUTH.fields_by_name['pinOp'].enum_type = _MESSAGE_PINAUTH_PINOP
 _MESSAGE_PINAUTH.containing_type = _MESSAGE;
-_MESSAGE_PINAUTH_PINOP.containing_type = _MESSAGE_PINAUTH;
-_MESSAGE_COMMAND_HEADER.fields_by_name['messageType'].enum_type = _MESSAGE_COMMAND_MESSAGETYPE
-_MESSAGE_COMMAND_HEADER.fields_by_name['priority'].enum_type = _MESSAGE_COMMAND_PRIORITY
-_MESSAGE_COMMAND_HEADER.containing_type = _MESSAGE_COMMAND;
-_MESSAGE_COMMAND_BODY.fields_by_name['keyValue'].message_type = _MESSAGE_COMMAND_KEYVALUE
-_MESSAGE_COMMAND_BODY.fields_by_name['range'].message_type = _MESSAGE_COMMAND_RANGE
-_MESSAGE_COMMAND_BODY.fields_by_name['setup'].message_type = _MESSAGE_COMMAND_SETUP
-_MESSAGE_COMMAND_BODY.fields_by_name['p2pOperation'].message_type = _MESSAGE_COMMAND_P2POPERATION
-_MESSAGE_COMMAND_BODY.fields_by_name['getLog'].message_type = _MESSAGE_COMMAND_GETLOG
-_MESSAGE_COMMAND_BODY.fields_by_name['security'].message_type = _MESSAGE_COMMAND_SECURITY
-_MESSAGE_COMMAND_BODY.fields_by_name['backgroundOperation'].message_type = _MESSAGE_COMMAND_BACKGROUNDOPERATION
-_MESSAGE_COMMAND_BODY.containing_type = _MESSAGE_COMMAND;
-_MESSAGE_COMMAND_STATUS.fields_by_name['code'].enum_type = _MESSAGE_COMMAND_STATUS_STATUSCODE
-_MESSAGE_COMMAND_STATUS.containing_type = _MESSAGE_COMMAND;
-_MESSAGE_COMMAND_STATUS_STATUSCODE.containing_type = _MESSAGE_COMMAND_STATUS;
-_MESSAGE_COMMAND_KEYVALUE.fields_by_name['algorithm'].enum_type = _MESSAGE_COMMAND_ALGORITHM
-_MESSAGE_COMMAND_KEYVALUE.fields_by_name['synchronization'].enum_type = _MESSAGE_COMMAND_SYNCHRONIZATION
-_MESSAGE_COMMAND_KEYVALUE.containing_type = _MESSAGE_COMMAND;
-_MESSAGE_COMMAND_RANGE.containing_type = _MESSAGE_COMMAND;
-_MESSAGE_COMMAND_SETUP.containing_type = _MESSAGE_COMMAND;
-_MESSAGE_COMMAND_P2POPERATION_OPERATION.fields_by_name['status'].message_type = _MESSAGE_COMMAND_STATUS
-_MESSAGE_COMMAND_P2POPERATION_OPERATION.fields_by_name['p2pop'].message_type = _MESSAGE_COMMAND_P2POPERATION
-_MESSAGE_COMMAND_P2POPERATION_OPERATION.containing_type = _MESSAGE_COMMAND_P2POPERATION;
-_MESSAGE_COMMAND_P2POPERATION_PEER.containing_type = _MESSAGE_COMMAND_P2POPERATION;
-_MESSAGE_COMMAND_P2POPERATION.fields_by_name['peer'].message_type = _MESSAGE_COMMAND_P2POPERATION_PEER
-_MESSAGE_COMMAND_P2POPERATION.fields_by_name['operation'].message_type = _MESSAGE_COMMAND_P2POPERATION_OPERATION
-_MESSAGE_COMMAND_P2POPERATION.containing_type = _MESSAGE_COMMAND;
-_MESSAGE_COMMAND_GETLOG_UTILIZATION.containing_type = _MESSAGE_COMMAND_GETLOG;
-_MESSAGE_COMMAND_GETLOG_TEMPERATURE.containing_type = _MESSAGE_COMMAND_GETLOG;
-_MESSAGE_COMMAND_GETLOG_CAPACITY.containing_type = _MESSAGE_COMMAND_GETLOG;
-_MESSAGE_COMMAND_GETLOG_CONFIGURATION_INTERFACE.containing_type = _MESSAGE_COMMAND_GETLOG_CONFIGURATION;
-_MESSAGE_COMMAND_GETLOG_CONFIGURATION.fields_by_name['interface'].message_type = _MESSAGE_COMMAND_GETLOG_CONFIGURATION_INTERFACE
-_MESSAGE_COMMAND_GETLOG_CONFIGURATION.containing_type = _MESSAGE_COMMAND_GETLOG;
-_MESSAGE_COMMAND_GETLOG_STATISTICS.fields_by_name['messageType'].enum_type = _MESSAGE_COMMAND_MESSAGETYPE
-_MESSAGE_COMMAND_GETLOG_STATISTICS.containing_type = _MESSAGE_COMMAND_GETLOG;
-_MESSAGE_COMMAND_GETLOG_LIMITS.containing_type = _MESSAGE_COMMAND_GETLOG;
-_MESSAGE_COMMAND_GETLOG_DEVICE.containing_type = _MESSAGE_COMMAND_GETLOG;
-_MESSAGE_COMMAND_GETLOG.fields_by_name['types'].enum_type = _MESSAGE_COMMAND_GETLOG_TYPE
-_MESSAGE_COMMAND_GETLOG.fields_by_name['utilizations'].message_type = _MESSAGE_COMMAND_GETLOG_UTILIZATION
-_MESSAGE_COMMAND_GETLOG.fields_by_name['temperatures'].message_type = _MESSAGE_COMMAND_GETLOG_TEMPERATURE
-_MESSAGE_COMMAND_GETLOG.fields_by_name['capacity'].message_type = _MESSAGE_COMMAND_GETLOG_CAPACITY
-_MESSAGE_COMMAND_GETLOG.fields_by_name['configuration'].message_type = _MESSAGE_COMMAND_GETLOG_CONFIGURATION
-_MESSAGE_COMMAND_GETLOG.fields_by_name['statistics'].message_type = _MESSAGE_COMMAND_GETLOG_STATISTICS
-_MESSAGE_COMMAND_GETLOG.fields_by_name['limits'].message_type = _MESSAGE_COMMAND_GETLOG_LIMITS
-_MESSAGE_COMMAND_GETLOG.fields_by_name['device'].message_type = _MESSAGE_COMMAND_GETLOG_DEVICE
-_MESSAGE_COMMAND_GETLOG.containing_type = _MESSAGE_COMMAND;
-_MESSAGE_COMMAND_GETLOG_TYPE.containing_type = _MESSAGE_COMMAND_GETLOG;
-_MESSAGE_COMMAND_SECURITY_ACL_SCOPE.fields_by_name['permission'].enum_type = _MESSAGE_COMMAND_SECURITY_ACL_PERMISSION
-_MESSAGE_COMMAND_SECURITY_ACL_SCOPE.containing_type = _MESSAGE_COMMAND_SECURITY_ACL;
-_MESSAGE_COMMAND_SECURITY_ACL.fields_by_name['hmacAlgorithm'].enum_type = _MESSAGE_COMMAND_SECURITY_ACL_HMACALGORITHM
-_MESSAGE_COMMAND_SECURITY_ACL.fields_by_name['scope'].message_type = _MESSAGE_COMMAND_SECURITY_ACL_SCOPE
-_MESSAGE_COMMAND_SECURITY_ACL.fields_by_name['maxPriority'].enum_type = _MESSAGE_COMMAND_PRIORITY
-_MESSAGE_COMMAND_SECURITY_ACL.containing_type = _MESSAGE_COMMAND_SECURITY;
-_MESSAGE_COMMAND_SECURITY_ACL_HMACALGORITHM.containing_type = _MESSAGE_COMMAND_SECURITY_ACL;
-_MESSAGE_COMMAND_SECURITY_ACL_PERMISSION.containing_type = _MESSAGE_COMMAND_SECURITY_ACL;
-_MESSAGE_COMMAND_SECURITY.fields_by_name['acl'].message_type = _MESSAGE_COMMAND_SECURITY_ACL
-_MESSAGE_COMMAND_SECURITY.containing_type = _MESSAGE_COMMAND;
-_MESSAGE_COMMAND_BACKGROUNDOPERATION.fields_by_name['backOpType'].enum_type = _MESSAGE_COMMAND_BACKGROUNDOPERATION_BACKOPTYPE
-_MESSAGE_COMMAND_BACKGROUNDOPERATION.fields_by_name['range'].message_type = _MESSAGE_COMMAND_RANGE
-_MESSAGE_COMMAND_BACKGROUNDOPERATION.containing_type = _MESSAGE_COMMAND;
-_MESSAGE_COMMAND_BACKGROUNDOPERATION_BACKOPTYPE.containing_type = _MESSAGE_COMMAND_BACKGROUNDOPERATION;
-_MESSAGE_COMMAND.fields_by_name['header'].message_type = _MESSAGE_COMMAND_HEADER
-_MESSAGE_COMMAND.fields_by_name['body'].message_type = _MESSAGE_COMMAND_BODY
-_MESSAGE_COMMAND.fields_by_name['status'].message_type = _MESSAGE_COMMAND_STATUS
-_MESSAGE_COMMAND.containing_type = _MESSAGE;
-_MESSAGE_COMMAND_SYNCHRONIZATION.containing_type = _MESSAGE_COMMAND;
-_MESSAGE_COMMAND_PRIORITY.containing_type = _MESSAGE_COMMAND;
-_MESSAGE_COMMAND_ALGORITHM.containing_type = _MESSAGE_COMMAND;
-_MESSAGE_COMMAND_MESSAGETYPE.containing_type = _MESSAGE_COMMAND;
 _MESSAGE.fields_by_name['authType'].enum_type = _MESSAGE_AUTHTYPE
 _MESSAGE.fields_by_name['hmacAuth'].message_type = _MESSAGE_HMACAUTH
 _MESSAGE.fields_by_name['pinAuth'].message_type = _MESSAGE_PINAUTH
 _MESSAGE_AUTHTYPE.containing_type = _MESSAGE;
+_COMMAND_HEADER.fields_by_name['messageType'].enum_type = _COMMAND_MESSAGETYPE
+_COMMAND_HEADER.fields_by_name['priority'].enum_type = _COMMAND_PRIORITY
+_COMMAND_HEADER.containing_type = _COMMAND;
+_COMMAND_BODY.fields_by_name['keyValue'].message_type = _COMMAND_KEYVALUE
+_COMMAND_BODY.fields_by_name['range'].message_type = _COMMAND_RANGE
+_COMMAND_BODY.fields_by_name['setup'].message_type = _COMMAND_SETUP
+_COMMAND_BODY.fields_by_name['p2pOperation'].message_type = _COMMAND_P2POPERATION
+_COMMAND_BODY.fields_by_name['getLog'].message_type = _COMMAND_GETLOG
+_COMMAND_BODY.fields_by_name['security'].message_type = _COMMAND_SECURITY
+_COMMAND_BODY.fields_by_name['backgroundOperation'].message_type = _COMMAND_BACKGROUNDOPERATION
+_COMMAND_BODY.fields_by_name['pinOp'].message_type = _COMMAND_PINOPERATION
+_COMMAND_BODY.containing_type = _COMMAND;
+_COMMAND_STATUS.fields_by_name['code'].enum_type = _COMMAND_STATUS_STATUSCODE
+_COMMAND_STATUS.containing_type = _COMMAND;
+_COMMAND_STATUS_STATUSCODE.containing_type = _COMMAND_STATUS;
+_COMMAND_KEYVALUE.fields_by_name['algorithm'].enum_type = _COMMAND_ALGORITHM
+_COMMAND_KEYVALUE.fields_by_name['synchronization'].enum_type = _COMMAND_SYNCHRONIZATION
+_COMMAND_KEYVALUE.containing_type = _COMMAND;
+_COMMAND_RANGE.containing_type = _COMMAND;
+_COMMAND_SETUP.containing_type = _COMMAND;
+_COMMAND_P2POPERATION_OPERATION.fields_by_name['status'].message_type = _COMMAND_STATUS
+_COMMAND_P2POPERATION_OPERATION.fields_by_name['p2pop'].message_type = _COMMAND_P2POPERATION
+_COMMAND_P2POPERATION_OPERATION.containing_type = _COMMAND_P2POPERATION;
+_COMMAND_P2POPERATION_PEER.containing_type = _COMMAND_P2POPERATION;
+_COMMAND_P2POPERATION.fields_by_name['peer'].message_type = _COMMAND_P2POPERATION_PEER
+_COMMAND_P2POPERATION.fields_by_name['operation'].message_type = _COMMAND_P2POPERATION_OPERATION
+_COMMAND_P2POPERATION.containing_type = _COMMAND;
+_COMMAND_GETLOG_UTILIZATION.containing_type = _COMMAND_GETLOG;
+_COMMAND_GETLOG_TEMPERATURE.containing_type = _COMMAND_GETLOG;
+_COMMAND_GETLOG_CAPACITY.containing_type = _COMMAND_GETLOG;
+_COMMAND_GETLOG_CONFIGURATION_INTERFACE.containing_type = _COMMAND_GETLOG_CONFIGURATION;
+_COMMAND_GETLOG_CONFIGURATION.fields_by_name['interface'].message_type = _COMMAND_GETLOG_CONFIGURATION_INTERFACE
+_COMMAND_GETLOG_CONFIGURATION.containing_type = _COMMAND_GETLOG;
+_COMMAND_GETLOG_STATISTICS.fields_by_name['messageType'].enum_type = _COMMAND_MESSAGETYPE
+_COMMAND_GETLOG_STATISTICS.containing_type = _COMMAND_GETLOG;
+_COMMAND_GETLOG_LIMITS.containing_type = _COMMAND_GETLOG;
+_COMMAND_GETLOG_DEVICE.containing_type = _COMMAND_GETLOG;
+_COMMAND_GETLOG.fields_by_name['types'].enum_type = _COMMAND_GETLOG_TYPE
+_COMMAND_GETLOG.fields_by_name['utilizations'].message_type = _COMMAND_GETLOG_UTILIZATION
+_COMMAND_GETLOG.fields_by_name['temperatures'].message_type = _COMMAND_GETLOG_TEMPERATURE
+_COMMAND_GETLOG.fields_by_name['capacity'].message_type = _COMMAND_GETLOG_CAPACITY
+_COMMAND_GETLOG.fields_by_name['configuration'].message_type = _COMMAND_GETLOG_CONFIGURATION
+_COMMAND_GETLOG.fields_by_name['statistics'].message_type = _COMMAND_GETLOG_STATISTICS
+_COMMAND_GETLOG.fields_by_name['limits'].message_type = _COMMAND_GETLOG_LIMITS
+_COMMAND_GETLOG.fields_by_name['device'].message_type = _COMMAND_GETLOG_DEVICE
+_COMMAND_GETLOG.containing_type = _COMMAND;
+_COMMAND_GETLOG_TYPE.containing_type = _COMMAND_GETLOG;
+_COMMAND_SECURITY_ACL_SCOPE.fields_by_name['permission'].enum_type = _COMMAND_SECURITY_ACL_PERMISSION
+_COMMAND_SECURITY_ACL_SCOPE.containing_type = _COMMAND_SECURITY_ACL;
+_COMMAND_SECURITY_ACL.fields_by_name['hmacAlgorithm'].enum_type = _COMMAND_SECURITY_ACL_HMACALGORITHM
+_COMMAND_SECURITY_ACL.fields_by_name['scope'].message_type = _COMMAND_SECURITY_ACL_SCOPE
+_COMMAND_SECURITY_ACL.fields_by_name['maxPriority'].enum_type = _COMMAND_PRIORITY
+_COMMAND_SECURITY_ACL.containing_type = _COMMAND_SECURITY;
+_COMMAND_SECURITY_ACL_HMACALGORITHM.containing_type = _COMMAND_SECURITY_ACL;
+_COMMAND_SECURITY_ACL_PERMISSION.containing_type = _COMMAND_SECURITY_ACL;
+_COMMAND_SECURITY.fields_by_name['acl'].message_type = _COMMAND_SECURITY_ACL
+_COMMAND_SECURITY.containing_type = _COMMAND;
+_COMMAND_BACKGROUNDOPERATION.fields_by_name['backOpType'].enum_type = _COMMAND_BACKGROUNDOPERATION_BACKOPTYPE
+_COMMAND_BACKGROUNDOPERATION.fields_by_name['range'].message_type = _COMMAND_RANGE
+_COMMAND_BACKGROUNDOPERATION.containing_type = _COMMAND;
+_COMMAND_BACKGROUNDOPERATION_BACKOPTYPE.containing_type = _COMMAND_BACKGROUNDOPERATION;
+_COMMAND_PINOPERATION.fields_by_name['pinOpType'].enum_type = _COMMAND_PINOPERATION_PINOPTYPE
+_COMMAND_PINOPERATION.containing_type = _COMMAND;
+_COMMAND_PINOPERATION_PINOPTYPE.containing_type = _COMMAND_PINOPERATION;
+_COMMAND.fields_by_name['header'].message_type = _COMMAND_HEADER
+_COMMAND.fields_by_name['body'].message_type = _COMMAND_BODY
+_COMMAND.fields_by_name['status'].message_type = _COMMAND_STATUS
+_COMMAND_SYNCHRONIZATION.containing_type = _COMMAND;
+_COMMAND_PRIORITY.containing_type = _COMMAND;
+_COMMAND_ALGORITHM.containing_type = _COMMAND;
+_COMMAND_MESSAGETYPE.containing_type = _COMMAND;
 DESCRIPTOR.message_types_by_name['Local'] = _LOCAL
 DESCRIPTOR.message_types_by_name['Message'] = _MESSAGE
+DESCRIPTOR.message_types_by_name['Command'] = _COMMAND
 
 class Local(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType
@@ -2079,147 +2117,153 @@ class Message(_message.Message):
     DESCRIPTOR = _MESSAGE_PINAUTH
 
     # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Message.PINauth)
-
-  class Command(_message.Message):
-    __metaclass__ = _reflection.GeneratedProtocolMessageType
-
-    class Header(_message.Message):
-      __metaclass__ = _reflection.GeneratedProtocolMessageType
-      DESCRIPTOR = _MESSAGE_COMMAND_HEADER
-
-      # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Message.Command.Header)
-
-    class Body(_message.Message):
-      __metaclass__ = _reflection.GeneratedProtocolMessageType
-      DESCRIPTOR = _MESSAGE_COMMAND_BODY
-
-      # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Message.Command.Body)
-
-    class Status(_message.Message):
-      __metaclass__ = _reflection.GeneratedProtocolMessageType
-      DESCRIPTOR = _MESSAGE_COMMAND_STATUS
-
-      # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Message.Command.Status)
-
-    class KeyValue(_message.Message):
-      __metaclass__ = _reflection.GeneratedProtocolMessageType
-      DESCRIPTOR = _MESSAGE_COMMAND_KEYVALUE
-
-      # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Message.Command.KeyValue)
-
-    class Range(_message.Message):
-      __metaclass__ = _reflection.GeneratedProtocolMessageType
-      DESCRIPTOR = _MESSAGE_COMMAND_RANGE
-
-      # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Message.Command.Range)
-
-    class Setup(_message.Message):
-      __metaclass__ = _reflection.GeneratedProtocolMessageType
-      DESCRIPTOR = _MESSAGE_COMMAND_SETUP
-
-      # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Message.Command.Setup)
-
-    class P2POperation(_message.Message):
-      __metaclass__ = _reflection.GeneratedProtocolMessageType
-
-      class Operation(_message.Message):
-        __metaclass__ = _reflection.GeneratedProtocolMessageType
-        DESCRIPTOR = _MESSAGE_COMMAND_P2POPERATION_OPERATION
-
-        # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Message.Command.P2POperation.Operation)
-
-      class Peer(_message.Message):
-        __metaclass__ = _reflection.GeneratedProtocolMessageType
-        DESCRIPTOR = _MESSAGE_COMMAND_P2POPERATION_PEER
-
-        # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Message.Command.P2POperation.Peer)
-      DESCRIPTOR = _MESSAGE_COMMAND_P2POPERATION
-
-      # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Message.Command.P2POperation)
-
-    class GetLog(_message.Message):
-      __metaclass__ = _reflection.GeneratedProtocolMessageType
-
-      class Utilization(_message.Message):
-        __metaclass__ = _reflection.GeneratedProtocolMessageType
-        DESCRIPTOR = _MESSAGE_COMMAND_GETLOG_UTILIZATION
-
-        # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Message.Command.GetLog.Utilization)
-
-      class Temperature(_message.Message):
-        __metaclass__ = _reflection.GeneratedProtocolMessageType
-        DESCRIPTOR = _MESSAGE_COMMAND_GETLOG_TEMPERATURE
-
-        # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Message.Command.GetLog.Temperature)
-
-      class Capacity(_message.Message):
-        __metaclass__ = _reflection.GeneratedProtocolMessageType
-        DESCRIPTOR = _MESSAGE_COMMAND_GETLOG_CAPACITY
-
-        # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Message.Command.GetLog.Capacity)
-
-      class Configuration(_message.Message):
-        __metaclass__ = _reflection.GeneratedProtocolMessageType
-
-        class Interface(_message.Message):
-          __metaclass__ = _reflection.GeneratedProtocolMessageType
-          DESCRIPTOR = _MESSAGE_COMMAND_GETLOG_CONFIGURATION_INTERFACE
-
-          # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Message.Command.GetLog.Configuration.Interface)
-        DESCRIPTOR = _MESSAGE_COMMAND_GETLOG_CONFIGURATION
-
-        # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Message.Command.GetLog.Configuration)
-
-      class Statistics(_message.Message):
-        __metaclass__ = _reflection.GeneratedProtocolMessageType
-        DESCRIPTOR = _MESSAGE_COMMAND_GETLOG_STATISTICS
-
-        # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Message.Command.GetLog.Statistics)
-
-      class Limits(_message.Message):
-        __metaclass__ = _reflection.GeneratedProtocolMessageType
-        DESCRIPTOR = _MESSAGE_COMMAND_GETLOG_LIMITS
-
-        # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Message.Command.GetLog.Limits)
-
-      class Device(_message.Message):
-        __metaclass__ = _reflection.GeneratedProtocolMessageType
-        DESCRIPTOR = _MESSAGE_COMMAND_GETLOG_DEVICE
-
-        # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Message.Command.GetLog.Device)
-      DESCRIPTOR = _MESSAGE_COMMAND_GETLOG
-
-      # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Message.Command.GetLog)
-
-    class Security(_message.Message):
-      __metaclass__ = _reflection.GeneratedProtocolMessageType
-
-      class ACL(_message.Message):
-        __metaclass__ = _reflection.GeneratedProtocolMessageType
-
-        class Scope(_message.Message):
-          __metaclass__ = _reflection.GeneratedProtocolMessageType
-          DESCRIPTOR = _MESSAGE_COMMAND_SECURITY_ACL_SCOPE
-
-          # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Message.Command.Security.ACL.Scope)
-        DESCRIPTOR = _MESSAGE_COMMAND_SECURITY_ACL
-
-        # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Message.Command.Security.ACL)
-      DESCRIPTOR = _MESSAGE_COMMAND_SECURITY
-
-      # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Message.Command.Security)
-
-    class BackgroundOperation(_message.Message):
-      __metaclass__ = _reflection.GeneratedProtocolMessageType
-      DESCRIPTOR = _MESSAGE_COMMAND_BACKGROUNDOPERATION
-
-      # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Message.Command.BackgroundOperation)
-    DESCRIPTOR = _MESSAGE_COMMAND
-
-    # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Message.Command)
   DESCRIPTOR = _MESSAGE
 
   # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Message)
+
+class Command(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+
+  class Header(_message.Message):
+    __metaclass__ = _reflection.GeneratedProtocolMessageType
+    DESCRIPTOR = _COMMAND_HEADER
+
+    # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Command.Header)
+
+  class Body(_message.Message):
+    __metaclass__ = _reflection.GeneratedProtocolMessageType
+    DESCRIPTOR = _COMMAND_BODY
+
+    # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Command.Body)
+
+  class Status(_message.Message):
+    __metaclass__ = _reflection.GeneratedProtocolMessageType
+    DESCRIPTOR = _COMMAND_STATUS
+
+    # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Command.Status)
+
+  class KeyValue(_message.Message):
+    __metaclass__ = _reflection.GeneratedProtocolMessageType
+    DESCRIPTOR = _COMMAND_KEYVALUE
+
+    # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Command.KeyValue)
+
+  class Range(_message.Message):
+    __metaclass__ = _reflection.GeneratedProtocolMessageType
+    DESCRIPTOR = _COMMAND_RANGE
+
+    # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Command.Range)
+
+  class Setup(_message.Message):
+    __metaclass__ = _reflection.GeneratedProtocolMessageType
+    DESCRIPTOR = _COMMAND_SETUP
+
+    # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Command.Setup)
+
+  class P2POperation(_message.Message):
+    __metaclass__ = _reflection.GeneratedProtocolMessageType
+
+    class Operation(_message.Message):
+      __metaclass__ = _reflection.GeneratedProtocolMessageType
+      DESCRIPTOR = _COMMAND_P2POPERATION_OPERATION
+
+      # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Command.P2POperation.Operation)
+
+    class Peer(_message.Message):
+      __metaclass__ = _reflection.GeneratedProtocolMessageType
+      DESCRIPTOR = _COMMAND_P2POPERATION_PEER
+
+      # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Command.P2POperation.Peer)
+    DESCRIPTOR = _COMMAND_P2POPERATION
+
+    # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Command.P2POperation)
+
+  class GetLog(_message.Message):
+    __metaclass__ = _reflection.GeneratedProtocolMessageType
+
+    class Utilization(_message.Message):
+      __metaclass__ = _reflection.GeneratedProtocolMessageType
+      DESCRIPTOR = _COMMAND_GETLOG_UTILIZATION
+
+      # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Command.GetLog.Utilization)
+
+    class Temperature(_message.Message):
+      __metaclass__ = _reflection.GeneratedProtocolMessageType
+      DESCRIPTOR = _COMMAND_GETLOG_TEMPERATURE
+
+      # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Command.GetLog.Temperature)
+
+    class Capacity(_message.Message):
+      __metaclass__ = _reflection.GeneratedProtocolMessageType
+      DESCRIPTOR = _COMMAND_GETLOG_CAPACITY
+
+      # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Command.GetLog.Capacity)
+
+    class Configuration(_message.Message):
+      __metaclass__ = _reflection.GeneratedProtocolMessageType
+
+      class Interface(_message.Message):
+        __metaclass__ = _reflection.GeneratedProtocolMessageType
+        DESCRIPTOR = _COMMAND_GETLOG_CONFIGURATION_INTERFACE
+
+        # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Command.GetLog.Configuration.Interface)
+      DESCRIPTOR = _COMMAND_GETLOG_CONFIGURATION
+
+      # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Command.GetLog.Configuration)
+
+    class Statistics(_message.Message):
+      __metaclass__ = _reflection.GeneratedProtocolMessageType
+      DESCRIPTOR = _COMMAND_GETLOG_STATISTICS
+
+      # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Command.GetLog.Statistics)
+
+    class Limits(_message.Message):
+      __metaclass__ = _reflection.GeneratedProtocolMessageType
+      DESCRIPTOR = _COMMAND_GETLOG_LIMITS
+
+      # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Command.GetLog.Limits)
+
+    class Device(_message.Message):
+      __metaclass__ = _reflection.GeneratedProtocolMessageType
+      DESCRIPTOR = _COMMAND_GETLOG_DEVICE
+
+      # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Command.GetLog.Device)
+    DESCRIPTOR = _COMMAND_GETLOG
+
+    # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Command.GetLog)
+
+  class Security(_message.Message):
+    __metaclass__ = _reflection.GeneratedProtocolMessageType
+
+    class ACL(_message.Message):
+      __metaclass__ = _reflection.GeneratedProtocolMessageType
+
+      class Scope(_message.Message):
+        __metaclass__ = _reflection.GeneratedProtocolMessageType
+        DESCRIPTOR = _COMMAND_SECURITY_ACL_SCOPE
+
+        # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Command.Security.ACL.Scope)
+      DESCRIPTOR = _COMMAND_SECURITY_ACL
+
+      # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Command.Security.ACL)
+    DESCRIPTOR = _COMMAND_SECURITY
+
+    # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Command.Security)
+
+  class BackgroundOperation(_message.Message):
+    __metaclass__ = _reflection.GeneratedProtocolMessageType
+    DESCRIPTOR = _COMMAND_BACKGROUNDOPERATION
+
+    # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Command.BackgroundOperation)
+
+  class PinOperation(_message.Message):
+    __metaclass__ = _reflection.GeneratedProtocolMessageType
+    DESCRIPTOR = _COMMAND_PINOPERATION
+
+    # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Command.PinOperation)
+  DESCRIPTOR = _COMMAND
+
+  # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Command)
 
 
 DESCRIPTOR.has_options = True
