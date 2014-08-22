@@ -5,15 +5,20 @@ This section will document changes to the library since the last release
 ## Important
 - Kinetic Protocol version updated to [3.0.0](https://github.com/Seagate/kinetic-protocol/tree/3.0.0)
 - Everything requires requires proto 3.0.0 or higher on the device
+- Devices pre 3.0.0 do not have handshakes and will raise Handshake timeout
 
 ## New features
 - Added `--version` to cmd line tool
 - Added background operations Scan and Optimize
-- Added pin operations
+- Added pin operations (Lock, unlock, erase, secureErase)
+- Client auto configures cluster_version based on initial handshake
+- ErasePin and LockPin can be set during the security operation
+- Client fields config and limits show device information
 
 ## Behavior changes
 - Removed GreenClient (Feature overlap with AsyncClient)
 - Removed PipelinedClient (Only used internally by the kineticc)
+- setPin removed from AdminClient
 
 Changes from 0.7.2 to 0.7.3
 ===========================

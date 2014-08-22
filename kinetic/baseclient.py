@@ -57,13 +57,12 @@ class BaseClient(object):
     # defaults
     HOSTNAME = 'localhost'
     PORT = 8123
-    CLUSTER_VERSION = 0
-    # development default
+    # drive default
     USER_ID = 1
     CLIENT_SECRET = 'asdfasdf'
 
     def __init__(self, hostname=HOSTNAME, port=PORT, identity=USER_ID,
-                 cluster_version=CLUSTER_VERSION, secret=CLIENT_SECRET,
+                 cluster_version=None, secret=CLIENT_SECRET,
                  chunk_size=common.DEFAULT_CHUNK_SIZE,
                  connect_timeout=common.DEFAULT_CONNECT_TIMEOUT,
                  socket_timeout=common.DEFAULT_SOCKET_TIMEOUT,
@@ -119,24 +118,47 @@ class BaseClient(object):
             s.bind((self.socket_address, self.socket_port))
         # if connect fails, there is nothing to clean up
         s.connect(sockaddr) # use first
-        s.settimeout(self.socket_timeout)
         s.setsockopt(ss.IPPROTO_TCP, ss.TCP_NODELAY, 1)
 
         # We are connected now, update attributes
         self._socket = s
-        self._sequence = itertools.count()
-        self.connection_id = int(time.time())
-        self._closed = False
+        try:
+            self._handshake()
+            self._socket.settimeout(self.socket_timeout)
 
-        self._handshake()
+            self._sequence = itertools.count()
+            self.connection_id = int(time.time())
+            self._closed = False
+        except:
+            self._socket = None
+            raise
 
     def _handshake(self):
         # Connection id handshake
-        h,v = operations.Noop.build()
-        self.update_header(h)
-        self.network_send(h,v)
-        h,v = self.network_recv()
-        operations._check_status(h)
+        try:
+            h,v = self.network_recv()
+        except socket.timeout:
+            raise common.KineticClientException("Handshake timeout")
+
+        # device locked only allowed to continue over SSL
+        if (h.status.code == messages.Command.Status.DEVICE_LOCKED):
+            if not self.use_ssl:
+                raise KineticMessageException(h.status)
+        elif (h.status.code != messages.Command.Status.SUCCESS):
+            raise KineticMessageException(h.status)
+
+        self.config = h.body.getLog.configuration
+        self.limits = h.body.getLog.limits
+
+        if self.cluster_version:
+            if self.cluster_version != h.header.clusterVersion:
+                h.status.code = messages.Command.Status.VERSION_FAILURE
+                h.status.statusMessage = \
+                    'Cluster version missmatch detected during handshake'
+                raise common.ClusterVersionFailureException(
+                    h.status, h.header.clusterVersion)
+        else:
+            self.cluster_version = h.header.clusterVersion
 
     def has_data_available(self):
         tmp = self._socket.recv(1, socket.MSG_PEEK)
@@ -234,6 +256,7 @@ class BaseClient(object):
         m = self.authenticate(command)
 
         if self.debug:
+            print m
             print command
 
         self._send_delimited_v2(m, value)
@@ -298,6 +321,9 @@ class BaseClient(object):
         """
 
         (m, value) = self._recv_delimited_v2()
+
+        if self.debug:
+            print m
 
         if m.authType == messages.Message.HMACAUTH:
             if m.hmacAuth.identity == self.identity:
