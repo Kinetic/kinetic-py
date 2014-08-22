@@ -357,7 +357,7 @@ class BaseClient(object):
                 else:
                     LOG.warn('Unsolicited status %s received but nobody listening.' % cmd.status.code)
 
-       return m,cmd,value
+        return m,cmd,value
 
     ### with statement support ###
 
