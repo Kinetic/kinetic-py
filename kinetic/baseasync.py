@@ -80,15 +80,25 @@ class BaseAsync(Client):
             raise common.ConnectionFaulted("Connection {0} is faulted. Can't receive message when connection is on a faulted state.".format(self))
 
         try:
-            resp,value = self.network_recv()
-            seq = resp.header.ackSequence
-            LOG.debug("Received message with ackSequence={0} on connection {1}.".format(seq,self))
-            onSuccess,_ = self._pending[seq]
-            del self._pending[seq]
-            try:
-                self.dispatch(onSuccess,resp,value)
-            except Exception as e:
-                self._raise(e)
+            m, resp,value = self.network_recv()
+            if m.authType == messages.Message.UNSOLICITED_STATUS:
+                if self.on_unsolicited:
+                    try:
+                        self.dispatch(self.on_unsolicited,resp.status)
+                    except Exception as e:
+                        self._raise(e)
+                else:
+                    LOG.warn('Unsolicited status %s received but nobody listening.' % resp.status.code)
+            else:
+                seq = resp.header.ackSequence
+                if LOG.isEnabledFor(logging.DEBUG):
+                    LOG.debug("Received message with ackSequence={0} on connection {1}.".format(seq,self))
+                onSuccess,_ = self._pending[seq]
+                del self._pending[seq]
+                try:
+                    self.dispatch(onSuccess,resp,value)
+                except Exception as e:
+                    self._raise(e)
         except Exception as e:
             if not self.isConnected:
                 raise common.ConnectionClosed("Connection closed by client.")

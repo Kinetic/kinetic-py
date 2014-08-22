@@ -38,9 +38,9 @@ class AdminClient(baseclient.BaseClient):
                 # update header
                 self.update_header(header)
                 # send message synchronously
-                r, v = self.send(header, value)
-            operations._check_status(r)
-            return op.parse(r,v)
+                _, cmd, v = self.send(header, value)
+            operations._check_status(cmd)
+            return op.parse(cmd,v)
         except Exception as e:
             return op.onError(e)
 

@@ -35,9 +35,9 @@ class Client(BaseClient):
                 # update header
                 self.update_header(header)
                 # send message synchronously
-                header, value = self.send(header, value)
-            operations._check_status(header)
-            return op.parse(header, value)
+                _, cmd, value = self.send(header, value)
+            operations._check_status(cmd)
+            return op.parse(cmd, value)
         except Exception as e:
             return op.onError(e)
 

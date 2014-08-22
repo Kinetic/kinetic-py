@@ -87,6 +87,7 @@ class BaseClient(object):
         self.wait_on_read = None
         self.use_ssl = use_ssl
         self.pin = pin
+        self.on_unsolicited = None
 
     @property
     def socket(self):
@@ -136,29 +137,29 @@ class BaseClient(object):
     def _handshake(self):
         # Connection id handshake
         try:
-            h,v = self.network_recv()
+            _,cmd,v = self.network_recv() # unsolicited status
         except socket.timeout:
             raise common.KineticClientException("Handshake timeout")
 
         # device locked only allowed to continue over SSL
-        if (h.status.code == messages.Command.Status.DEVICE_LOCKED):
+        if (cmd.status.code == messages.Command.Status.DEVICE_LOCKED):
             if not self.use_ssl:
-                raise KineticMessageException(h.status)
-        elif (h.status.code != messages.Command.Status.SUCCESS):
-            raise KineticMessageException(h.status)
+                raise KineticMessageException(cmd.status)
+        elif (cmd.status.code != messages.Command.Status.SUCCESS):
+            raise KineticMessageException(cmd.status)
 
-        self.config = h.body.getLog.configuration
-        self.limits = h.body.getLog.limits
+        self.config = cmd.body.getLog.configuration
+        self.limits = cmd.body.getLog.limits
 
         if self.cluster_version:
-            if self.cluster_version != h.header.clusterVersion:
-                h.status.code = messages.Command.Status.VERSION_FAILURE
-                h.status.statusMessage = \
+            if self.cluster_version != cmd.header.clusterVersion:
+                cmd.status.code = messages.Command.Status.VERSION_FAILURE
+                cmd.status.statusMessage = \
                     'Cluster version missmatch detected during handshake'
                 raise common.ClusterVersionFailureException(
-                    h.status, h.header.clusterVersion)
+                    cmd.status, cmd.header.clusterVersion)
         else:
-            self.cluster_version = h.header.clusterVersion
+            self.cluster_version = cmd.header.clusterVersion
 
     def has_data_available(self):
         tmp = self._socket.recv(1, socket.MSG_PEEK)
@@ -343,12 +344,20 @@ class BaseClient(object):
         if resp.header.connectionID:
             self.connection_id = resp.header.connectionID
 
-        return (resp, value)
+        return (m, resp, value)
 
     def send(self, header, value):
-       self.network_send(header, value)
-       resp = self.network_recv()
-       return resp
+        self.network_send(header, value)
+        done = False
+        while not done:
+            m,cmd,value = self.network_recv()
+            if m.authType == messages.Message.UNSOLICITED_STATUS:
+                if self.on_unsolicited:
+                    self.on_unsolicited(resp.status) # uncatched exceptions by the handler will be raised to the caller
+                else:
+                    LOG.warn('Unsolicited status %s received but nobody listening.' % cmd.status.code)
+
+       return m,cmd,value
 
     ### with statement support ###
 

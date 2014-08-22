@@ -14,6 +14,7 @@ This section will document changes to the library since the last release
 - Client auto configures cluster_version based on initial handshake
 - ErasePin and LockPin can be set during the security operation
 - Client fields config and limits show device information
+- Added unsolicited status support
 
 ## Behavior changes
 - Removed GreenClient (Feature overlap with AsyncClient)
