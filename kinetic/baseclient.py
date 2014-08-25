@@ -128,7 +128,6 @@ class BaseClient(object):
             self._socket.settimeout(self.socket_timeout)
 
             self._sequence = itertools.count()
-            self.connection_id = int(time.time())
             self._closed = False
         except:
             self._socket = None
@@ -147,6 +146,8 @@ class BaseClient(object):
                 raise KineticMessageException(cmd.status)
         elif (cmd.status.code != messages.Command.Status.SUCCESS):
             raise KineticMessageException(cmd.status)
+
+        self.connection_id = cmd.header.connectionID
 
         self.config = cmd.body.getLog.configuration
         self.limits = cmd.body.getLog.limits
