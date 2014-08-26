@@ -81,7 +81,7 @@ class BaseAsync(Client):
 
         try:
             m, resp,value = self.network_recv()
-            if m.authType == messages.Message.UNSOLICITED_STATUS:
+            if m.authType == messages.Message.UNSOLICITEDSTATUS:
                 if self.on_unsolicited:
                     try:
                         self.dispatch(self.on_unsolicited,resp.status)
