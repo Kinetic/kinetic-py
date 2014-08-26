@@ -475,10 +475,10 @@ class Security(object):
 
             op.acl.extend(proto_acls)
 
-        if old_lock_pin: op.oldLockPIN = old_lock_pin
-        if new_lock_pin: op.newLockPIN = new_lock_pin
-        if old_erase_pin: op.oldErasePIN = old_erase_pin
-        if new_erase_pin: op.newErasePIN = new_erase_pin
+        if not old_lock_pin is None: op.oldLockPIN = old_lock_pin
+        if not new_lock_pin is None: op.newLockPIN = new_lock_pin
+        if not old_erase_pin is None: op.oldErasePIN = old_erase_pin
+        if not new_erase_pin is None: op.newErasePIN = new_erase_pin
 
         return (m, None)
 
