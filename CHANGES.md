@@ -7,7 +7,7 @@ Changes from 0.7.3 to 0.8.0
 
 ## Important
 - Kinetic Protocol version updated to [3.0.0](https://github.com/Seagate/kinetic-protocol/tree/3.0.0)
-- Everything requires requires proto 3.0.0 or higher on the device
+- Everything requires proto 3.0.0 or higher on the device
 - Devices pre 3.0.0 do not have handshakes and will raise Handshake timeout
 
 ## New features
