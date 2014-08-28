@@ -17,6 +17,7 @@ This section will document changes to the library since the last release
 - Added unsolicited status support
 - Pin based operations MUST have a pin set and SSL enabled
 - setSecurity MUST have SSL enabled
+- getLog / getLogAsync added to Client/AsyncClient
 
 ## Behavior changes
 - Removed GreenClient (Feature overlap with AsyncClient)

@@ -101,8 +101,8 @@ class AsyncClient(baseasync.BaseAsync):
         d.error = None
         d.result = None
 
-        def innerSuccess(header, value):
-            d.result = (header, value)
+        def innerSuccess(m, r, value):
+            d.result = (m, r, value)
             done.send()
 
         def innerError(e):

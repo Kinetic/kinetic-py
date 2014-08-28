@@ -80,7 +80,7 @@ class BaseAsync(Client):
             raise common.ConnectionFaulted("Connection {0} is faulted. Can't receive message when connection is on a faulted state.".format(self))
 
         try:
-            m, resp,value = self.network_recv()
+            m, resp, value = self.network_recv()
             if m.authType == messages.Message.UNSOLICITEDSTATUS:
                 if self.on_unsolicited:
                     try:
@@ -96,7 +96,7 @@ class BaseAsync(Client):
                 onSuccess,_ = self._pending[seq]
                 del self._pending[seq]
                 try:
-                    self.dispatch(onSuccess,resp,value)
+                    self.dispatch(onSuccess, m, resp, value)
                 except Exception as e:
                     self._raise(e)
         except Exception as e:
@@ -115,8 +115,8 @@ class BaseAsync(Client):
         d.error = None
         d.result = None
 
-        def innerSuccess(response, value):
-            d.result = (response, value)
+        def innerSuccess(m, resp, value):
+            d.result = (m, resp, value)
             done.set()
 
         def innerError(e):
@@ -142,10 +142,10 @@ class BaseAsync(Client):
             self._raise(common.NotConnected("Not connected."), onError)
             return #skip the rest
 
-        def innerSuccess(response, value):
+        def innerSuccess(m, response, value):
             try:
                 operations._check_status(response)
-                onSuccess(response, value)
+                onSuccess(m, response, value)
             except Exception as ex:
                 onError(ex)
 
@@ -167,7 +167,7 @@ class BaseAsync(Client):
     def _processAsync(self, op, onSuccess, onError, *args, **kwargs):
         if not self.isConnected: raise common.NotConnected("Must call connect() before sending operations.")
 
-        def innerSuccess(header, value):
+        def innerSuccess(m, header, value):
             onSuccess(op.parse(header, value))
 
         def innerError(e):
@@ -216,4 +216,7 @@ class BaseAsync(Client):
 
     def mediaOptimizeAsync(self, onSuccess, onError, *args, **kwargs):
         self._processAsync(operations.MediaOptimize, onSuccess, onError, *args, **kwargs)
+
+    def getLogAsync(self, onSuccess, onError, *args, **kwargs):
+        self._processAsync(operations.GetLog, onSuccess, onError, *args, **kwargs)
 

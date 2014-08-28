@@ -95,6 +95,8 @@ class Client(BaseClient):
     def mediaOptimize(self, *args, **kwargs):
         return self._process(operations.MediaOptimize, *args, **kwargs)
 
+    def getLog(self, *args, **kwargs):
+        return self._process(operations.GetLog, *args, **kwargs)
 
 class KineticRangeIter(object):
 
