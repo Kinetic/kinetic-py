@@ -15,6 +15,8 @@ This section will document changes to the library since the last release
 - ErasePin and LockPin can be set during the security operation
 - Client fields config and limits show device information
 - Added unsolicited status support
+- Pin based operations MUST have a pin set and SSL enabled
+- setSecurity MUST have SSL enabled
 
 ## Behavior changes
 - Removed GreenClient (Feature overlap with AsyncClient)

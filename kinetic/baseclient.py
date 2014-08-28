@@ -111,7 +111,7 @@ class BaseClient(object):
         # Stage socket on a local variable first
         s = self.build_socket(family)
         if self.use_ssl:
-            s = ssl.wrap_socket(s)
+            s = ssl.wrap_socket(s, ssl_version=ssl.PROTOCOL_TLSv1)
 
         s.settimeout(self.connect_timeout)
         if self.socket_address:
