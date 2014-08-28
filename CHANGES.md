@@ -1,6 +1,9 @@
-Changes since 0.7.3
+Changes since 0.8.0
 ===========================
 This section will document changes to the library since the last release
+
+Changes from 0.7.3 to 0.8.0
+===========================
 
 ## Important
 - Kinetic Protocol version updated to [3.0.0](https://github.com/Seagate/kinetic-protocol/tree/3.0.0)
