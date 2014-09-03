@@ -28,6 +28,42 @@ DEFAULT_CHUNK_SIZE = 64*1024
 
 local = messages.Local()
 
+class Response(object):
+
+    def __init__(self):
+        self.resp = eventlet.event.Event()
+        self._hasError = False
+
+    def setResponse(self, v):
+        self.resp.send(v)
+
+    def setError(self, e):
+        self._hasError = True
+        self.resp.send(e)
+
+    def wait(self):
+        resp = self.resp.wait()
+        if self._hasError:
+            raise resp
+        else:
+            return resp
+
+    def ready(self):
+        return self.resp.ready()
+
+
+def promise(fn, *args, **kwargs):
+    r = Response()
+    def inner_success(x):
+        r.setResponse(x)
+
+    def inner_error(ex):
+        r.setError(ex)
+
+    fn(inner_success, inner_error, *args, **kwargs)
+
+    return r
+
 class DeferedValue():
 
     def __init__(self, socket, value_ln):
