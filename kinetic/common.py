@@ -64,6 +64,9 @@ def promise(fn, *args, **kwargs):
 
     return r
 
+def wait_all(ps):
+    for p in ps: p.wait()
+
 class DeferedValue():
 
     def __init__(self, socket, value_ln):

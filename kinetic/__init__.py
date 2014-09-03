@@ -46,6 +46,7 @@ from threadedclient import ThreadedClient
 from common import KeyRange
 from common import Entry
 from common import promise
+from common import wait_all
 
 # exceptions
 from common import KineticMessageException
