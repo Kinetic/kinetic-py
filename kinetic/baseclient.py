@@ -27,7 +27,6 @@ import struct
 import common
 import kinetic_pb2 as messages
 import ssl
-import operations
 
 ss = socket
 

@@ -2,6 +2,9 @@ Changes since 0.8.0
 ===========================
 This section will document changes to the library since the last release
 
+## New features
+- Added timeout, time_quanta, priority and early_exit support
+
 Changes from 0.7.3 to 0.8.0
 ===========================
 

@@ -42,37 +42,37 @@ class Client(BaseClient):
             return op.onError(e)
 
     def noop(self, *args, **kwargs):
-        return self._process(operations.Noop, *args, **kwargs)
+        return self._process(operations.Noop(), *args, **kwargs)
 
     def put(self, *args, **kwargs):
-        return self._process(operations.Put, *args, **kwargs)
+        return self._process(operations.Put(), *args, **kwargs)
 
     def get(self, *args, **kwargs):
-        return self._process(operations.Get, *args, **kwargs)
+        return self._process(operations.Get(), *args, **kwargs)
 
     def getMetadata(self, *args, **kwargs):
-        return self._process(operations.GetMetadata, *args, **kwargs)
+        return self._process(operations.GetMetadata(), *args, **kwargs)
 
     def delete(self, *args, **kwargs):
-        return self._process(operations.Delete, *args, **kwargs)
+        return self._process(operations.Delete(), *args, **kwargs)
 
     def getNext(self, *args, **kwargs):
-        return self._process(operations.GetNext, *args, **kwargs)
+        return self._process(operations.GetNext(), *args, **kwargs)
 
     def getPrevious(self, *args, **kwargs):
-        return self._process(operations.GetPrevious, *args, **kwargs)
+        return self._process(operations.GetPrevious(), *args, **kwargs)
 
     def getKeyRange(self, *args, **kwargs):
-        return self._process(operations.GetKeyRange, *args, **kwargs)
+        return self._process(operations.GetKeyRange(), *args, **kwargs)
 
     def getRange(self, startKey, endKey, startKeyInclusive=True, endKeyInclusive=True, prefetch=64):
         return KineticRangeIter(self, startKey, endKey, startKeyInclusive, endKeyInclusive, prefetch)
 
     def push(self, *args, **kwargs):
-        return self._process(operations.P2pPush, *args, **kwargs)
+        return self._process(operations.P2pPush(), *args, **kwargs)
 
     def pipedPush(self, *args, **kwargs):
-        return self._process(operations.P2pPipedPush, *args, **kwargs)
+        return self._process(operations.P2pPipedPush(), *args, **kwargs)
 
 
     def getVersion(self, *args, **kwargs):
@@ -80,23 +80,23 @@ class Client(BaseClient):
             Arguments: key -> The key you are seeking version information for.
             Returns a protobuf object with the version property that determines the pair's current version.
         """
-        return self._process(operations.GetVersion, *args, **kwargs)
+        return self._process(operations.GetVersion(), *args, **kwargs)
 
 
     # @RequiresProtocol('2.0.3')
     def flush(self, *args, **kwargs):
-        return self._process(operations.Flush, *args, **kwargs)
+        return self._process(operations.Flush(), *args, **kwargs)
 
     # @RequiresProtocol('3.0.0')
     def mediaScan(self, *args, **kwargs):
-        return self._process(operations.MediaScan, *args, **kwargs)
+        return self._process(operations.MediaScan(), *args, **kwargs)
 
     # @RequiresProtocol('3.0.0')
     def mediaOptimize(self, *args, **kwargs):
-        return self._process(operations.MediaOptimize, *args, **kwargs)
+        return self._process(operations.MediaOptimize(), *args, **kwargs)
 
     def getLog(self, *args, **kwargs):
-        return self._process(operations.GetLog, *args, **kwargs)
+        return self._process(operations.GetLog(), *args, **kwargs)
 
 class KineticRangeIter(object):
 

@@ -182,41 +182,41 @@ class BaseAsync(Client):
 
 
     def putAsync(self, onSuccess, onError, *args, **kwargs):
-        self._processAsync(operations.Put, onSuccess, onError, *args, **kwargs)
+        self._processAsync(operations.Put(), onSuccess, onError, *args, **kwargs)
 
     def getAsync(self, onSuccess, onError, *args, **kwargs):
-        self._processAsync(operations.Get, onSuccess, onError, *args, **kwargs)
+        self._processAsync(operations.Get(), onSuccess, onError, *args, **kwargs)
 
     def getMetadataAsync(self, onSuccess, onError, *args, **kwargs):
-        self._processAsync(operations.GetMetadata, onSuccess, onError, *args, **kwargs)
+        self._processAsync(operations.GetMetadata(), onSuccess, onError, *args, **kwargs)
 
     def deleteAsync(self, onSuccess, onError, *args, **kwargs):
-        self._processAsync(operations.Delete, onSuccess, onError, *args, **kwargs)
+        self._processAsync(operations.Delete(), onSuccess, onError, *args, **kwargs)
 
     def getNextAsync(self, onSuccess, onError, *args, **kwargs):
-        self._processAsync(operations.GetNext, onSuccess, onError, *args, **kwargs)
+        self._processAsync(operations.GetNext(), onSuccess, onError, *args, **kwargs)
 
     def getPreviousAsync(self, onSuccess, onError, *args, **kwargs):
-        self._processAsync(operations.GetPrevious, onSuccess, onError, *args, **kwargs)
+        self._processAsync(operations.GetPrevious(), onSuccess, onError, *args, **kwargs)
 
     def getKeyRangeAsync(self, onSuccess, onError, *args, **kwargs):
-        self._processAsync(operations.GetKeyRange, onSuccess, onError, *args, **kwargs)
+        self._processAsync(operations.GetKeyRange(), onSuccess, onError, *args, **kwargs)
 
     def getVersionAsync(self, onSuccess, onError, *args, **kwargs):
-        self._processAsync(operations.GetVersion, onSuccess, onError, *args, **kwargs)
+        self._processAsync(operations.GetVersion(), onSuccess, onError, *args, **kwargs)
 
     def flushAsync(self, onSuccess, onError, *args, **kwargs):
-        self._processAsync(operations.Flush, onSuccess, onError, *args, **kwargs)
+        self._processAsync(operations.Flush(), onSuccess, onError, *args, **kwargs)
 
     def noopAsync(self, onSuccess, onError, *args, **kwargs):
-        self._processAsync(operations.Noop, onSuccess, onError, *args, **kwargs)
+        self._processAsync(operations.Noop(), onSuccess, onError, *args, **kwargs)
 
     def mediaScanAsync(self, onSuccess, onError, *args, **kwargs):
-        self._processAsync(operations.MediaScan, onSuccess, onError, *args, **kwargs)
+        self._processAsync(operations.MediaScan(), onSuccess, onError, *args, **kwargs)
 
     def mediaOptimizeAsync(self, onSuccess, onError, *args, **kwargs):
-        self._processAsync(operations.MediaOptimize, onSuccess, onError, *args, **kwargs)
+        self._processAsync(operations.MediaOptimize(), onSuccess, onError, *args, **kwargs)
 
     def getLogAsync(self, onSuccess, onError, *args, **kwargs):
-        self._processAsync(operations.GetLog, onSuccess, onError, *args, **kwargs)
+        self._processAsync(operations.GetLog(), onSuccess, onError, *args, **kwargs)
 
