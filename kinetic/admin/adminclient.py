@@ -21,7 +21,7 @@ from kinetic import baseclient
 from kinetic import operations
 from kinetic.common import KineticException
 from functools import wraps
-
+import warnings
 
 def withPin(f):
     @wraps(f)
@@ -75,33 +75,45 @@ class AdminClient(baseclient.BaseClient):
 
 
     def getLog(self, *args, **kwargs):
-        return self._process(operations.GetLog, *args, **kwargs)
+        return self._process(operations.GetLog(), *args, **kwargs)
 
     def setClusterVersion(self, *args, **kwargs):
-        return self._process(operations.SetClusterVersion, *args, **kwargs)
+        return self._process(operations.SetClusterVersion(), *args, **kwargs)
 
     def updateFirmware(self, *args, **kwargs):
-        return self._process(operations.UpdateFirmware, *args, **kwargs)
+        return self._process(operations.UpdateFirmware(), *args, **kwargs)
 
     @withPin
     @requiresSsl
     def unlock(self, *args, **kwargs):
-        return self._process(operations.UnlockDevice, *args, **kwargs)
+        return self._process(operations.UnlockDevice(), *args, **kwargs)
 
     @withPin
     @requiresSsl
     def lock(self, *args, **kwargs):
-        return self._process(operations.LockDevice, *args, **kwargs)
+        return self._process(operations.LockDevice(), *args, **kwargs)
 
     @withPin
     @requiresSsl
     def erase(self, *args, **kwargs):
-        return self._process(operations.EraseDevice, *args, **kwargs)
+        return self._process(operations.EraseDevice(), *args, **kwargs)
 
     @withPin
     @requiresSsl
     def instantSecureErase(self, *args, **kwargs):
-        return self._process(operations.SecureEraseDevice, *args, **kwargs)
+        return self._process(operations.SecureEraseDevice(), *args, **kwargs)
+
+    @requiresSsl
+    def setErasePin(self, *args, **kwargs):
+        return self._process(operations.SetErasePin(), *args, **kwargs)
+
+    @requiresSsl
+    def setLockPin(self, *args, **kwargs):
+        return self._process(operations.SetLockPin(), *args, **kwargs)
+
+    @requiresSsl
+    def setACL(self, *args, **kwargs):
+        return self._process(operations.SetACL(), *args, **kwargs)
 
     @requiresSsl
     def setSecurity(self, *args, **kwargs):
@@ -109,5 +121,9 @@ class AdminClient(baseclient.BaseClient):
             Set the access control lists to lock users out of different permissions.
             Arguments: aclList -> A list of ACL (Access Control List) objects.
         """
-        return self._process(operations.Security, *args, **kwargs)
+        warnings.warn(
+            "Shouldn't use this function anymore! Use setErasePin/setLockPin/setACL instead.",
+            DeprecationWarning
+        )
+        return self._process(operations.Security(), *args, **kwargs)
 

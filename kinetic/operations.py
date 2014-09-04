@@ -401,6 +401,24 @@ class Security(BaseOperation):
         return (m, None)
 
 
+class SetACL(Security):
+
+    def _build(self, acls):
+        return super(SetACL, self)._build(acls=acls)
+
+
+class SetErasePin(Security):
+
+    def _build(self, new_pin, old_pin):
+        return super(SetErasePin, self)._build(new_erase_pin=new_pin, old_erase_pin=old_pin)
+
+
+class SetLockPin(Security):
+
+    def _build(self, new_pin, old_pin):
+        return super(SetLockPin, self)._build(new_lock_pin=new_pin, old_lock_pin=old_pin)
+
+
 ###########################
 #  Background operations  #
 ###########################
