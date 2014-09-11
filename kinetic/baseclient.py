@@ -354,7 +354,7 @@ class BaseClient(object):
             m,cmd,value = self.network_recv()
             if m.authType == messages.Message.UNSOLICITEDSTATUS:
                 if self.on_unsolicited:
-                    self.on_unsolicited(resp.status) # uncatched exceptions by the handler will be raised to the caller
+                    self.on_unsolicited(cmd.status) # uncatched exceptions by the handler will be raised to the caller
                 else:
                     LOG.warn('Unsolicited status %s received but nobody listening.' % cmd.status.code)
             else: done = True
