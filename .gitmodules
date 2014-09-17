@@ -1,4 +1,4 @@
 [submodule "kinetic-protocol"]
 	path = kinetic-protocol
 	url = https://github.com/Seagate/kinetic-protocol.git
-	branch = 3.0.0
+	branch = 3.0.5
