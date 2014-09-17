@@ -2,8 +2,12 @@ Changes since 0.8.0
 ===========================
 This section will document changes to the library since the last release
 
+## Important
+- Kinetic Protocol version updated to [3.0.5](https://github.com/Seagate/kinetic-protocol/tree/3.0.5)
+
 ## New features
 - Added timeout, time_quanta, priority and early_exit support
+- Pin size added to limits
 
 Changes from 0.7.3 to 0.8.0
 ===========================

@@ -435,12 +435,9 @@ class MediaScan(BaseOperation):
 
         m = self.m
 
-        m.header.messageType = messages.Command.BACKOP
+        m.header.messageType = messages.Command.MEDIASCAN
 
-        op = m.body.backgroundOperation
-        op.backOpType = messages.Command.BackgroundOperation.MEDIASCAN
-
-        kr = op.range
+        kr = m.body.range
         kr.startKey = startKey
         kr.endKey = endKey
         kr.startKeyInclusive = startKeyInclusive
@@ -450,7 +447,7 @@ class MediaScan(BaseOperation):
         return (m, None)
 
     def parse(self, m, value):
-        r = m.body.backgroundOperation.range
+        r = m.body.range
         return ([k for k in r.keys], r.endKey)
 
 
@@ -467,12 +464,9 @@ class MediaOptimize(BaseOperation):
 
         m = self.m
 
-        m.header.messageType = messages.Command.BACKOP
+        m.header.messageType = messages.Command.MEDIAOPTIMIZE
 
-        op = m.body.backgroundOperation
-        op.backOpType = messages.Command.BackgroundOperation.MEDIAOPTIMIZE
-
-        kr = op.range
+        kr = m.body.range
         kr.startKey = startKey
         kr.endKey = endKey
         kr.startKeyInclusive = startKeyInclusive
@@ -482,7 +476,7 @@ class MediaOptimize(BaseOperation):
         return (m, None)
 
     def parse(self, m, value):
-        r = m.body.backgroundOperation.range
+        r = m.body.range
         return ([k for k in r.keys], r.endKey)
 
 
