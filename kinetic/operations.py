@@ -502,21 +502,21 @@ class UnlockDevice(BasePinOperation):
         self.pin_op_type = messages.Command.PinOperation.UNLOCK_PINOP
 
 
-class LockDevice(BaseOperation):
+class LockDevice(BasePinOperation):
 
     def __init__(self):
         super(LockDevice, self).__init__()
         self.pin_op_type = messages.Command.PinOperation.LOCK_PINOP
 
 
-class EraseDevice(BaseOperation):
+class EraseDevice(BasePinOperation):
 
     def __init__(self):
         super(EraseDevice, self).__init__()
         self.pin_op_type = messages.Command.PinOperation.ERASE_PINOP
 
 
-class SecureEraseDevice(BaseOperation):
+class SecureEraseDevice(BasePinOperation):
 
     def __init__(self):
         super(SecureEraseDevice, self).__init__()
