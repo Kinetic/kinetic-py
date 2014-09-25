@@ -8,6 +8,7 @@ This section will document changes to the library since the last release
 ## New features
 - Added timeout, time_quanta, priority and early_exit support
 - Pin size added to limits
+- SHA1 calculation used as default on puts when algorithm and tag not specified.
 
 Changes from 0.7.3 to 0.8.0
 ===========================

@@ -22,6 +22,7 @@ from common import KineticMessageException
 import common
 import kinetic_pb2 as messages
 import logging
+import hashlib
 
 LOG = logging.getLogger(__name__)
 
@@ -47,8 +48,13 @@ def _buildMessage(m, messageType, key, data=None, version='', new_version='',
         m.body.keyValue.tag = tag
         m.body.keyValue.algorithm = algorithm
     elif messageType == messages.Command.PUT:
-        m.body.keyValue.tag = 'l337'
-        m.body.keyValue.algorithm = 1 # nacho: should be change to a value over 100
+        # check the data type first
+        if data and (isinstance(data, str) or isinstance(data, bytes) or isinstance(data, bytearray)):
+            # default to sha1
+            m.body.keyValue.tag = hashlib.sha1(data).digest()
+            m.body.keyValue.algorithm = common.IntegrityAlgorithms.SHA1
+        else:
+            m.body.keyValue.tag = 'l337'
     if synchronization:
         m.body.keyValue.synchronization = synchronization
     if version:
