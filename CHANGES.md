@@ -99,8 +99,8 @@ Kinetic Protocol version updated to 2.0.3
 - Added version field on kinetic module.
 
 ## Breaking changes
-- Renamed Synchronization.ASYNC to Synchronization.WRITETHROUGH
-- Renamed Synchronization.SYNC to Synchronization.WRITEBACK
+- Renamed Synchronization.ASYNC to Synchronization.WRITEBACK
+- Renamed Synchronization.SYNC to Synchronization.WRITETHROUGH
 
 ## Bug Fixes
 - Fixed issue with asynchronous clients leaving the socket open after _close_ was called (ASOKVAD-263).
