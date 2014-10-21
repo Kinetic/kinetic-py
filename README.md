@@ -1,6 +1,7 @@
 Introduction
 ============
 The [kinetic-protocol](https://github.com/Seagate/kinetic-protocol) python client.
+Requires Python 2.7.3 or higher. Python 3.x is not supported.
 
 Installing latest stable release
 ================================
@@ -13,6 +14,11 @@ Installing from Source
     git clone https://github.com/Seagate/kinetic-py.git
     cd kinetic-py
     git submodule update --init
+    python setup.py develop
+
+For devices with old firmware code:
+
+    git checkout 0.7.3
     python setup.py develop
 
 Running Tests
