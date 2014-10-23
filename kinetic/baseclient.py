@@ -234,7 +234,7 @@ class BaseClient(object):
         m = messages.Message()
         m.commandBytes = command.SerializeToString()
 
-        if self.pin:
+        if self.pin != None:
             m.authType = messages.Message.PINAUTH
             m.pinAuth.pin = self.pin
         else: # Hmac
