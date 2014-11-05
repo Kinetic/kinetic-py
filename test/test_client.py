@@ -213,6 +213,8 @@ class KineticBasicTestCase(BaseTestCase):
     def test_key_too_big(self):
         self.assertRaises(common.KineticClientException, self.client.put, self.buildKey('x' * (common.MAX_KEY_SIZE + 1)), 'y')
 
+    def test_noop(self):
+        self.client.noop()
 
 if __name__ == '__main__':
     unittest.main()
