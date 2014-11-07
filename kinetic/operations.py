@@ -297,30 +297,6 @@ class P2pPipedPush(BaseOperation):
         return [op for op in m.body.p2pOperation.operation]
 
 
-class PushKeys(object):
-
-    @staticmethod
-    def build(keys, hostname='localhost', port=8123, **kwargs):
-        m = messages.Command()
-        m.header.messageType = messages.Command.PEER2PEERPUSH
-        m.body.p2pOperation.peer.hostname = hostname
-        m.body.p2pOperation.peer.port = port
-
-        m.body.p2pOperation.operation.extend([
-            messages.Command.P2POperation.Operation(key=key) for key in keys
-        ])
-
-        return (m, None)
-
-    @staticmethod
-    def parse(m, value):
-        return [op for op in m.body.p2pOperation.operation]
-
-    @staticmethod
-    def onError(e):
-        raise e
-
-
 class Flush(BaseOperation):
 
     def _build(self):
