@@ -1,6 +1,7 @@
 Introduction
 ============
 The [kinetic-protocol](https://github.com/Seagate/kinetic-protocol) python client.
+Requires Python 2.7.3 or higher. Python 3.x is not supported.
 
 Installing latest stable release
 ================================
@@ -13,6 +14,11 @@ Installing from Source
     git clone https://github.com/Seagate/kinetic-py.git
     cd kinetic-py
     git submodule update --init
+    python setup.py develop
+
+For devices with old firmware code:
+
+    git checkout 0.7.3
     python setup.py develop
 
 Running Tests
@@ -41,6 +47,15 @@ c.put('message','hello world')
 print c.get('message').value
 ```
 Should print out _hello_ _world_
+
+Troubleshooting during the installation
+=======================================
+On a brand new system, you might be missing a few things.
+If you get an error saying setup tools not installed or missing.
+Check the python [setuptools intallation guide](https://pypi.python.org/pypi/setuptools#installation-instructions).
+If you needed to installed that, chances are you are missing some requirements to install and compile eventlet on your system.
+On debian systems the quickest way is `sudo apt-get install python-eventlet`.
+
 
 License
 -------

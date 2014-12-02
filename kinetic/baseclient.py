@@ -27,7 +27,6 @@ import struct
 import common
 import kinetic_pb2 as messages
 import ssl
-import operations
 
 ss = socket
 
@@ -111,7 +110,7 @@ class BaseClient(object):
         # Stage socket on a local variable first
         s = self.build_socket(family)
         if self.use_ssl:
-            s = ssl.wrap_socket(s, ssl_version=ssl.PROTOCOL_TLSv1)
+            s = ssl.wrap_socket(s)
 
         s.settimeout(self.connect_timeout)
         if self.socket_address:
@@ -235,7 +234,7 @@ class BaseClient(object):
         m = messages.Message()
         m.commandBytes = command.SerializeToString()
 
-        if self.pin:
+        if self.pin != None:
             m.authType = messages.Message.PINAUTH
             m.pinAuth.pin = self.pin
         else: # Hmac
@@ -355,7 +354,7 @@ class BaseClient(object):
             m,cmd,value = self.network_recv()
             if m.authType == messages.Message.UNSOLICITEDSTATUS:
                 if self.on_unsolicited:
-                    self.on_unsolicited(resp.status) # uncatched exceptions by the handler will be raised to the caller
+                    self.on_unsolicited(cmd.status) # uncatched exceptions by the handler will be raised to the caller
                 else:
                     LOG.warn('Unsolicited status %s received but nobody listening.' % cmd.status.code)
             else: done = True

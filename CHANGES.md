@@ -1,13 +1,25 @@
-Changes since 0.8.0
+Changes since 0.8.1
 ===========================
 This section will document changes to the library since the last release
+
+Changes from 0.8.0 to 0.8.1
+===========================
+This section will document changes to the library since the last release
+
+## Important
+- Kinetic Protocol version updated to [3.0.5](https://github.com/Seagate/kinetic-protocol/tree/3.0.5)
+
+## New features
+- Added timeout, time_quanta, priority and early_exit support
+- Pin size added to limits
+- SHA1 calculation used as default on puts when algorithm and tag not specified.
 
 Changes from 0.7.3 to 0.8.0
 ===========================
 
 ## Important
 - Kinetic Protocol version updated to [3.0.0](https://github.com/Seagate/kinetic-protocol/tree/3.0.0)
-- Everything requires requires proto 3.0.0 or higher on the device
+- Everything requires proto 3.0.0 or higher on the device
 - Devices pre 3.0.0 do not have handshakes and will raise Handshake timeout
 
 ## New features
@@ -91,8 +103,8 @@ Kinetic Protocol version updated to 2.0.3
 - Added version field on kinetic module.
 
 ## Breaking changes
-- Renamed Synchronization.ASYNC to Synchronization.WRITETHROUGH
-- Renamed Synchronization.SYNC to Synchronization.WRITEBACK
+- Renamed Synchronization.ASYNC to Synchronization.WRITEBACK
+- Renamed Synchronization.SYNC to Synchronization.WRITETHROUGH
 
 ## Bug Fixes
 - Fixed issue with asynchronous clients leaving the socket open after _close_ was called (ASOKVAD-263).

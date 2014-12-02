@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='kinetic.proto',
   package='com.seagate.kinetic.proto',
-  serialized_pb='\n\rkinetic.proto\x12\x19\x63om.seagate.kinetic.proto\"\'\n\x05Local\x12\x1e\n\x0fprotocolVersion\x18\x01 \x01(\t:\x05\x33.0.0\"\xfc\x02\n\x07Message\x12=\n\x08\x61uthType\x18\x04 \x01(\x0e\x32+.com.seagate.kinetic.proto.Message.AuthType\x12=\n\x08hmacAuth\x18\x05 \x01(\x0b\x32+.com.seagate.kinetic.proto.Message.HMACauth\x12;\n\x07pinAuth\x18\x06 \x01(\x0b\x32*.com.seagate.kinetic.proto.Message.PINauth\x12\x14\n\x0c\x63ommandBytes\x18\x07 \x01(\x0c\x1a*\n\x08HMACauth\x12\x10\n\x08identity\x18\x01 \x01(\x03\x12\x0c\n\x04hmac\x18\x02 \x01(\x0c\x1a\x16\n\x07PINauth\x12\x0b\n\x03pin\x18\x01 \x01(\x0c\"\\\n\x08\x41uthType\x12\x1e\n\x11INVALID_AUTH_TYPE\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x0c\n\x08HMACAUTH\x10\x01\x12\x0b\n\x07PINAUTH\x10\x02\x12\x15\n\x11UNSOLICITEDSTATUS\x10\x03\"\x91\x32\n\x07\x43ommand\x12\x39\n\x06header\x18\x01 \x01(\x0b\x32).com.seagate.kinetic.proto.Command.Header\x12\x35\n\x04\x62ody\x18\x02 \x01(\x0b\x32\'.com.seagate.kinetic.proto.Command.Body\x12\x39\n\x06status\x18\x03 \x01(\x0b\x32).com.seagate.kinetic.proto.Command.Status\x1a\x99\x02\n\x06Header\x12\x16\n\x0e\x63lusterVersion\x18\x01 \x01(\x03\x12\x14\n\x0c\x63onnectionID\x18\x03 \x01(\x03\x12\x10\n\x08sequence\x18\x04 \x01(\x03\x12\x13\n\x0b\x61\x63kSequence\x18\x06 \x01(\x03\x12\x43\n\x0bmessageType\x18\x07 \x01(\x0e\x32..com.seagate.kinetic.proto.Command.MessageType\x12\x0f\n\x07timeout\x18\t \x01(\x03\x12\x11\n\tearlyExit\x18\n \x01(\x08\x12=\n\x08priority\x18\x0c \x01(\x0e\x32+.com.seagate.kinetic.proto.Command.Priority\x12\x12\n\nTimeQuanta\x18\r \x01(\x03\x1a\x8d\x04\n\x04\x42ody\x12=\n\x08keyValue\x18\x01 \x01(\x0b\x32+.com.seagate.kinetic.proto.Command.KeyValue\x12\x37\n\x05range\x18\x02 \x01(\x0b\x32(.com.seagate.kinetic.proto.Command.Range\x12\x37\n\x05setup\x18\x03 \x01(\x0b\x32(.com.seagate.kinetic.proto.Command.Setup\x12\x45\n\x0cp2pOperation\x18\x04 \x01(\x0b\x32/.com.seagate.kinetic.proto.Command.P2POperation\x12\x39\n\x06getLog\x18\x06 \x01(\x0b\x32).com.seagate.kinetic.proto.Command.GetLog\x12=\n\x08security\x18\x07 \x01(\x0b\x32+.com.seagate.kinetic.proto.Command.Security\x12S\n\x13\x62\x61\x63kgroundOperation\x18\x05 \x01(\x0b\x32\x36.com.seagate.kinetic.proto.Command.BackgroundOperation\x12>\n\x05pinOp\x18\x08 \x01(\x0b\x32/.com.seagate.kinetic.proto.Command.PinOperation\x1a\xde\x04\n\x06Status\x12\x42\n\x04\x63ode\x18\x01 \x01(\x0e\x32\x34.com.seagate.kinetic.proto.Command.Status.StatusCode\x12\x15\n\rstatusMessage\x18\x02 \x01(\t\x12\x17\n\x0f\x64\x65tailedMessage\x18\x03 \x01(\x0c\"\xdf\x03\n\nStatusCode\x12 \n\x13INVALID_STATUS_CODE\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x11\n\rNOT_ATTEMPTED\x10\x00\x12\x0b\n\x07SUCCESS\x10\x01\x12\x10\n\x0cHMAC_FAILURE\x10\x02\x12\x12\n\x0eNOT_AUTHORIZED\x10\x03\x12\x13\n\x0fVERSION_FAILURE\x10\x04\x12\x12\n\x0eINTERNAL_ERROR\x10\x05\x12\x13\n\x0fHEADER_REQUIRED\x10\x06\x12\r\n\tNOT_FOUND\x10\x07\x12\x14\n\x10VERSION_MISMATCH\x10\x08\x12\x10\n\x0cSERVICE_BUSY\x10\t\x12\x0b\n\x07\x45XPIRED\x10\n\x12\x0e\n\nDATA_ERROR\x10\x0b\x12\x13\n\x0fPERM_DATA_ERROR\x10\x0c\x12\x1b\n\x17REMOTE_CONNECTION_ERROR\x10\r\x12\x0c\n\x08NO_SPACE\x10\x0e\x12\x1a\n\x16NO_SUCH_HMAC_ALGORITHM\x10\x0f\x12\x13\n\x0fINVALID_REQUEST\x10\x10\x12\x1b\n\x17NESTED_OPERATION_ERRORS\x10\x11\x12\x11\n\rDEVICE_LOCKED\x10\x12\x12\x1b\n\x17\x44\x45VICE_ALREADY_UNLOCKED\x10\x13\x12\x19\n\x15\x43ONNECTION_TERMINATED\x10\x14\x1a\xfe\x01\n\x08KeyValue\x12\x12\n\nnewVersion\x18\x02 \x01(\x0c\x12\r\n\x05\x66orce\x18\x08 \x01(\x08\x12\x0b\n\x03key\x18\x03 \x01(\x0c\x12\x11\n\tdbVersion\x18\x04 \x01(\x0c\x12\x0b\n\x03tag\x18\x05 \x01(\x0c\x12?\n\talgorithm\x18\x06 \x01(\x0e\x32,.com.seagate.kinetic.proto.Command.Algorithm\x12\x14\n\x0cmetadataOnly\x18\x07 \x01(\x08\x12K\n\x0fsynchronization\x18\t \x01(\x0e\x32\x32.com.seagate.kinetic.proto.Command.Synchronization\x1a\x91\x01\n\x05Range\x12\x10\n\x08startKey\x18\x01 \x01(\x0c\x12\x0e\n\x06\x65ndKey\x18\x02 \x01(\x0c\x12\x19\n\x11startKeyInclusive\x18\x03 \x01(\x08\x12\x17\n\x0f\x65ndKeyInclusive\x18\x04 \x01(\x08\x12\x13\n\x0bmaxReturned\x18\x05 \x01(\x05\x12\x0f\n\x07reverse\x18\x06 \x01(\x08\x12\x0c\n\x04keys\x18\x08 \x03(\x0c\x1a<\n\x05Setup\x12\x19\n\x11newClusterVersion\x18\x01 \x01(\x03\x12\x18\n\x10\x66irmwareDownload\x18\x05 \x01(\x08\x1a\xc0\x03\n\x0cP2POperation\x12\x42\n\x04peer\x18\x01 \x01(\x0b\x32\x34.com.seagate.kinetic.proto.Command.P2POperation.Peer\x12L\n\toperation\x18\x02 \x03(\x0b\x32\x39.com.seagate.kinetic.proto.Command.P2POperation.Operation\x12#\n\x1b\x61llChildOperationsSucceeded\x18\x03 \x01(\x08\x1a\xc3\x01\n\tOperation\x12\x0b\n\x03key\x18\x03 \x01(\x0c\x12\x0f\n\x07version\x18\x04 \x01(\x0c\x12\x0e\n\x06newKey\x18\x05 \x01(\x0c\x12\r\n\x05\x66orce\x18\x06 \x01(\x08\x12\x39\n\x06status\x18\x07 \x01(\x0b\x32).com.seagate.kinetic.proto.Command.Status\x12>\n\x05p2pop\x18\x08 \x01(\x0b\x32/.com.seagate.kinetic.proto.Command.P2POperation\x1a\x33\n\x04Peer\x12\x10\n\x08hostname\x18\x01 \x01(\t\x12\x0c\n\x04port\x18\x02 \x01(\x05\x12\x0b\n\x03tls\x18\x03 \x01(\x08\x1a\x95\x0e\n\x06GetLog\x12=\n\x05types\x18\x01 \x03(\x0e\x32..com.seagate.kinetic.proto.Command.GetLog.Type\x12K\n\x0cutilizations\x18\x02 \x03(\x0b\x32\x35.com.seagate.kinetic.proto.Command.GetLog.Utilization\x12K\n\x0ctemperatures\x18\x03 \x03(\x0b\x32\x35.com.seagate.kinetic.proto.Command.GetLog.Temperature\x12\x44\n\x08\x63\x61pacity\x18\x04 \x01(\x0b\x32\x32.com.seagate.kinetic.proto.Command.GetLog.Capacity\x12N\n\rconfiguration\x18\x05 \x01(\x0b\x32\x37.com.seagate.kinetic.proto.Command.GetLog.Configuration\x12H\n\nstatistics\x18\x06 \x03(\x0b\x32\x34.com.seagate.kinetic.proto.Command.GetLog.Statistics\x12\x10\n\x08messages\x18\x07 \x01(\x0c\x12@\n\x06limits\x18\x08 \x01(\x0b\x32\x30.com.seagate.kinetic.proto.Command.GetLog.Limits\x12@\n\x06\x64\x65vice\x18\t \x01(\x0b\x32\x30.com.seagate.kinetic.proto.Command.GetLog.Device\x1a*\n\x0bUtilization\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x02\x1a^\n\x0bTemperature\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07\x63urrent\x18\x02 \x01(\x02\x12\x0f\n\x07minimum\x18\x03 \x01(\x02\x12\x0f\n\x07maximum\x18\x04 \x01(\x02\x12\x0e\n\x06target\x18\x05 \x01(\x02\x1a?\n\x08\x43\x61pacity\x12\x1e\n\x16nominalCapacityInBytes\x18\x04 \x01(\x04\x12\x13\n\x0bportionFull\x18\x05 \x01(\x02\x1a\xb6\x03\n\rConfiguration\x12\x0e\n\x06vendor\x18\x05 \x01(\t\x12\r\n\x05model\x18\x06 \x01(\t\x12\x14\n\x0cserialNumber\x18\x07 \x01(\x0c\x12\x15\n\rworldWideName\x18\x0e \x01(\x0c\x12\x0f\n\x07version\x18\x08 \x01(\t\x12\x17\n\x0f\x63ompilationDate\x18\x0c \x01(\t\x12\x12\n\nsourceHash\x18\r \x01(\t\x12\x17\n\x0fprotocolVersion\x18\x0f \x01(\t\x12\x1f\n\x17protocolCompilationDate\x18\x10 \x01(\t\x12\x1a\n\x12protocolSourceHash\x18\x11 \x01(\t\x12T\n\tinterface\x18\t \x03(\x0b\x32\x41.com.seagate.kinetic.proto.Command.GetLog.Configuration.Interface\x12\x0c\n\x04port\x18\n \x01(\x05\x12\x0f\n\x07tlsPort\x18\x0b \x01(\x05\x1aP\n\tInterface\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0b\n\x03MAC\x18\x02 \x01(\x0c\x12\x13\n\x0bipv4Address\x18\x03 \x01(\x0c\x12\x13\n\x0bipv6Address\x18\x04 \x01(\x0c\x1ao\n\nStatistics\x12\x43\n\x0bmessageType\x18\x01 \x01(\x0e\x32..com.seagate.kinetic.proto.Command.MessageType\x12\r\n\x05\x63ount\x18\x04 \x01(\x04\x12\r\n\x05\x62ytes\x18\x05 \x01(\x04\x1a\x8b\x02\n\x06Limits\x12\x12\n\nmaxKeySize\x18\x01 \x01(\r\x12\x14\n\x0cmaxValueSize\x18\x02 \x01(\r\x12\x16\n\x0emaxVersionSize\x18\x03 \x01(\r\x12\x12\n\nmaxTagSize\x18\x04 \x01(\r\x12\x16\n\x0emaxConnections\x18\x05 \x01(\r\x12\"\n\x1amaxOutstandingReadRequests\x18\x06 \x01(\r\x12#\n\x1bmaxOutstandingWriteRequests\x18\x07 \x01(\r\x12\x16\n\x0emaxMessageSize\x18\x08 \x01(\r\x12\x18\n\x10maxKeyRangeCount\x18\t \x01(\r\x12\x18\n\x10maxIdentityCount\x18\n \x01(\r\x1a\x16\n\x06\x44\x65vice\x12\x0c\n\x04name\x18\x01 \x01(\x0c\"\x9e\x01\n\x04Type\x12\x19\n\x0cINVALID_TYPE\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x10\n\x0cUTILIZATIONS\x10\x00\x12\x10\n\x0cTEMPERATURES\x10\x01\x12\x0e\n\nCAPACITIES\x10\x02\x12\x11\n\rCONFIGURATION\x10\x03\x12\x0e\n\nSTATISTICS\x10\x04\x12\x0c\n\x08MESSAGES\x10\x05\x12\n\n\x06LIMITS\x10\x06\x12\n\n\x06\x44\x45VICE\x10\x07\x1a\xfd\x05\n\x08Security\x12<\n\x03\x61\x63l\x18\x02 \x03(\x0b\x32/.com.seagate.kinetic.proto.Command.Security.ACL\x12\x12\n\noldLockPIN\x18\x03 \x01(\x0c\x12\x12\n\nnewLockPIN\x18\x04 \x01(\x0c\x12\x13\n\x0boldErasePIN\x18\x05 \x01(\x0c\x12\x13\n\x0bnewErasePIN\x18\x06 \x01(\x0c\x1a\xe0\x04\n\x03\x41\x43L\x12\x10\n\x08identity\x18\x01 \x01(\x03\x12\x0b\n\x03key\x18\x02 \x01(\x0c\x12T\n\rhmacAlgorithm\x18\x03 \x01(\x0e\x32=.com.seagate.kinetic.proto.Command.Security.ACL.HMACAlgorithm\x12\x44\n\x05scope\x18\x04 \x03(\x0b\x32\x35.com.seagate.kinetic.proto.Command.Security.ACL.Scope\x12@\n\x0bmaxPriority\x18\x05 \x01(\x0e\x32+.com.seagate.kinetic.proto.Command.Priority\x1a\x8b\x01\n\x05Scope\x12\x0e\n\x06offset\x18\x01 \x01(\x03\x12\r\n\x05value\x18\x02 \x01(\x0c\x12N\n\npermission\x18\x03 \x03(\x0e\x32:.com.seagate.kinetic.proto.Command.Security.ACL.Permission\x12\x13\n\x0bTlsRequired\x18\x04 \x01(\x08\"B\n\rHMACAlgorithm\x12#\n\x16INVALID_HMAC_ALGORITHM\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x0c\n\x08HmacSHA1\x10\x01\"\x89\x01\n\nPermission\x12\x1f\n\x12INVALID_PERMISSION\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x08\n\x04READ\x10\x00\x12\t\n\x05WRITE\x10\x01\x12\n\n\x06\x44\x45LETE\x10\x02\x12\t\n\x05RANGE\x10\x03\x12\t\n\x05SETUP\x10\x04\x12\t\n\x05P2POP\x10\x05\x12\n\n\x06GETLOG\x10\x07\x12\x0c\n\x08SECURITY\x10\x08\x1a\xf2\x01\n\x13\x42\x61\x63kgroundOperation\x12U\n\nbackOpType\x18\x01 \x01(\x0e\x32\x41.com.seagate.kinetic.proto.Command.BackgroundOperation.BackOpType\x12\x37\n\x05range\x18\x02 \x01(\x0b\x32(.com.seagate.kinetic.proto.Command.Range\"K\n\nBackOpType\x12\x1b\n\x0eINVALID_BACKOP\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\r\n\tMEDIASCAN\x10\x01\x12\x11\n\rMEDIAOPTIMIZE\x10\x02\x1a\xd0\x01\n\x0cPinOperation\x12L\n\tpinOpType\x18\x01 \x01(\x0e\x32\x39.com.seagate.kinetic.proto.Command.PinOperation.PinOpType\"r\n\tPinOpType\x12\x1a\n\rINVALID_PINOP\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x10\n\x0cUNLOCK_PINOP\x10\x01\x12\x0e\n\nLOCK_PINOP\x10\x02\x12\x0f\n\x0b\x45RASE_PINOP\x10\x03\x12\x16\n\x12SECURE_ERASE_PINOP\x10\x04\"c\n\x0fSynchronization\x12$\n\x17INVALID_SYNCHRONIZATION\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x10\n\x0cWRITETHROUGH\x10\x01\x12\r\n\tWRITEBACK\x10\x02\x12\t\n\x05\x46LUSH\x10\x03\"F\n\x08Priority\x12\n\n\x06NORMAL\x10\x05\x12\n\n\x06LOWEST\x10\x01\x12\t\n\x05LOWER\x10\x03\x12\n\n\x06HIGHER\x10\x07\x12\x0b\n\x07HIGHEST\x10\t\"_\n\tAlgorithm\x12\x1e\n\x11INVALID_ALGORITHM\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x08\n\x04SHA1\x10\x01\x12\x08\n\x04SHA2\x10\x02\x12\x08\n\x04SHA3\x10\x03\x12\t\n\x05\x43RC32\x10\x04\x12\t\n\x05\x43RC64\x10\x05\"\xc7\x04\n\x0bMessageType\x12!\n\x14INVALID_MESSAGE_TYPE\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x07\n\x03GET\x10\x02\x12\x10\n\x0cGET_RESPONSE\x10\x01\x12\x07\n\x03PUT\x10\x04\x12\x10\n\x0cPUT_RESPONSE\x10\x03\x12\n\n\x06\x44\x45LETE\x10\x06\x12\x13\n\x0f\x44\x45LETE_RESPONSE\x10\x05\x12\x0b\n\x07GETNEXT\x10\x08\x12\x14\n\x10GETNEXT_RESPONSE\x10\x07\x12\x0f\n\x0bGETPREVIOUS\x10\n\x12\x18\n\x14GETPREVIOUS_RESPONSE\x10\t\x12\x0f\n\x0bGETKEYRANGE\x10\x0c\x12\x18\n\x14GETKEYRANGE_RESPONSE\x10\x0b\x12\x0e\n\nGETVERSION\x10\x10\x12\x17\n\x13GETVERSION_RESPONSE\x10\x0f\x12\t\n\x05SETUP\x10\x16\x12\x12\n\x0eSETUP_RESPONSE\x10\x15\x12\n\n\x06GETLOG\x10\x18\x12\x13\n\x0fGETLOG_RESPONSE\x10\x17\x12\x0c\n\x08SECURITY\x10\x1a\x12\x15\n\x11SECURITY_RESPONSE\x10\x19\x12\x11\n\rPEER2PEERPUSH\x10\x1c\x12\x1a\n\x16PEER2PEERPUSH_RESPONSE\x10\x1b\x12\x08\n\x04NOOP\x10\x1e\x12\x11\n\rNOOP_RESPONSE\x10\x1d\x12\x10\n\x0c\x46LUSHALLDATA\x10 \x12\x19\n\x15\x46LUSHALLDATA_RESPONSE\x10\x1f\x12\n\n\x06\x42\x41\x43KOP\x10\"\x12\x13\n\x0f\x42\x41\x43KOP_RESPONSE\x10!\x12\t\n\x05PINOP\x10$\x12\x12\n\x0ePINOP_RESPONSE\x10#B\tB\x07Kinetic')
+  serialized_pb='\n\rkinetic.proto\x12\x19\x63om.seagate.kinetic.proto\"\'\n\x05Local\x12\x1e\n\x0fprotocolVersion\x18\x01 \x01(\t:\x05\x33.0.5\"\xfc\x02\n\x07Message\x12=\n\x08\x61uthType\x18\x04 \x01(\x0e\x32+.com.seagate.kinetic.proto.Message.AuthType\x12=\n\x08hmacAuth\x18\x05 \x01(\x0b\x32+.com.seagate.kinetic.proto.Message.HMACauth\x12;\n\x07pinAuth\x18\x06 \x01(\x0b\x32*.com.seagate.kinetic.proto.Message.PINauth\x12\x14\n\x0c\x63ommandBytes\x18\x07 \x01(\x0c\x1a*\n\x08HMACauth\x12\x10\n\x08identity\x18\x01 \x01(\x03\x12\x0c\n\x04hmac\x18\x02 \x01(\x0c\x1a\x16\n\x07PINauth\x12\x0b\n\x03pin\x18\x01 \x01(\x0c\"\\\n\x08\x41uthType\x12\x1e\n\x11INVALID_AUTH_TYPE\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x0c\n\x08HMACAUTH\x10\x01\x12\x0b\n\x07PINAUTH\x10\x02\x12\x15\n\x11UNSOLICITEDSTATUS\x10\x03\"\x90\x30\n\x07\x43ommand\x12\x39\n\x06header\x18\x01 \x01(\x0b\x32).com.seagate.kinetic.proto.Command.Header\x12\x35\n\x04\x62ody\x18\x02 \x01(\x0b\x32\'.com.seagate.kinetic.proto.Command.Body\x12\x39\n\x06status\x18\x03 \x01(\x0b\x32).com.seagate.kinetic.proto.Command.Status\x1a\x99\x02\n\x06Header\x12\x16\n\x0e\x63lusterVersion\x18\x01 \x01(\x03\x12\x14\n\x0c\x63onnectionID\x18\x03 \x01(\x03\x12\x10\n\x08sequence\x18\x04 \x01(\x03\x12\x13\n\x0b\x61\x63kSequence\x18\x06 \x01(\x03\x12\x43\n\x0bmessageType\x18\x07 \x01(\x0e\x32..com.seagate.kinetic.proto.Command.MessageType\x12\x0f\n\x07timeout\x18\t \x01(\x03\x12\x11\n\tearlyExit\x18\n \x01(\x08\x12=\n\x08priority\x18\x0c \x01(\x0e\x32+.com.seagate.kinetic.proto.Command.Priority\x12\x12\n\nTimeQuanta\x18\r \x01(\x03\x1a\xb8\x03\n\x04\x42ody\x12=\n\x08keyValue\x18\x01 \x01(\x0b\x32+.com.seagate.kinetic.proto.Command.KeyValue\x12\x37\n\x05range\x18\x02 \x01(\x0b\x32(.com.seagate.kinetic.proto.Command.Range\x12\x37\n\x05setup\x18\x03 \x01(\x0b\x32(.com.seagate.kinetic.proto.Command.Setup\x12\x45\n\x0cp2pOperation\x18\x04 \x01(\x0b\x32/.com.seagate.kinetic.proto.Command.P2POperation\x12\x39\n\x06getLog\x18\x06 \x01(\x0b\x32).com.seagate.kinetic.proto.Command.GetLog\x12=\n\x08security\x18\x07 \x01(\x0b\x32+.com.seagate.kinetic.proto.Command.Security\x12>\n\x05pinOp\x18\x08 \x01(\x0b\x32/.com.seagate.kinetic.proto.Command.PinOperation\x1a\xde\x04\n\x06Status\x12\x42\n\x04\x63ode\x18\x01 \x01(\x0e\x32\x34.com.seagate.kinetic.proto.Command.Status.StatusCode\x12\x15\n\rstatusMessage\x18\x02 \x01(\t\x12\x17\n\x0f\x64\x65tailedMessage\x18\x03 \x01(\x0c\"\xdf\x03\n\nStatusCode\x12 \n\x13INVALID_STATUS_CODE\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x11\n\rNOT_ATTEMPTED\x10\x00\x12\x0b\n\x07SUCCESS\x10\x01\x12\x10\n\x0cHMAC_FAILURE\x10\x02\x12\x12\n\x0eNOT_AUTHORIZED\x10\x03\x12\x13\n\x0fVERSION_FAILURE\x10\x04\x12\x12\n\x0eINTERNAL_ERROR\x10\x05\x12\x13\n\x0fHEADER_REQUIRED\x10\x06\x12\r\n\tNOT_FOUND\x10\x07\x12\x14\n\x10VERSION_MISMATCH\x10\x08\x12\x10\n\x0cSERVICE_BUSY\x10\t\x12\x0b\n\x07\x45XPIRED\x10\n\x12\x0e\n\nDATA_ERROR\x10\x0b\x12\x13\n\x0fPERM_DATA_ERROR\x10\x0c\x12\x1b\n\x17REMOTE_CONNECTION_ERROR\x10\r\x12\x0c\n\x08NO_SPACE\x10\x0e\x12\x1a\n\x16NO_SUCH_HMAC_ALGORITHM\x10\x0f\x12\x13\n\x0fINVALID_REQUEST\x10\x10\x12\x1b\n\x17NESTED_OPERATION_ERRORS\x10\x11\x12\x11\n\rDEVICE_LOCKED\x10\x12\x12\x1b\n\x17\x44\x45VICE_ALREADY_UNLOCKED\x10\x13\x12\x19\n\x15\x43ONNECTION_TERMINATED\x10\x14\x1a\xfe\x01\n\x08KeyValue\x12\x12\n\nnewVersion\x18\x02 \x01(\x0c\x12\r\n\x05\x66orce\x18\x08 \x01(\x08\x12\x0b\n\x03key\x18\x03 \x01(\x0c\x12\x11\n\tdbVersion\x18\x04 \x01(\x0c\x12\x0b\n\x03tag\x18\x05 \x01(\x0c\x12?\n\talgorithm\x18\x06 \x01(\x0e\x32,.com.seagate.kinetic.proto.Command.Algorithm\x12\x14\n\x0cmetadataOnly\x18\x07 \x01(\x08\x12K\n\x0fsynchronization\x18\t \x01(\x0e\x32\x32.com.seagate.kinetic.proto.Command.Synchronization\x1a\x91\x01\n\x05Range\x12\x10\n\x08startKey\x18\x01 \x01(\x0c\x12\x0e\n\x06\x65ndKey\x18\x02 \x01(\x0c\x12\x19\n\x11startKeyInclusive\x18\x03 \x01(\x08\x12\x17\n\x0f\x65ndKeyInclusive\x18\x04 \x01(\x08\x12\x13\n\x0bmaxReturned\x18\x05 \x01(\x05\x12\x0f\n\x07reverse\x18\x06 \x01(\x08\x12\x0c\n\x04keys\x18\x08 \x03(\x0c\x1a<\n\x05Setup\x12\x19\n\x11newClusterVersion\x18\x01 \x01(\x03\x12\x18\n\x10\x66irmwareDownload\x18\x05 \x01(\x08\x1a\xc0\x03\n\x0cP2POperation\x12\x42\n\x04peer\x18\x01 \x01(\x0b\x32\x34.com.seagate.kinetic.proto.Command.P2POperation.Peer\x12L\n\toperation\x18\x02 \x03(\x0b\x32\x39.com.seagate.kinetic.proto.Command.P2POperation.Operation\x12#\n\x1b\x61llChildOperationsSucceeded\x18\x03 \x01(\x08\x1a\xc3\x01\n\tOperation\x12\x0b\n\x03key\x18\x03 \x01(\x0c\x12\x0f\n\x07version\x18\x04 \x01(\x0c\x12\x0e\n\x06newKey\x18\x05 \x01(\x0c\x12\r\n\x05\x66orce\x18\x06 \x01(\x08\x12\x39\n\x06status\x18\x07 \x01(\x0b\x32).com.seagate.kinetic.proto.Command.Status\x12>\n\x05p2pop\x18\x08 \x01(\x0b\x32/.com.seagate.kinetic.proto.Command.P2POperation\x1a\x33\n\x04Peer\x12\x10\n\x08hostname\x18\x01 \x01(\t\x12\x0c\n\x04port\x18\x02 \x01(\x05\x12\x0b\n\x03tls\x18\x03 \x01(\x08\x1a\xa9\x0e\n\x06GetLog\x12=\n\x05types\x18\x01 \x03(\x0e\x32..com.seagate.kinetic.proto.Command.GetLog.Type\x12K\n\x0cutilizations\x18\x02 \x03(\x0b\x32\x35.com.seagate.kinetic.proto.Command.GetLog.Utilization\x12K\n\x0ctemperatures\x18\x03 \x03(\x0b\x32\x35.com.seagate.kinetic.proto.Command.GetLog.Temperature\x12\x44\n\x08\x63\x61pacity\x18\x04 \x01(\x0b\x32\x32.com.seagate.kinetic.proto.Command.GetLog.Capacity\x12N\n\rconfiguration\x18\x05 \x01(\x0b\x32\x37.com.seagate.kinetic.proto.Command.GetLog.Configuration\x12H\n\nstatistics\x18\x06 \x03(\x0b\x32\x34.com.seagate.kinetic.proto.Command.GetLog.Statistics\x12\x10\n\x08messages\x18\x07 \x01(\x0c\x12@\n\x06limits\x18\x08 \x01(\x0b\x32\x30.com.seagate.kinetic.proto.Command.GetLog.Limits\x12@\n\x06\x64\x65vice\x18\t \x01(\x0b\x32\x30.com.seagate.kinetic.proto.Command.GetLog.Device\x1a*\n\x0bUtilization\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x02\x1a^\n\x0bTemperature\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07\x63urrent\x18\x02 \x01(\x02\x12\x0f\n\x07minimum\x18\x03 \x01(\x02\x12\x0f\n\x07maximum\x18\x04 \x01(\x02\x12\x0e\n\x06target\x18\x05 \x01(\x02\x1a?\n\x08\x43\x61pacity\x12\x1e\n\x16nominalCapacityInBytes\x18\x04 \x01(\x04\x12\x13\n\x0bportionFull\x18\x05 \x01(\x02\x1a\xb6\x03\n\rConfiguration\x12\x0e\n\x06vendor\x18\x05 \x01(\t\x12\r\n\x05model\x18\x06 \x01(\t\x12\x14\n\x0cserialNumber\x18\x07 \x01(\x0c\x12\x15\n\rworldWideName\x18\x0e \x01(\x0c\x12\x0f\n\x07version\x18\x08 \x01(\t\x12\x17\n\x0f\x63ompilationDate\x18\x0c \x01(\t\x12\x12\n\nsourceHash\x18\r \x01(\t\x12\x17\n\x0fprotocolVersion\x18\x0f \x01(\t\x12\x1f\n\x17protocolCompilationDate\x18\x10 \x01(\t\x12\x1a\n\x12protocolSourceHash\x18\x11 \x01(\t\x12T\n\tinterface\x18\t \x03(\x0b\x32\x41.com.seagate.kinetic.proto.Command.GetLog.Configuration.Interface\x12\x0c\n\x04port\x18\n \x01(\x05\x12\x0f\n\x07tlsPort\x18\x0b \x01(\x05\x1aP\n\tInterface\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0b\n\x03MAC\x18\x02 \x01(\x0c\x12\x13\n\x0bipv4Address\x18\x03 \x01(\x0c\x12\x13\n\x0bipv6Address\x18\x04 \x01(\x0c\x1ao\n\nStatistics\x12\x43\n\x0bmessageType\x18\x01 \x01(\x0e\x32..com.seagate.kinetic.proto.Command.MessageType\x12\r\n\x05\x63ount\x18\x04 \x01(\x04\x12\r\n\x05\x62ytes\x18\x05 \x01(\x04\x1a\x9f\x02\n\x06Limits\x12\x12\n\nmaxKeySize\x18\x01 \x01(\r\x12\x14\n\x0cmaxValueSize\x18\x02 \x01(\r\x12\x16\n\x0emaxVersionSize\x18\x03 \x01(\r\x12\x12\n\nmaxTagSize\x18\x04 \x01(\r\x12\x16\n\x0emaxConnections\x18\x05 \x01(\r\x12\"\n\x1amaxOutstandingReadRequests\x18\x06 \x01(\r\x12#\n\x1bmaxOutstandingWriteRequests\x18\x07 \x01(\r\x12\x16\n\x0emaxMessageSize\x18\x08 \x01(\r\x12\x18\n\x10maxKeyRangeCount\x18\t \x01(\r\x12\x18\n\x10maxIdentityCount\x18\n \x01(\r\x12\x12\n\nmaxPinSize\x18\x0b \x01(\r\x1a\x16\n\x06\x44\x65vice\x12\x0c\n\x04name\x18\x01 \x01(\x0c\"\x9e\x01\n\x04Type\x12\x19\n\x0cINVALID_TYPE\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x10\n\x0cUTILIZATIONS\x10\x00\x12\x10\n\x0cTEMPERATURES\x10\x01\x12\x0e\n\nCAPACITIES\x10\x02\x12\x11\n\rCONFIGURATION\x10\x03\x12\x0e\n\nSTATISTICS\x10\x04\x12\x0c\n\x08MESSAGES\x10\x05\x12\n\n\x06LIMITS\x10\x06\x12\n\n\x06\x44\x45VICE\x10\x07\x1a\xfd\x05\n\x08Security\x12<\n\x03\x61\x63l\x18\x02 \x03(\x0b\x32/.com.seagate.kinetic.proto.Command.Security.ACL\x12\x12\n\noldLockPIN\x18\x03 \x01(\x0c\x12\x12\n\nnewLockPIN\x18\x04 \x01(\x0c\x12\x13\n\x0boldErasePIN\x18\x05 \x01(\x0c\x12\x13\n\x0bnewErasePIN\x18\x06 \x01(\x0c\x1a\xe0\x04\n\x03\x41\x43L\x12\x10\n\x08identity\x18\x01 \x01(\x03\x12\x0b\n\x03key\x18\x02 \x01(\x0c\x12T\n\rhmacAlgorithm\x18\x03 \x01(\x0e\x32=.com.seagate.kinetic.proto.Command.Security.ACL.HMACAlgorithm\x12\x44\n\x05scope\x18\x04 \x03(\x0b\x32\x35.com.seagate.kinetic.proto.Command.Security.ACL.Scope\x12@\n\x0bmaxPriority\x18\x05 \x01(\x0e\x32+.com.seagate.kinetic.proto.Command.Priority\x1a\x8b\x01\n\x05Scope\x12\x0e\n\x06offset\x18\x01 \x01(\x03\x12\r\n\x05value\x18\x02 \x01(\x0c\x12N\n\npermission\x18\x03 \x03(\x0e\x32:.com.seagate.kinetic.proto.Command.Security.ACL.Permission\x12\x13\n\x0bTlsRequired\x18\x04 \x01(\x08\"B\n\rHMACAlgorithm\x12#\n\x16INVALID_HMAC_ALGORITHM\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x0c\n\x08HmacSHA1\x10\x01\"\x89\x01\n\nPermission\x12\x1f\n\x12INVALID_PERMISSION\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x08\n\x04READ\x10\x00\x12\t\n\x05WRITE\x10\x01\x12\n\n\x06\x44\x45LETE\x10\x02\x12\t\n\x05RANGE\x10\x03\x12\t\n\x05SETUP\x10\x04\x12\t\n\x05P2POP\x10\x05\x12\n\n\x06GETLOG\x10\x07\x12\x0c\n\x08SECURITY\x10\x08\x1a\xd0\x01\n\x0cPinOperation\x12L\n\tpinOpType\x18\x01 \x01(\x0e\x32\x39.com.seagate.kinetic.proto.Command.PinOperation.PinOpType\"r\n\tPinOpType\x12\x1a\n\rINVALID_PINOP\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x10\n\x0cUNLOCK_PINOP\x10\x01\x12\x0e\n\nLOCK_PINOP\x10\x02\x12\x0f\n\x0b\x45RASE_PINOP\x10\x03\x12\x16\n\x12SECURE_ERASE_PINOP\x10\x04\"c\n\x0fSynchronization\x12$\n\x17INVALID_SYNCHRONIZATION\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x10\n\x0cWRITETHROUGH\x10\x01\x12\r\n\tWRITEBACK\x10\x02\x12\t\n\x05\x46LUSH\x10\x03\"F\n\x08Priority\x12\n\n\x06NORMAL\x10\x05\x12\n\n\x06LOWEST\x10\x01\x12\t\n\x05LOWER\x10\x03\x12\n\n\x06HIGHER\x10\x07\x12\x0b\n\x07HIGHEST\x10\t\"_\n\tAlgorithm\x12\x1e\n\x11INVALID_ALGORITHM\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x08\n\x04SHA1\x10\x01\x12\x08\n\x04SHA2\x10\x02\x12\x08\n\x04SHA3\x10\x03\x12\t\n\x05\x43RC32\x10\x04\x12\t\n\x05\x43RC64\x10\x05\"\xfc\x04\n\x0bMessageType\x12!\n\x14INVALID_MESSAGE_TYPE\x10\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\x12\x07\n\x03GET\x10\x02\x12\x10\n\x0cGET_RESPONSE\x10\x01\x12\x07\n\x03PUT\x10\x04\x12\x10\n\x0cPUT_RESPONSE\x10\x03\x12\n\n\x06\x44\x45LETE\x10\x06\x12\x13\n\x0f\x44\x45LETE_RESPONSE\x10\x05\x12\x0b\n\x07GETNEXT\x10\x08\x12\x14\n\x10GETNEXT_RESPONSE\x10\x07\x12\x0f\n\x0bGETPREVIOUS\x10\n\x12\x18\n\x14GETPREVIOUS_RESPONSE\x10\t\x12\x0f\n\x0bGETKEYRANGE\x10\x0c\x12\x18\n\x14GETKEYRANGE_RESPONSE\x10\x0b\x12\x0e\n\nGETVERSION\x10\x10\x12\x17\n\x13GETVERSION_RESPONSE\x10\x0f\x12\t\n\x05SETUP\x10\x16\x12\x12\n\x0eSETUP_RESPONSE\x10\x15\x12\n\n\x06GETLOG\x10\x18\x12\x13\n\x0fGETLOG_RESPONSE\x10\x17\x12\x0c\n\x08SECURITY\x10\x1a\x12\x15\n\x11SECURITY_RESPONSE\x10\x19\x12\x11\n\rPEER2PEERPUSH\x10\x1c\x12\x1a\n\x16PEER2PEERPUSH_RESPONSE\x10\x1b\x12\x08\n\x04NOOP\x10\x1e\x12\x11\n\rNOOP_RESPONSE\x10\x1d\x12\x10\n\x0c\x46LUSHALLDATA\x10 \x12\x19\n\x15\x46LUSHALLDATA_RESPONSE\x10\x1f\x12\t\n\x05PINOP\x10$\x12\x12\n\x0ePINOP_RESPONSE\x10#\x12\r\n\tMEDIASCAN\x10&\x12\x16\n\x12MEDIASCAN_RESPONSE\x10%\x12\x11\n\rMEDIAOPTIMIZE\x10(\x12\x1a\n\x16MEDIAOPTIMIZE_RESPONSE\x10\'B\tB\x07Kinetic')
 
 
 
@@ -143,8 +143,8 @@ _COMMAND_STATUS_STATUSCODE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=1593,
-  serialized_end=2072,
+  serialized_start=1508,
+  serialized_end=1987,
 )
 
 _COMMAND_GETLOG_TYPE = _descriptor.EnumDescriptor(
@@ -192,8 +192,8 @@ _COMMAND_GETLOG_TYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=4648,
-  serialized_end=4806,
+  serialized_start=4583,
+  serialized_end=4741,
 )
 
 _COMMAND_SECURITY_ACL_HMACALGORITHM = _descriptor.EnumDescriptor(
@@ -213,8 +213,8 @@ _COMMAND_SECURITY_ACL_HMACALGORITHM = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=5368,
-  serialized_end=5434,
+  serialized_start=5303,
+  serialized_end=5369,
 )
 
 _COMMAND_SECURITY_ACL_PERMISSION = _descriptor.EnumDescriptor(
@@ -262,33 +262,8 @@ _COMMAND_SECURITY_ACL_PERMISSION = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=5437,
-  serialized_end=5574,
-)
-
-_COMMAND_BACKGROUNDOPERATION_BACKOPTYPE = _descriptor.EnumDescriptor(
-  name='BackOpType',
-  full_name='com.seagate.kinetic.proto.Command.BackgroundOperation.BackOpType',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='INVALID_BACKOP', index=0, number=-1,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='MEDIASCAN', index=1, number=1,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='MEDIAOPTIMIZE', index=2, number=2,
-      options=None,
-      type=None),
-  ],
-  containing_type=None,
-  options=None,
-  serialized_start=5744,
-  serialized_end=5819,
+  serialized_start=5372,
+  serialized_end=5509,
 )
 
 _COMMAND_PINOPERATION_PINOPTYPE = _descriptor.EnumDescriptor(
@@ -320,8 +295,8 @@ _COMMAND_PINOPERATION_PINOPTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=5916,
-  serialized_end=6030,
+  serialized_start=5606,
+  serialized_end=5720,
 )
 
 _COMMAND_SYNCHRONIZATION = _descriptor.EnumDescriptor(
@@ -349,8 +324,8 @@ _COMMAND_SYNCHRONIZATION = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=6032,
-  serialized_end=6131,
+  serialized_start=5722,
+  serialized_end=5821,
 )
 
 _COMMAND_PRIORITY = _descriptor.EnumDescriptor(
@@ -382,8 +357,8 @@ _COMMAND_PRIORITY = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=6133,
-  serialized_end=6203,
+  serialized_start=5823,
+  serialized_end=5893,
 )
 
 _COMMAND_ALGORITHM = _descriptor.EnumDescriptor(
@@ -419,8 +394,8 @@ _COMMAND_ALGORITHM = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=6205,
-  serialized_end=6300,
+  serialized_start=5895,
+  serialized_end=5990,
 )
 
 _COMMAND_MESSAGETYPE = _descriptor.EnumDescriptor(
@@ -538,26 +513,34 @@ _COMMAND_MESSAGETYPE = _descriptor.EnumDescriptor(
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='BACKOP', index=27, number=34,
+      name='PINOP', index=27, number=36,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='BACKOP_RESPONSE', index=28, number=33,
+      name='PINOP_RESPONSE', index=28, number=35,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='PINOP', index=29, number=36,
+      name='MEDIASCAN', index=29, number=38,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='PINOP_RESPONSE', index=30, number=35,
+      name='MEDIASCAN_RESPONSE', index=30, number=37,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='MEDIAOPTIMIZE', index=31, number=40,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='MEDIAOPTIMIZE_RESPONSE', index=32, number=39,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=6303,
-  serialized_end=6886,
+  serialized_start=5993,
+  serialized_end=6629,
 )
 
 
@@ -571,7 +554,7 @@ _LOCAL = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='protocolVersion', full_name='com.seagate.kinetic.proto.Local.protocolVersion', index=0,
       number=1, type=9, cpp_type=9, label=1,
-      has_default_value=True, default_value=unicode("3.0.0", "utf-8"),
+      has_default_value=True, default_value=unicode("3.0.5", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -833,14 +816,7 @@ _COMMAND_BODY = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='backgroundOperation', full_name='com.seagate.kinetic.proto.Command.Body.backgroundOperation', index=6,
-      number=5, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='pinOp', full_name='com.seagate.kinetic.proto.Command.Body.pinOp', index=7,
+      name='pinOp', full_name='com.seagate.kinetic.proto.Command.Body.pinOp', index=6,
       number=8, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -856,7 +832,7 @@ _COMMAND_BODY = _descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=938,
-  serialized_end=1463,
+  serialized_end=1378,
 )
 
 _COMMAND_STATUS = _descriptor.Descriptor(
@@ -897,8 +873,8 @@ _COMMAND_STATUS = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=1466,
-  serialized_end=2072,
+  serialized_start=1381,
+  serialized_end=1987,
 )
 
 _COMMAND_KEYVALUE = _descriptor.Descriptor(
@@ -973,8 +949,8 @@ _COMMAND_KEYVALUE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2075,
-  serialized_end=2329,
+  serialized_start=1990,
+  serialized_end=2244,
 )
 
 _COMMAND_RANGE = _descriptor.Descriptor(
@@ -1042,8 +1018,8 @@ _COMMAND_RANGE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2332,
-  serialized_end=2477,
+  serialized_start=2247,
+  serialized_end=2392,
 )
 
 _COMMAND_SETUP = _descriptor.Descriptor(
@@ -1076,8 +1052,8 @@ _COMMAND_SETUP = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2479,
-  serialized_end=2539,
+  serialized_start=2394,
+  serialized_end=2454,
 )
 
 _COMMAND_P2POPERATION_OPERATION = _descriptor.Descriptor(
@@ -1138,8 +1114,8 @@ _COMMAND_P2POPERATION_OPERATION = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2742,
-  serialized_end=2937,
+  serialized_start=2657,
+  serialized_end=2852,
 )
 
 _COMMAND_P2POPERATION_PEER = _descriptor.Descriptor(
@@ -1179,8 +1155,8 @@ _COMMAND_P2POPERATION_PEER = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2939,
-  serialized_end=2990,
+  serialized_start=2854,
+  serialized_end=2905,
 )
 
 _COMMAND_P2POPERATION = _descriptor.Descriptor(
@@ -1220,8 +1196,8 @@ _COMMAND_P2POPERATION = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2542,
-  serialized_end=2990,
+  serialized_start=2457,
+  serialized_end=2905,
 )
 
 _COMMAND_GETLOG_UTILIZATION = _descriptor.Descriptor(
@@ -1254,8 +1230,8 @@ _COMMAND_GETLOG_UTILIZATION = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3594,
-  serialized_end=3636,
+  serialized_start=3509,
+  serialized_end=3551,
 )
 
 _COMMAND_GETLOG_TEMPERATURE = _descriptor.Descriptor(
@@ -1309,8 +1285,8 @@ _COMMAND_GETLOG_TEMPERATURE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3638,
-  serialized_end=3732,
+  serialized_start=3553,
+  serialized_end=3647,
 )
 
 _COMMAND_GETLOG_CAPACITY = _descriptor.Descriptor(
@@ -1343,8 +1319,8 @@ _COMMAND_GETLOG_CAPACITY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3734,
-  serialized_end=3797,
+  serialized_start=3649,
+  serialized_end=3712,
 )
 
 _COMMAND_GETLOG_CONFIGURATION_INTERFACE = _descriptor.Descriptor(
@@ -1391,8 +1367,8 @@ _COMMAND_GETLOG_CONFIGURATION_INTERFACE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=4158,
-  serialized_end=4238,
+  serialized_start=4073,
+  serialized_end=4153,
 )
 
 _COMMAND_GETLOG_CONFIGURATION = _descriptor.Descriptor(
@@ -1502,8 +1478,8 @@ _COMMAND_GETLOG_CONFIGURATION = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=3800,
-  serialized_end=4238,
+  serialized_start=3715,
+  serialized_end=4153,
 )
 
 _COMMAND_GETLOG_STATISTICS = _descriptor.Descriptor(
@@ -1543,8 +1519,8 @@ _COMMAND_GETLOG_STATISTICS = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=4240,
-  serialized_end=4351,
+  serialized_start=4155,
+  serialized_end=4266,
 )
 
 _COMMAND_GETLOG_LIMITS = _descriptor.Descriptor(
@@ -1624,6 +1600,13 @@ _COMMAND_GETLOG_LIMITS = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='maxPinSize', full_name='com.seagate.kinetic.proto.Command.GetLog.Limits.maxPinSize', index=10,
+      number=11, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -1633,8 +1616,8 @@ _COMMAND_GETLOG_LIMITS = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=4354,
-  serialized_end=4621,
+  serialized_start=4269,
+  serialized_end=4556,
 )
 
 _COMMAND_GETLOG_DEVICE = _descriptor.Descriptor(
@@ -1660,8 +1643,8 @@ _COMMAND_GETLOG_DEVICE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=4623,
-  serialized_end=4645,
+  serialized_start=4558,
+  serialized_end=4580,
 )
 
 _COMMAND_GETLOG = _descriptor.Descriptor(
@@ -1744,8 +1727,8 @@ _COMMAND_GETLOG = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=2993,
-  serialized_end=4806,
+  serialized_start=2908,
+  serialized_end=4741,
 )
 
 _COMMAND_SECURITY_ACL_SCOPE = _descriptor.Descriptor(
@@ -1792,8 +1775,8 @@ _COMMAND_SECURITY_ACL_SCOPE = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=5227,
-  serialized_end=5366,
+  serialized_start=5162,
+  serialized_end=5301,
 )
 
 _COMMAND_SECURITY_ACL = _descriptor.Descriptor(
@@ -1849,8 +1832,8 @@ _COMMAND_SECURITY_ACL = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=4966,
-  serialized_end=5574,
+  serialized_start=4901,
+  serialized_end=5509,
 )
 
 _COMMAND_SECURITY = _descriptor.Descriptor(
@@ -1904,43 +1887,8 @@ _COMMAND_SECURITY = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=4809,
-  serialized_end=5574,
-)
-
-_COMMAND_BACKGROUNDOPERATION = _descriptor.Descriptor(
-  name='BackgroundOperation',
-  full_name='com.seagate.kinetic.proto.Command.BackgroundOperation',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='backOpType', full_name='com.seagate.kinetic.proto.Command.BackgroundOperation.backOpType', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=-1,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='range', full_name='com.seagate.kinetic.proto.Command.BackgroundOperation.range', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-    _COMMAND_BACKGROUNDOPERATION_BACKOPTYPE,
-  ],
-  options=None,
-  is_extendable=False,
-  extension_ranges=[],
-  serialized_start=5577,
-  serialized_end=5819,
+  serialized_start=4744,
+  serialized_end=5509,
 )
 
 _COMMAND_PINOPERATION = _descriptor.Descriptor(
@@ -1967,8 +1915,8 @@ _COMMAND_PINOPERATION = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=5822,
-  serialized_end=6030,
+  serialized_start=5512,
+  serialized_end=5720,
 )
 
 _COMMAND = _descriptor.Descriptor(
@@ -2002,7 +1950,7 @@ _COMMAND = _descriptor.Descriptor(
   ],
   extensions=[
   ],
-  nested_types=[_COMMAND_HEADER, _COMMAND_BODY, _COMMAND_STATUS, _COMMAND_KEYVALUE, _COMMAND_RANGE, _COMMAND_SETUP, _COMMAND_P2POPERATION, _COMMAND_GETLOG, _COMMAND_SECURITY, _COMMAND_BACKGROUNDOPERATION, _COMMAND_PINOPERATION, ],
+  nested_types=[_COMMAND_HEADER, _COMMAND_BODY, _COMMAND_STATUS, _COMMAND_KEYVALUE, _COMMAND_RANGE, _COMMAND_SETUP, _COMMAND_P2POPERATION, _COMMAND_GETLOG, _COMMAND_SECURITY, _COMMAND_PINOPERATION, ],
   enum_types=[
     _COMMAND_SYNCHRONIZATION,
     _COMMAND_PRIORITY,
@@ -2013,7 +1961,7 @@ _COMMAND = _descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=469,
-  serialized_end=6886,
+  serialized_end=6629,
 )
 
 _MESSAGE_HMACAUTH.containing_type = _MESSAGE;
@@ -2031,7 +1979,6 @@ _COMMAND_BODY.fields_by_name['setup'].message_type = _COMMAND_SETUP
 _COMMAND_BODY.fields_by_name['p2pOperation'].message_type = _COMMAND_P2POPERATION
 _COMMAND_BODY.fields_by_name['getLog'].message_type = _COMMAND_GETLOG
 _COMMAND_BODY.fields_by_name['security'].message_type = _COMMAND_SECURITY
-_COMMAND_BODY.fields_by_name['backgroundOperation'].message_type = _COMMAND_BACKGROUNDOPERATION
 _COMMAND_BODY.fields_by_name['pinOp'].message_type = _COMMAND_PINOPERATION
 _COMMAND_BODY.containing_type = _COMMAND;
 _COMMAND_STATUS.fields_by_name['code'].enum_type = _COMMAND_STATUS_STATUSCODE
@@ -2079,10 +2026,6 @@ _COMMAND_SECURITY_ACL_HMACALGORITHM.containing_type = _COMMAND_SECURITY_ACL;
 _COMMAND_SECURITY_ACL_PERMISSION.containing_type = _COMMAND_SECURITY_ACL;
 _COMMAND_SECURITY.fields_by_name['acl'].message_type = _COMMAND_SECURITY_ACL
 _COMMAND_SECURITY.containing_type = _COMMAND;
-_COMMAND_BACKGROUNDOPERATION.fields_by_name['backOpType'].enum_type = _COMMAND_BACKGROUNDOPERATION_BACKOPTYPE
-_COMMAND_BACKGROUNDOPERATION.fields_by_name['range'].message_type = _COMMAND_RANGE
-_COMMAND_BACKGROUNDOPERATION.containing_type = _COMMAND;
-_COMMAND_BACKGROUNDOPERATION_BACKOPTYPE.containing_type = _COMMAND_BACKGROUNDOPERATION;
 _COMMAND_PINOPERATION.fields_by_name['pinOpType'].enum_type = _COMMAND_PINOPERATION_PINOPTYPE
 _COMMAND_PINOPERATION.containing_type = _COMMAND;
 _COMMAND_PINOPERATION_PINOPTYPE.containing_type = _COMMAND_PINOPERATION;
@@ -2249,12 +2192,6 @@ class Command(_message.Message):
     DESCRIPTOR = _COMMAND_SECURITY
 
     # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Command.Security)
-
-  class BackgroundOperation(_message.Message):
-    __metaclass__ = _reflection.GeneratedProtocolMessageType
-    DESCRIPTOR = _COMMAND_BACKGROUNDOPERATION
-
-    # @@protoc_insertion_point(class_scope:com.seagate.kinetic.proto.Command.BackgroundOperation)
 
   class PinOperation(_message.Message):
     __metaclass__ = _reflection.GeneratedProtocolMessageType
