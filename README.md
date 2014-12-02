@@ -48,6 +48,15 @@ print c.get('message').value
 ```
 Should print out _hello_ _world_
 
+Troubleshooting during the installation
+=======================================
+On a brand new system, you might be missing a few things.
+If you get an error saying setup tools not installed or missing.
+Check the python [setuptools intallation guide](https://pypi.python.org/pypi/setuptools#installation-instructions).
+If you needed to installed that, chances are you are missing some requirements to install and compile eventlet on your system.
+On debian systems the quickest way is `sudo apt-get install python-eventlet`.
+
+
 License
 -------
 
