@@ -1,4 +1,8 @@
-Changes since 0.8.0
+Changes since 0.8.1
+===========================
+This section will document changes to the library since the last release
+
+Changes from 0.8.0 to 0.8.1
 ===========================
 This section will document changes to the library since the last release
 
