@@ -14,6 +14,9 @@ This section will document changes to the library since the last release
 - Pin size added to limits
 - SHA1 calculation used as default on puts when algorithm and tag not specified.
 
+## Minor changes
+- The client will use WRITEBACK as default when synchronization mode not specified on PUT and DELETE.
+
 Changes from 0.7.3 to 0.8.0
 ===========================
 

@@ -55,6 +55,10 @@ def _buildMessage(m, messageType, key, data=None, version='', new_version='',
             m.body.keyValue.algorithm = common.IntegrityAlgorithms.SHA1
         else:
             m.body.keyValue.tag = 'l337'
+
+    if (messageType == messages.Command.PUT or messageType == messages.Command.DELETE) and synchronization == None:
+        synchronization = common.Synchronization.WRITEBACK
+
     if synchronization:
         m.body.keyValue.synchronization = synchronization
     if version:

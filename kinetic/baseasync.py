@@ -88,7 +88,7 @@ class BaseAsync(Client):
                     except Exception as e:
                         self._raise(e)
                 else:
-                    LOG.warn('Unsolicited status %s received but nobody listening.' % resp.status.code)
+                    LOG.warn('Unsolicited status %s received but nobody listening. %s' % (resp.status.code, resp.status.statusMessage))
             else:
                 seq = resp.header.ackSequence
                 if LOG.isEnabledFor(logging.DEBUG):
