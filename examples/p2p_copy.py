@@ -17,4 +17,4 @@ c2 = Client('localhost', 8124)
 c2.connect()
 kv = c2.get(key)
 
-print 'Read { Key: %s, Value: %s } from second device' % (key, value)
+print 'Read { Key: %s, Value: %s } from second device' % (kv.key, kv.value)

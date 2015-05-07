@@ -21,11 +21,11 @@ c2 = Client('localhost', 8124)
 c2.connect()
 kv = c2.get(key)
 
-print 'Read { Key: %s, Value: %s } from second device' % (key, value)
+print 'Read { Key: %s, Value: %s } from second device' % (kv.key, kv.value)
 
 # Verify third device
 c3 = Client('localhost', 8126)
 c3.connect()
 kv = c3.get(key)
 
-print 'Read { Key: %s, Value: %s } from third device' % (key, value)
+print 'Read { Key: %s, Value: %s } from third device' % (kv.key, kv.value)
