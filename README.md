@@ -1,4 +1,4 @@
-# **kinetic-py**: a kinetic protocol python library
+# **Kinetic-py**
 [![PyPI](https://img.shields.io/pypi/v/kinetic.svg)](https://pypi.python.org/pypi/kinetic/0.8.2)
 [![PyPI](https://img.shields.io/pypi/l/kinetic.svg)](https://github.com/Seagate/kinetic-py/blob/master/LICENSE/LGPL2.1.md)
 
@@ -9,6 +9,7 @@ The [kinetic-protocol](https://github.com/Seagate/kinetic-protocol) python clien
 ## Requirements
 - Requires Python 2.7.3 or higher. 
 - Requires Python 2.7.9 on OSX to use SSL 
+
 > **NOTE:** Python 3.x is not supported. 
  
 Installing latest stable release
@@ -21,13 +22,10 @@ Installing from Source
 
     git clone https://github.com/Seagate/kinetic-py.git
     cd kinetic-py
-    git submodule update --init
     python setup.py develop
 
-For devices with old firmware code:
-
+> **NOTE:** for devices with old firmware code get version 0.7.3 of the libray
     git checkout 0.7.3
-    python setup.py develop
 
 Running Tests
 =============
