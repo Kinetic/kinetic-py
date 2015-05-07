@@ -300,7 +300,7 @@ class BaseClient(object):
         # read proto message
         raw_proto = self.fast_read(proto_ln)
 
-        value = None
+        value = ''
         if value_ln > 0:
             if self.defer_read:
                 # let user handle the read from socket
