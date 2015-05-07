@@ -1,7 +1,7 @@
 Introduction
 ============
 The [kinetic-protocol](https://github.com/Seagate/kinetic-protocol) python client.
-Requires Python 2.7.3 or higher. Python 3.x is not supported.
+Requires Python 2.7.3 or higher. Python 3.x is not supported. If you want to connect through SSL on Mac OS X, you will need to have Python 2.7.9.
 
 Installing latest stable release
 ================================
