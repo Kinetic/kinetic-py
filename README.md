@@ -49,10 +49,11 @@ Getting Started with the basic client
 ```python
 from kinetic import Client
 c = Client('localhost', 8123)
+c.connect()
 c.put('message','hello world')
 print c.get('message').value
 ```
-Should print out _hello_ _world_
+Should print out _hello world_
 
 Troubleshooting during the installation
 =======================================
