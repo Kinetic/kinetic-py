@@ -16,7 +16,7 @@
 
 #@author: Ignacio Corderi
 
-from client import Client
+import deprecated
 from common import Entry
 import common
 
@@ -27,7 +27,7 @@ import threading
 
 LOG = logging.getLogger(__name__)
 
-class BaseAsync(Client):
+class BaseAsync(deprecated.BlockingClient):
 
     def __init__(self, *args, **kwargs):
         super(BaseAsync, self).__init__(*args, socket_timeout=None, **kwargs)

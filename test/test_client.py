@@ -29,6 +29,7 @@ class KineticBasicTestCase(BaseTestCase):
     def setUp(self):
         super(KineticBasicTestCase, self).setUp()
         self.client = Client(self.host, self.port)
+        self.client.connect()
 
     def test_command_put(self):
         self.client.put(self.buildKey(0),"test_value")

@@ -99,7 +99,10 @@ class BaseClient(object):
         return not self._closed
 
     def build_socket(self, family=ss.AF_INET):
-       return socket.socket(family)
+        return socket.socket(family)
+       
+    def wrap_secure_socket(self, s, ssl_version):
+        return ssl.wrap_socket(s) #, ssl_version=ssl_version)   
 
     def connect(self):
         if self._socket:
@@ -110,7 +113,7 @@ class BaseClient(object):
         # Stage socket on a local variable first
         s = self.build_socket(family)
         if self.use_ssl:
-            s = ssl.wrap_socket(s)
+            s = self.wrap_secure_socket(s, ssl.PROTOCOL_TLSv1_2)
 
         s.settimeout(self.connect_timeout)
         if self.socket_address:

@@ -16,17 +16,17 @@
 
 #@author: Ignacio Corderi
 
-from baseclient import BaseClient
-import operations
-import kinetic_pb2 as messages
+from kinetic.baseclient import BaseClient
+from kinetic import operations
+from kinetic import kinetic_pb2 as messages
 import logging
 
 LOG = logging.getLogger(__name__)
 
-class Client(BaseClient):
+class BlockingClient(BaseClient):
 
     def __init__(self, *args, **kwargs):
-        super(Client, self).__init__(*args, **kwargs)
+        super(BlockingClient, self).__init__(*args, **kwargs)
 
     def _process(self, op, *args, **kwargs):
         header,value = op.build(*args, **kwargs)
@@ -74,14 +74,12 @@ class Client(BaseClient):
     def pipedPush(self, *args, **kwargs):
         return self._process(operations.P2pPipedPush(), *args, **kwargs)
 
-
     def getVersion(self, *args, **kwargs):
         """
             Arguments: key -> The key you are seeking version information for.
             Returns a protobuf object with the version property that determines the pair's current version.
         """
         return self._process(operations.GetVersion(), *args, **kwargs)
-
 
     # @RequiresProtocol('2.0.3')
     def flush(self, *args, **kwargs):
@@ -97,6 +95,12 @@ class Client(BaseClient):
 
     def getLog(self, *args, **kwargs):
         return self._process(operations.GetLog(), *args, **kwargs)
+        
+    def setClusterVersion(self, *args, **kwargs):
+        return self._process(operations.SetClusterVersion(), *args, **kwargs)
+
+    def updateFirmware(self, *args, **kwargs):
+        return self._process(operations.UpdateFirmware(), *args, **kwargs)
 
 class KineticRangeIter(object):
 

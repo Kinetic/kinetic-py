@@ -21,6 +21,8 @@ import eventlet
 from eventlet.queue import Queue
 
 from eventlet.green import socket
+from eventlet.green.ssl import GreenSSLSocket
+
 import baseasync
 import common
 
@@ -30,10 +32,10 @@ DEFAULT_POOL_SIZE = 100
 DEFAULT_MAX_QUEUE_SIZE = 20
 MAX_PENDING = 10
 
-class AsyncClient(baseasync.BaseAsync):
+class Client(baseasync.BaseAsync):
 
     def __init__(self, *args, **kwargs):
-        super(AsyncClient, self).__init__(*args, **kwargs)
+        super(Client, self).__init__(*args, **kwargs)
         self.pool = eventlet.greenpool.GreenPool(DEFAULT_POOL_SIZE)
         self.reader_thread = None
         self.writer_thread = None
@@ -43,9 +45,12 @@ class AsyncClient(baseasync.BaseAsync):
 
     def build_socket(self, family=socket.AF_INET):
         return socket.socket(family)
-
+            
+    def wrap_secure_socket(self, s, ssl_version):
+        return GreenSSLSocket(s, ssl_version=ssl_version)
+        
     def connect(self):
-        super(AsyncClient, self).connect()
+        super(Client, self).connect()
         self.closing = False
         self.reader_thread = eventlet.greenthread.spawn(self._reader_run)
         self.writer_thread = eventlet.greenthread.spawn(self._writer_run)
@@ -68,7 +73,7 @@ class AsyncClient(baseasync.BaseAsync):
         self.writer_thread.kill()
         self.reader_thread.kill()
 
-        super(AsyncClient, self).close()
+        super(Client, self).close()
 
         self.writer_thread = None
         self.reader_thread = None
@@ -121,7 +126,7 @@ class AsyncClient(baseasync.BaseAsync):
                 while len(self._pending) > self.max_pending:
                     eventlet.sleep(0)
                 (header, value, onSuccess, onError) = self.queue.get()
-                super(AsyncClient, self).sendAsync(header, value, onSuccess, onError)
+                super(Client, self).sendAsync(header, value, onSuccess, onError)
             except common.ConnectionFaulted: pass
             except common.ConnectionClosed: pass
             except Exception as ex:

@@ -30,8 +30,7 @@ class P2PTestCase(MultiSimulatorTestCase):
         key = self.buildKey('test')
         source.put(key, 'value')
         self.assertEqual(target.get(key), None)
-        resp = source._process(operations.PushKeys, [key],
-                               target.hostname, target.port)
+        resp = source.push([key],target.hostname, target.port)
         for op in resp:
             self.assertEquals(op.key, key)
             self.assertEquals(op.status.code, op.status.SUCCESS)

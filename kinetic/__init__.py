@@ -16,6 +16,10 @@
 
 #@author: Ignacio Corderi
 
+# Logging
+import logging
+logging.basicConfig()
+
 # Protocol version
 from common import local
 
@@ -37,9 +41,9 @@ else:
 #utils
 from utils import buildRange
 
-# client
-from client import Client
-from asyncclient import AsyncClient
+# clients
+from greenclient import Client
+from secureclient import SecureClient
 from threadedclient import ThreadedClient
 
 # common
@@ -49,5 +53,7 @@ from common import Entry
 # exceptions
 from common import KineticMessageException
 
-# Admin
-from admin import AdminClient
+# backward compatibility alliases
+AsyncClient = Client
+from kinetic.deprecated.adminclient import AdminClient
+from kinetic import greenclient as client
