@@ -1,6 +1,16 @@
-Changes since 0.8.1
+Changes since 0.8.2
 ===========================
-This section will document changes to the library since the last release
+>**NOTE:** this section will document changes to the library since the last release
+
+Changes from 0.8.1 to 0.8.2
+===========================
+
+## Bug fixes
+- Keys with empty values show correctly as '' instead of None
+- **WRITEBACK** set as default mode for `put` and `delete` operations
+
+## Misc
+- OSX requirements for SSL connections updated.
 
 Changes from 0.8.0 to 0.8.1
 ===========================
