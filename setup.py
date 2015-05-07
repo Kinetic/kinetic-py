@@ -6,16 +6,37 @@ with open('requirements.txt', 'r') as f:
 version = '0.8.3-dev'
 
 setup(
-    name='kinetic',
-    version=version,
-    url='https://github.com/Seagate/kinetic-py',
-    description="Python client for Kinetic devices",
-    author='Ignacio Corderi',
+    # overview    
+    name = 'kinetic',
+    description = "Python client for Kinetic devices",
+
+    # technical info
+    version = version,
     packages=find_packages(exclude=['test']),
+    requires = requires,
     install_requires=requires,
+
+    # features
     entry_points = {
-        'console_scripts': [
-            'kineticc = kinetic.cmd:main'
-        ],
+        'console_scripts': [ 'kineticc = kinetic.cmd:main' ],
     },
+
+    # copyright
+    author='Ignacio Corderi',
+    license='LGPLv2.1',
+
+    # more info
+    url = 'https://github.com/Seagate/kinetic-py',
+
+    # categorization
+    keywords = ('kinetic protocol api storage key/value seagate'),
+    classifiers  = [
+        'Development Status :: 4 - Beta',
+        'Intended Audience :: Developers',
+        'Intended Audience :: Information Technology',
+        'License :: OSI Approved :: GNU Lesser General Public License v2.1 (LGPLv2.1)',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 2 :: Only',
+        'Topic :: Software Development :: Libraries :: Python Modules',
+     ],
 )

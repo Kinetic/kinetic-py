@@ -1,8 +1,16 @@
+# **kinetic-py**: a kinetic protocol python library
+[![PyPI](https://img.shields.io/pypi/v/kinetic.svg)](https://pypi.python.org/pypi/kinetic/0.8.2)
+[![PyPI](https://img.shields.io/pypi/l/kinetic.svg)](https://github.com/Seagate/kinetic-py/blob/master/LICENSE/LGPL2.1.md)
+
 Introduction
 ============
 The [kinetic-protocol](https://github.com/Seagate/kinetic-protocol) python client.
-Requires Python 2.7.3 or higher. Python 3.x is not supported. If you want to connect through SSL on Mac OS X, you will need to have Python 2.7.9.
 
+## Requirements
+- Requires Python 2.7.3 or higher. 
+- Requires Python 2.7.9 on OSX to use SSL 
+> **NOTE:** Python 3.x is not supported. 
+ 
 Installing latest stable release
 ================================
     pip install kinetic
