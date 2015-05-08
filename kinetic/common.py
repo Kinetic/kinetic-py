@@ -171,6 +171,9 @@ class ClusterVersionFailureException(KineticMessageException):
         super(ClusterVersionFailureException, self).__init__(status)
         self.cluster_version = cluster_version
 
+class BatchAbortedException(KineticException):
+    def __init__(self):
+        self.failed_operation_index = -1
 
 class HmacAlgorithms:
     INVALID_HMAC_ALGORITHM = -1 # Must come first, so default is invalid
