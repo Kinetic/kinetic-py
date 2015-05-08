@@ -18,6 +18,7 @@
 
 import kinetic_pb2 as messages
 import eventlet
+import os
 
 MAX_KEY_SIZE = 4*1024
 MAX_VALUE_SIZE = 1024*1024
@@ -26,6 +27,12 @@ DEFAULT_CONNECT_TIMEOUT = 0.1
 DEFAULT_SOCKET_TIMEOUT = 5
 DEFAULT_CHUNK_SIZE = 64*1024
 
+# Env variables
+try: 
+    KINETIC_CONNECT_TIMEOUT = float(os.environ.get('KINETIC_CONNECT_TIMEOUT', DEFAULT_CONNECT_TIMEOUT))
+except:
+    KINETIC_CONNECT_TIMEOUT = DEFAULT_CONNECT_TIMEOUT
+    
 local = messages.Local()
 
 class DeferedValue():

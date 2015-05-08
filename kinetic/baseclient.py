@@ -63,7 +63,7 @@ class BaseClient(object):
     def __init__(self, hostname=HOSTNAME, port=PORT, identity=USER_ID,
                  cluster_version=None, secret=CLIENT_SECRET,
                  chunk_size=common.DEFAULT_CHUNK_SIZE,
-                 connect_timeout=common.DEFAULT_CONNECT_TIMEOUT,
+                 connect_timeout=common.KINETIC_CONNECT_TIMEOUT,
                  socket_timeout=common.DEFAULT_SOCKET_TIMEOUT,
                  socket_address=None, socket_port=0,
                  defer_read=False,

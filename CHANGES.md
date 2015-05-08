@@ -2,6 +2,21 @@ Changes since 0.8.2
 ===========================
 >**NOTE:** this section will document changes to the library since the last release
 
+## Major changes
+- `AsyncClient` has been renamed to `Client`
+- A new `SecureClient` has been added to `kinetic`.
+
+## Minor changes
+- Added env variable _KINETIC_CONNECT_TIMEOUT_ to control default connection timeout.
+
+## Deprecated features
+- Old blocking `Client` has been moved to `kinetic.depracated.BlockingClient`
+- Old `AdminClient` has been moved to `kinetic.depracated.AdminClient`
+
+## Misc
+- Added alias for `AsyncClient = Client` to smooth transition.
+- Added alias on `kinetic` for `AdminClient` to smooth transition.
+
 Changes from 0.8.1 to 0.8.2
 ===========================
 
