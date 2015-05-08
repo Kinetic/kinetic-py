@@ -7,7 +7,9 @@ install:
     - "pip install ."
     - "pip install -r requirements.txt"
 
-before_script:
-       
+env:
+    KINETIC_JAR=$(echo $TRAVIS_BUILD_DIR/kinetic-java/kinetic-simulator/target/*-jar-with-dependencies.jar)
+
+before_script: ./build_simulator.sh
 
 script: nosetests
