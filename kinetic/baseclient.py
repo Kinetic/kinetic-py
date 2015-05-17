@@ -365,6 +365,9 @@ class BaseClient(object):
             else: done = True
         return m,cmd,value
 
+    def send_no_ack(self, header, value):
+        self.network_send(header, value)
+
     def next_batch_id(self):
         return self._batch_id.next()
 
