@@ -37,7 +37,6 @@ class Batch(object):
     requested for the next batch operation.
     """
 
-    MSG_BATCH_COMPLETED = "batch completed. no more operations are permitted within this batch."
 
     def __init__(self, client, batch_id):
         """
@@ -69,11 +68,12 @@ class Batch(object):
             KineticException: if any internal error occurs.
         """
         if self._batch_completed:
-            raise common.KineticException(MSG_BATCH_COMPLETED)
+            raise common.BatchCompletedException
 
         self._op_count += 1
         #TODO: add batch put logging
-        self._client.batch_put(self._batch_id, *args, **kwargs)
+        kwargs['batch_id'] = self._batch_id
+        self._client.batch_put(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
         """
@@ -89,16 +89,17 @@ class Batch(object):
         Kwargs:
 
         Raises:
-            KineticExcpetion: if any internal error occurs.
+            KineticException: if any internal error occurs.
         """
         if self._batch_completed:
-            raise common.KineticException(MSG_BATCH_COMPLETED)
+            raise common.BatchCompletedException
 
         self._op_count += 1
         #TODO: add batch delete logging
-        self._client.batch_delete(self._batch_id, *args, **kwargs)
+        kwargs['batch_id'] = self._batch_id
+        self._client.batch_delete(*args, **kwargs)
 
-    def commit(self):
+    def commit(self, *args, **kwargs):
         """
         Commit the current batch operation.
 
@@ -113,16 +114,19 @@ class Batch(object):
                 the batch were committed to the store. 
         """
         if self._batch_completed:
-            raise common.KineticException(MSG_BATCH_COMPLETED)
+            raise common.BatchCompletedException
 
         #TODO: add batch commit logging
+        kwargs['batch_id'] = self._batch_id
+        kwargs['batch_op_count'] = self._op_count
         try:
-            self._client.batch_commit(self._batch_id, self._op_count)
+            self._client.batch_commit(*args, **kwargs)
+            self._batch_completed = True
         except BatchAbortedException:
             self._batch_completed = True
             raise
 
-    def abort(self):
+    def abort(self, *args, **kwargs):
         """
         Abort the current batch operation.
 
@@ -134,10 +138,11 @@ class Batch(object):
             KineticException: if any internal error occurred.
         """
         if self._batch_completed:
-            raise common.KineticException(MSG_BATCH_COMPLETED)
+            raise common.BatchCompletedException
 
         #TODO: add batch abort logging
-        self._client.batch_abort(self._batch_id)
+        kwargs['batch_id'] = self._batch_id
+        self._client.batch_abort(*args, **kwargs)
         self._batch_completed = True
 
     def is_completed(self):
