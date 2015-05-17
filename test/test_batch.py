@@ -194,14 +194,16 @@ class BatchTestCase(BaseTestCase):
         self.batch.put(key1, '')
         self.batch.commit()
 
-        self.assertRaises(common.BatchCompletedException, self.batch.put(key2,''))
+        args = (key2, '')
+        self.assertRaises(common.BatchCompletedException, self.batch.put, *args)
 
     def test_batch_reuse_after_abort(self):
         key = 'test_batch_reuse_after_abort'
         self.batch.put(key, '')
         self.batch.abort()
 
-        self.assertRaises(common.BatchCompletedException, self.batch.delete(key))
+        args = (key)
+        self.assertRaises(common.BatchCompletedException, self.batch.delete, *args)
 
 
 if __name__ == '__main__':
