@@ -130,6 +130,7 @@ class BaseClient(object):
             self._socket.settimeout(self.socket_timeout)
 
             self._sequence = itertools.count()
+            self._batch_id = itertools.count()
             self._closed = False
         except:
             self._socket = None
@@ -180,6 +181,7 @@ class BaseClient(object):
         self._socket = None
         self.connection_id = None
         self._sequence = itertools.count()
+        self._batch_id = itertools.count()
 
 
     def update_header(self, command):
@@ -362,6 +364,9 @@ class BaseClient(object):
                     LOG.warn('Unsolicited status %s received but nobody listening.' % cmd.status.code)
             else: done = True
         return m,cmd,value
+
+    def next_batch_id(self):
+        return self._batch_id.next()
 
     ### with statement support ###
 
