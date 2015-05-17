@@ -68,7 +68,7 @@ class Batch(object):
             KineticException: if any internal error occurs.
         """
         if self._batch_completed:
-            raise common.BatchCompletedException
+            raise common.BatchCompletedException()
 
         self._op_count += 1
         #TODO: add batch put logging
@@ -92,7 +92,7 @@ class Batch(object):
             KineticException: if any internal error occurs.
         """
         if self._batch_completed:
-            raise common.BatchCompletedException
+            raise common.BatchCompletedException()
 
         self._op_count += 1
         #TODO: add batch delete logging
@@ -114,7 +114,7 @@ class Batch(object):
                 the batch were committed to the store. 
         """
         if self._batch_completed:
-            raise common.BatchCompletedException
+            raise common.BatchCompletedException()
 
         #TODO: add batch commit logging
         kwargs['batch_id'] = self._batch_id
@@ -138,7 +138,7 @@ class Batch(object):
             KineticException: if any internal error occurred.
         """
         if self._batch_completed:
-            raise common.BatchCompletedException
+            raise common.BatchCompletedException()
 
         #TODO: add batch abort logging
         kwargs['batch_id'] = self._batch_id
