@@ -34,6 +34,8 @@ class BatchTestCase(BaseTestCase):
 
     def _create_new_batch(self):
         self.batch = self.client.begin_batch()
+        if self.batch is None:
+            raise common.KineticException("unable to create batch")
 
     def test_batch_initial_state(self):
         self.assertFalse(self.batch.is_completed())
@@ -52,9 +54,9 @@ class BatchTestCase(BaseTestCase):
 
         self.batch.abort()
 
-    def test_batch_is_completed(self):
-        key1 = 'test_batch_is_completed_1'
-        key2 = 'test_batch_is_completed_2'
+    def test_batch_commit_is_completed(self):
+        key1 = 'test_batch_commit_is_completed_1'
+        key2 = 'test_batch_commit_is_completed_2'
         self.assertFalse(self.batch.is_completed())
         self.batch.put(key1, '')
         self.batch.delete(key2)
@@ -62,8 +64,9 @@ class BatchTestCase(BaseTestCase):
         self.batch.commit()
         self.assertTrue(self.batch.is_completed())
 
-        # do it again, but abort this time
-        self._create_new_batch()
+    def test_batch_abort_is_completed(self):
+        key1 = 'test_batch_abort_is_completed_1'
+        key2 = 'test_batch_abort_is_completed_2'
         self.assertFalse(self.batch.is_completed())
         self.batch.put(key1, '')
         self.batch.delete(key2)
@@ -73,7 +76,7 @@ class BatchTestCase(BaseTestCase):
 
     def test_empty_batch_abort(self):
         # abort with no operations in batch
-        self.batch.abort()
+        self.assertRaises(common.BatchAbortedException, self.batch.abort())
 
     def test_batch_abort(self):
         key = 'key_should_not_exist'
@@ -186,18 +189,19 @@ class BatchTestCase(BaseTestCase):
         self.assertEqual(self.client.get(key2), None)
 
     def test_batch_reuse_after_commit(self):
-        key = 'test_batch_reuse_after_commit'
-        self.batch.put(key, '')
+        key1 = 'test_batch_reuse_after_commit_1'
+        key2 = 'test_batch_reuse_after_commit_2'
+        self.batch.put(key1, '')
         self.batch.commit()
 
-        self.assertRaises(common.BatchAbortedException, self.batch.delete(key))
+        self.assertRaises(common.BatchCompletedException, self.batch.put(key2,''))
 
     def test_batch_reuse_after_abort(self):
         key = 'test_batch_reuse_after_abort'
         self.batch.put(key, '')
         self.batch.abort()
 
-        self.assertRaises(common.BatchAbortedException, self.batch.delete(key))
+        self.assertRaises(common.BatchCompletedException, self.batch.delete(key))
 
 
 if __name__ == '__main__':
