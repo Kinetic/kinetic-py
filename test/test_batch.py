@@ -19,8 +19,8 @@
 import unittest
 
 from kinetic import Client
-from kinetic import Batch
-from common import BatchAbortedExcpetion
+from kinetic import batch
+from kinetic import common
 from base import BaseTestCase
 
 
@@ -30,9 +30,9 @@ class BatchTestCase(BaseTestCase):
         super(BatchTestCase, self).setUp()
         self.client = Client(self.host, self.port)
         self.client.connect()
-        self.create_new_batch()
+        self._create_new_batch()
 
-    def create_new_batch(self):
+    def _create_new_batch(self):
         self.batch = self.client.begin_batch()
 
     def test_batch_initial_state(self):
@@ -63,7 +63,7 @@ class BatchTestCase(BaseTestCase):
         self.assertTrue(self.batch.is_completed())
 
         # do it again, but abort this time
-        self.create_new_batch()
+        self._create_new_batch()
         self.assertFalse(self.batch.is_completed())
         self.batch.put(key1, '')
         self.batch.delete(key2)
@@ -71,23 +71,25 @@ class BatchTestCase(BaseTestCase):
         self.batch.abort()
         self.assertTrue(self.batch.is_completed())
 
-    def test_batch_abort(self):
-        self.abort()  # abort with no operations in batch
+    def test_empty_batch_abort(self):
+        # abort with no operations in batch
+        self.batch.abort()
 
-        self.create_new_batch()
+    def test_batch_abort(self):
         key = 'key_should_not_exist'
         self.batch.put(key, '')
-        self.abort()
-        self.assertNone(self.client.get(key))
+        self.batch.abort()
+        self.assertEqual(self.client.get(key), None)
+
+    def test_empty_batch_commit(self):
+        # commit with no operations in batch
+        self.assertRaises(common.BatchAbortedException, self.batch.commit())
 
     def test_batch_commit(self):
-        self.commit() # commit with no operations in batch
-
-        self.create_new_batch()
         key = 'key_should_exist'
         self.batch.put(key, '')
         self.batch.commit()
-        self.assertNotNone(self.client.get(key))
+        self.assertIsNotNone(self.client.get(key))
 
     def test_batch_delete_commit(self):
         # put an entry
@@ -96,7 +98,7 @@ class BatchTestCase(BaseTestCase):
 
         self.batch.delete(key)
         self.batch.commit()
-        self.assertNone(self.client.get(key))
+        self.assertEqual(self.client.get(key), None)
 
     def test_batch_delete_abort(self):
         # put an entry
@@ -105,19 +107,19 @@ class BatchTestCase(BaseTestCase):
 
         self.batch.delete(key)
         self.batch.abort()
-        self.assertNotNone(self.client.get(key))
+        self.assertIsNotNone(self.client.get(key))
 
     def test_batch_put_commit(self):
         key = 'test_batch_put_commit'
         self.batch.put(key, '')
         self.batch.commit()
-        self.assertNotNone(self.client.get(key))
+        self.assertIsNotNone(self.client.get(key))
 
     def test_batch_put_abort(self):
         key = 'test_batch_put_abort'
         self.batch.put(key, '')
         self.batch.abort()
-        self.assertNone(self.client.get(key))
+        self.assertEqual(self.client.get(key), None)
 
     def test_batch_multiple_put_commit(self):
         key1 = 'test_batch_multiple_put_commit_1'
@@ -125,8 +127,8 @@ class BatchTestCase(BaseTestCase):
         self.batch.put(key1, '')
         self.batch.put(key2, '')
         self.batch.commit()
-        self.assertNotNone(self.client.get(key1))
-        self.assertNotNone(self.client.get(key2))
+        self.assertIsNotNone(self.client.get(key1))
+        self.assertIsNotNone(self.client.get(key2))
 
     def test_batch_multiple_put_abort(self):
         key1 = 'test_batch_multiple_put_abort_1'
@@ -134,8 +136,8 @@ class BatchTestCase(BaseTestCase):
         self.batch.put(key1, '')
         self.batch.put(key2, '')
         self.batch.abort()
-        self.assertNone(self.client.get(key1))
-        self.assertNone(self.client.get(key2))
+        self.assertEqual(self.client.get(key1), None)
+        self.assertEqual(self.client.get(key2), None)
 
     def test_batch_multiple_delete_commit(self):
         key1 = 'test_batch_multiple_delete_commit_1'
@@ -146,8 +148,8 @@ class BatchTestCase(BaseTestCase):
         self.batch.delete(key1)
         self.batch.delete(key2)
         self.batch.commit()
-        self.assertNone(self.client.get(key1))
-        self.assertNone(self.client.get(key2))
+        self.assertEqual(self.client.get(key1), None)
+        self.assertEqual(self.client.get(key2), None)
 
     def test_batch_multiple_delete_abort(self):
         key1 = 'test_batch_multiple_delete_abort_1'
@@ -158,8 +160,8 @@ class BatchTestCase(BaseTestCase):
         self.batch.delete(key1)
         self.batch.delete(key2)
         self.batch.abort()
-        self.assertNotNone(self.client.get(key1))
-        self.assertNotNone(self.client.get(key2))
+        self.assertIsNotNone(self.client.get(key1))
+        self.assertIsNotNone(self.client.get(key2))
 
     def test_batch_mixed_commit(self):
         key1 = 'test_batch_mixed_commit_1'
@@ -169,8 +171,8 @@ class BatchTestCase(BaseTestCase):
         self.batch.delete(key1)
         self.batch.put(key2, '')
         self.batch.commit()
-        self.assertNone(self.client.get(key1))
-        self.assertNotNone(self.client.get(key2))
+        self.assertEqual(self.client.get(key1), None)
+        self.assertIsNotNone(self.client.get(key2))
 
     def test_batch_mixed_abort(self):
         key1 = 'test_batch_mixed_abort_1'
@@ -180,13 +182,20 @@ class BatchTestCase(BaseTestCase):
         self.batch.delete(key1)
         self.batch.put(key2, '')
         self.batch.abort()
-        self.assertNotNone(self.client.get(key1))
-        self.assertNone(self.client.get(key2))
+        self.assertIsNotNone(self.client.get(key1))
+        self.assertEqual(self.client.get(key2), None)
 
-    def test_batch_reuse(self):
-        key = 'test_batch_reuse'
+    def test_batch_reuse_after_commit(self):
+        key = 'test_batch_reuse_after_commit'
         self.batch.put(key, '')
         self.batch.commit()
+
+        self.assertRaises(common.BatchAbortedException, self.batch.delete(key))
+
+    def test_batch_reuse_after_abort(self):
+        key = 'test_batch_reuse_after_abort'
+        self.batch.put(key, '')
+        self.batch.abort()
 
         self.assertRaises(common.BatchAbortedException, self.batch.delete(key))
 
