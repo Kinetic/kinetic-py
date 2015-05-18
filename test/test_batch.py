@@ -42,9 +42,9 @@ class BatchTestCase(BaseTestCase):
         self.assertEquals(self.batch.operation_count(), 0)
 
     def test_batch_operation_count(self):
-        key1 = 'test_batch_operation_count_1'
-        key2 = 'test_batch_operation_count_2'
-        key3 = 'test_batch_operation_count_3'
+        key1 = self.buildKey('test_batch_operation_count_1')
+        key2 = self.buildKey('test_batch_operation_count_2')
+        key3 = self.buildKey('test_batch_operation_count_3')
         self.batch.put(key1, '')
         self.assertEquals(self.batch.operation_count(), 1)
         self.batch.put(key2, '')
@@ -55,8 +55,8 @@ class BatchTestCase(BaseTestCase):
         self.batch.abort()
 
     def test_batch_commit_is_completed(self):
-        key1 = 'test_batch_commit_is_completed_1'
-        key2 = 'test_batch_commit_is_completed_2'
+        key1 = self.buildKey('test_batch_commit_is_completed_1')
+        key2 = self.buildKey('test_batch_commit_is_completed_2')
         self.assertFalse(self.batch.is_completed())
         self.batch.put(key1, '')
         self.batch.delete(key2)
@@ -65,8 +65,8 @@ class BatchTestCase(BaseTestCase):
         self.assertTrue(self.batch.is_completed())
 
     def test_batch_abort_is_completed(self):
-        key1 = 'test_batch_abort_is_completed_1'
-        key2 = 'test_batch_abort_is_completed_2'
+        key1 = self.buildKey('test_batch_abort_is_completed_1')
+        key2 = self.buildKey('test_batch_abort_is_completed_2')
         self.assertFalse(self.batch.is_completed())
         self.batch.put(key1, '')
         self.batch.delete(key2)
@@ -79,7 +79,7 @@ class BatchTestCase(BaseTestCase):
         self.assertRaises(common.BatchAbortedException, self.batch.abort())
 
     def test_batch_abort(self):
-        key = 'key_should_not_exist'
+        key = self.buildKey('key_should_not_exist')
         self.batch.put(key, '')
         self.batch.abort()
         self.assertEqual(self.client.get(key), None)
@@ -89,14 +89,14 @@ class BatchTestCase(BaseTestCase):
         self.assertRaises(common.BatchAbortedException, self.batch.commit())
 
     def test_batch_commit(self):
-        key = 'key_should_exist'
+        key = self.buildKey('key_should_exist')
         self.batch.put(key, '')
         self.batch.commit()
         self.assertIsNotNone(self.client.get(key))
 
     def test_batch_delete_commit(self):
         # put an entry
-        key = 'test_batch_delete_commit'
+        key = self.buildKey('test_batch_delete_commit')
         self.client.put(key, '')
 
         self.batch.delete(key)
@@ -105,7 +105,7 @@ class BatchTestCase(BaseTestCase):
 
     def test_batch_delete_abort(self):
         # put an entry
-        key = 'test_batch_delete_abort'
+        key = self.buildKey('test_batch_delete_abort')
         self.client.put(key, '')
 
         self.batch.delete(key)
@@ -113,20 +113,20 @@ class BatchTestCase(BaseTestCase):
         self.assertIsNotNone(self.client.get(key))
 
     def test_batch_put_commit(self):
-        key = 'test_batch_put_commit'
+        key = self.buildKey('test_batch_put_commit')
         self.batch.put(key, '')
         self.batch.commit()
         self.assertIsNotNone(self.client.get(key))
 
     def test_batch_put_abort(self):
-        key = 'test_batch_put_abort'
+        key = self.buildKey('test_batch_put_abort')
         self.batch.put(key, '')
         self.batch.abort()
         self.assertEqual(self.client.get(key), None)
 
     def test_batch_multiple_put_commit(self):
-        key1 = 'test_batch_multiple_put_commit_1'
-        key2 = 'test_batch_multiple_put_commit_2'
+        key1 = self.buildKey('test_batch_multiple_put_commit_1')
+        key2 = self.buildKey('test_batch_multiple_put_commit_2')
         self.batch.put(key1, '')
         self.batch.put(key2, '')
         self.batch.commit()
@@ -134,8 +134,8 @@ class BatchTestCase(BaseTestCase):
         self.assertIsNotNone(self.client.get(key2))
 
     def test_batch_multiple_put_abort(self):
-        key1 = 'test_batch_multiple_put_abort_1'
-        key2 = 'test_batch_multiple_put_abort_2'
+        key1 = self.buildKey('test_batch_multiple_put_abort_1')
+        key2 = self.buildKey('test_batch_multiple_put_abort_2')
         self.batch.put(key1, '')
         self.batch.put(key2, '')
         self.batch.abort()
@@ -143,8 +143,8 @@ class BatchTestCase(BaseTestCase):
         self.assertEqual(self.client.get(key2), None)
 
     def test_batch_multiple_delete_commit(self):
-        key1 = 'test_batch_multiple_delete_commit_1'
-        key2 = 'test_batch_multiple_delete_commit_2'
+        key1 = self.buildKey('test_batch_multiple_delete_commit_1')
+        key2 = self.buildKey('test_batch_multiple_delete_commit_2')
         self.client.put(key1, '')
         self.client.put(key2, '')
 
@@ -155,8 +155,8 @@ class BatchTestCase(BaseTestCase):
         self.assertEqual(self.client.get(key2), None)
 
     def test_batch_multiple_delete_abort(self):
-        key1 = 'test_batch_multiple_delete_abort_1'
-        key2 = 'test_batch_multiple_delete_abort_2'
+        key1 = self.buildKey('test_batch_multiple_delete_abort_1')
+        key2 = self.buildKey('test_batch_multiple_delete_abort_2')
         self.client.put(key1, '')
         self.client.put(key2, '')
 
@@ -167,8 +167,8 @@ class BatchTestCase(BaseTestCase):
         self.assertIsNotNone(self.client.get(key2))
 
     def test_batch_mixed_commit(self):
-        key1 = 'test_batch_mixed_commit_1'
-        key2 = 'test_batch_mixed_commit_2'
+        key1 = self.buildKey('test_batch_mixed_commit_1')
+        key2 = self.buildKey('test_batch_mixed_commit_2')
         self.client.put(key1, '')
 
         self.batch.delete(key1)
@@ -178,8 +178,8 @@ class BatchTestCase(BaseTestCase):
         self.assertIsNotNone(self.client.get(key2))
 
     def test_batch_mixed_abort(self):
-        key1 = 'test_batch_mixed_abort_1'
-        key2 = 'test_batch_mixed_abort_2'
+        key1 = self.buildKey('test_batch_mixed_abort_1')
+        key2 = self.buildKey('test_batch_mixed_abort_2')
         self.client.put(key1, '')
         
         self.batch.delete(key1)
@@ -189,8 +189,8 @@ class BatchTestCase(BaseTestCase):
         self.assertEqual(self.client.get(key2), None)
 
     def test_batch_reuse_after_commit(self):
-        key1 = 'test_batch_reuse_after_commit_1'
-        key2 = 'test_batch_reuse_after_commit_2'
+        key1 = self.buildKey('test_batch_reuse_after_commit_1')
+        key2 = self.buildKey('test_batch_reuse_after_commit_2')
         self.batch.put(key1, '')
         self.batch.commit()
 
@@ -198,7 +198,7 @@ class BatchTestCase(BaseTestCase):
         self.assertRaises(common.BatchCompletedException, self.batch.put, *args)
 
     def test_batch_reuse_after_abort(self):
-        key = 'test_batch_reuse_after_abort'
+        key = self.buildKey('test_batch_reuse_after_abort')
         self.batch.put(key, '')
         self.batch.abort()
 
