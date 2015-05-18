@@ -308,7 +308,8 @@ class P2pPipedPush(BaseOperation):
 class StartBatch(BaseOperation):
 
     def _build(self):
-        return _buildMessage(self.m, messages.Command.START_BATCH, '')
+        self.m.header.messageType = messages.Command.START_BATCH
+        return (self.m, None)
 
 
 class EndBatch(BaseOperation):
@@ -329,7 +330,8 @@ class EndBatch(BaseOperation):
 class AbortBatch(BaseOperation):
 
     def _build(self):
-        return _buildMessage(self.m, messages.Command.ABORT_BATCH, '')
+        self.m.header.messageType = messages.Command.ABORT_BATCH
+        return (self.m, None)
 
 
 class Flush(BaseOperation):
