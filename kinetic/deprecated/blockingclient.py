@@ -99,8 +99,10 @@ class BlockingClient(BaseClient):
 
     # @RequiresProtocol('3.0.6')
     def begin_batch(self, *args, **kwargs):
+        next_batch_id = self.next_batch_id()
+        kwargs['batch_id'] = next_batch_id
         self.batch_begin(*args, **kwargs)
-        return batch.Batch(self, self.next_batch_id())
+        return batch.Batch(self, next_batch_id)
 
     # @RequiresProtocol('3.0.6')
     def batch_begin(self, *args, **kwargs):
