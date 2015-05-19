@@ -38,8 +38,11 @@ class BatchTestCase(BaseTestCase):
             raise common.KineticException("unable to create batch")
 
     def test_batch_initial_state(self):
-        self.assertFalse(self.batch.is_completed())
-        self.assertEquals(self.batch.operation_count(), 0)
+        is_completed = self.batch.is_completed()
+        op_count = self.batch.operation_count()
+        self.batch.abort()
+        self.assertFalse(is_completed)
+        self.assertEquals(op_count, 0)
 
     def test_batch_operation_count(self):
         key1 = self.buildKey('test_batch_operation_count_1')
