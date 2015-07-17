@@ -39,7 +39,7 @@ class BatchTestCase(BaseTestCase):
 
     def test_batch_initial_state(self):
         is_completed = self.batch.is_completed()
-        op_count = self.batch.operation_count()
+        op_count = len(self.batch)
         self.batch.abort()
         self.assertFalse(is_completed)
         self.assertEquals(op_count, 0)
@@ -49,11 +49,11 @@ class BatchTestCase(BaseTestCase):
         key2 = self.buildKey('test_batch_operation_count_2')
         key3 = self.buildKey('test_batch_operation_count_3')
         self.batch.put(key1, '')
-        self.assertEquals(self.batch.operation_count(), 1)
+        self.assertEquals(len(self.batch), 1)
         self.batch.put(key2, '')
-        self.assertEquals(self.batch.operation_count(), 2)
+        self.assertEquals(len(self.batch), 2)
         self.batch.delete(key3)
-        self.assertEquals(self.batch.operation_count(), 3)
+        self.assertEquals(len(self.batch), 3)
 
         self.batch.abort()
 
