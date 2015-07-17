@@ -59,7 +59,6 @@ class BaseClient(object):
     # drive default
     USER_ID = 1
     CLIENT_SECRET = 'asdfasdf'
-    _batch_id = 0
 
     def __init__(self, hostname=HOSTNAME, port=PORT, identity=USER_ID,
                  cluster_version=None, secret=CLIENT_SECRET,
@@ -131,6 +130,7 @@ class BaseClient(object):
             self._socket.settimeout(self.socket_timeout)
 
             self._sequence = itertools.count()
+            self._batch_id = itertools.count()
             self._closed = False
         except:
             self._socket = None
@@ -181,6 +181,7 @@ class BaseClient(object):
         self._socket = None
         self.connection_id = None
         self._sequence = itertools.count()
+        self._batch_id = itertools.count()
 
 
     def update_header(self, command):
@@ -368,8 +369,7 @@ class BaseClient(object):
         self.network_send(header, value)
 
     def next_batch_id(self):
-        BaseClient._batch_id += 1
-        return BaseClient._batch_id
+        return self._batch_id.next()
 
     ### with statement support ###
 
