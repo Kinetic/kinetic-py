@@ -1,6 +1,13 @@
-Changes since 0.8.2
+Changes since 0.9.1
 ===========================
 >**NOTE:** this section will document changes to the library since the last release
+
+Changes from 0.9.0 to 0.9.1
+===========================
+This version was skipped due to a pypi error.
+
+Changes from 0.8.2 to 0.9.0
+===========================
 
 ## Important
 - Kinetic Protocol version updated to [3.0.6](https://github.com/Seagate/kinetic-protocol/tree/3.0.6)
