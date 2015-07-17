@@ -101,30 +101,8 @@ class BlockingClient(BaseClient):
     def begin_batch(self, *args, **kwargs):
         next_batch_id = self.next_batch_id()
         kwargs['batch_id'] = next_batch_id
-        self.batch_begin(*args, **kwargs)
+        self._process(operations.StartBatch(), *args, **kwargs)
         return batch.Batch(self, next_batch_id)
-
-    # @RequiresProtocol('3.0.6')
-    def batch_begin(self, *args, **kwargs):
-        return self._process(operations.StartBatch(), *args, **kwargs)
-
-    # @RequiresProtocol('3.0.6')
-    def batch_put(self, *args, **kwargs):
-        kwargs['no_ack'] = True
-        return self.put(*args, **kwargs)
-
-    # @RequiresProtocol('3.0.6')
-    def batch_delete(self, *args, **kwargs):
-        kwargs['no_ack'] = True
-        return self.delete(*args, **kwargs)
-
-    # @RequiresProtocol('3.0.6')
-    def batch_commit(self, *args, **kwargs):
-        return self._process(operations.EndBatch(), *args, **kwargs)
-
-    # @RequiresProtocol('3.0.6')
-    def batch_abort(self, *args, **kwargs):
-        return self._process(operations.AbortBatch(), *args, **kwargs)
 
     # @RequiresProtocol('3.0.0')
     def mediaScan(self, *args, **kwargs):

@@ -18,9 +18,9 @@
 
 import common
 import logging
+import operations
 
 LOG = logging.getLogger(__name__)
-
 
 class Batch(object):
     """
@@ -50,7 +50,7 @@ class Batch(object):
         self._batch_id = batch_id
         self._op_count = 0
         self._batch_completed = False   # to detect attempted reuse
-
+  
     def put(self, *args, **kwargs):
         """
         Put an entry within the batch operation.
@@ -70,10 +70,11 @@ class Batch(object):
         if self._batch_completed:
             raise common.BatchCompletedException()
 
-        self._op_count += 1
-        #TODO: add batch put logging
+        self._op_count += 1        
         kwargs['batch_id'] = self._batch_id
-        self._client.batch_put(*args, **kwargs)
+        kwargs['no_ack'] = True
+        
+        self._client.put(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
         """
@@ -95,9 +96,10 @@ class Batch(object):
             raise common.BatchCompletedException()
 
         self._op_count += 1
-        #TODO: add batch delete logging
         kwargs['batch_id'] = self._batch_id
-        self._client.batch_delete(*args, **kwargs)
+        kwargs['no_ack'] = True
+        
+        self._client.delete(*args, **kwargs)
 
     def commit(self, *args, **kwargs):
         """
@@ -116,11 +118,10 @@ class Batch(object):
         if self._batch_completed:
             raise common.BatchCompletedException()
 
-        #TODO: add batch commit logging
         kwargs['batch_id'] = self._batch_id
         kwargs['batch_op_count'] = self._op_count
         try:
-            self._client.batch_commit(*args, **kwargs)
+            self._client._process(operations.EndBatch(), *args, **kwargs)
             self._batch_completed = True
         except BatchAbortedException:
             self._batch_completed = True
@@ -140,9 +141,8 @@ class Batch(object):
         if self._batch_completed:
             raise common.BatchCompletedException()
 
-        #TODO: add batch abort logging
         kwargs['batch_id'] = self._batch_id
-        self._client.batch_abort(*args, **kwargs)
+        self._client._process(operations.AbortBatch(), *args, **kwargs)
         self._batch_completed = True
 
     def is_completed(self):
@@ -152,7 +152,7 @@ class Batch(object):
         """
         return self._batch_completed
 
-    def operation_count(self):
+    def __len__(self):
         """
         Return the number of operations that have been included in the batch.
         """
