@@ -1,8 +1,18 @@
+# **Kinetic-py**
+[![Travis](https://img.shields.io/travis/Seagate/kinetic-py.svg)](https://travis-ci.org/Seagate/kinetic-py)
+[![PyPI](https://img.shields.io/pypi/v/kinetic.svg)](https://pypi.python.org/pypi/kinetic/0.8.2)
+[![PyPI](https://img.shields.io/pypi/l/kinetic.svg)](https://github.com/Seagate/kinetic-py/blob/master/LICENSE/LGPL2.1.md)
+
 Introduction
 ============
 The [kinetic-protocol](https://github.com/Seagate/kinetic-protocol) python client.
-Requires Python 2.7.3 or higher. Python 3.x is not supported. If you want to connect through SSL on Mac OS X, you will need to have Python 2.7.9.
 
+## Requirements
+- Requires Python 2.7.3 or higher. 
+- Requires Python 2.7.9 on OSX to use SSL 
+
+> **NOTE:** Python 3.x is not supported. 
+ 
 Installing latest stable release
 ================================
     pip install kinetic
@@ -13,13 +23,10 @@ Installing from Source
 
     git clone https://github.com/Seagate/kinetic-py.git
     cd kinetic-py
-    git submodule update --init
     python setup.py develop
 
-For devices with old firmware code:
-
+> **NOTE:** for devices with old firmware code get version 0.7.3 of the libray
     git checkout 0.7.3
-    python setup.py develop
 
 Running Tests
 =============
@@ -43,10 +50,11 @@ Getting Started with the basic client
 ```python
 from kinetic import Client
 c = Client('localhost', 8123)
+c.connect()
 c.put('message','hello world')
 print c.get('message').value
 ```
-Should print out _hello_ _world_
+Should print out _hello world_
 
 Troubleshooting during the installation
 =======================================

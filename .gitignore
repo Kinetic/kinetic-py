@@ -1,8 +1,13 @@
 .DS_STORE
-build
-dist
-*egg-info
+
+# Python
+build/
+dist/
+*egg-info/
 *.pyc
 
 # IDEs
 .idea/
+
+# scripting
+tmp/

@@ -16,28 +16,40 @@
 
 #@author: Ignacio Corderi
 
-from baseclient import BaseClient
-import operations
-import kinetic_pb2 as messages
+from kinetic.baseclient import BaseClient
+from kinetic import operations
+from kinetic import kinetic_pb2 as messages
+from kinetic import batch
 import logging
 
 LOG = logging.getLogger(__name__)
 
-class Client(BaseClient):
+class BlockingClient(BaseClient):
 
     def __init__(self, *args, **kwargs):
-        super(Client, self).__init__(*args, **kwargs)
+        super(BlockingClient, self).__init__(*args, **kwargs)
 
     def _process(self, op, *args, **kwargs):
+        if 'no_ack' in kwargs:
+            send_no_ack = True
+            del kwargs['no_ack']
+        else:
+            send_no_ack = False
         header,value = op.build(*args, **kwargs)
         try:
             with self:
                 # update header
                 self.update_header(header)
                 # send message synchronously
-                _, cmd, value = self.send(header, value)
-            operations._check_status(cmd)
-            return op.parse(cmd, value)
+                if send_no_ack:
+                    self.send_no_ack(header, value)
+                else:
+                    _, cmd, value = self.send(header, value)
+            if send_no_ack:
+                return None
+            else:
+                operations._check_status(cmd)
+                return op.parse(cmd, value)
         except Exception as e:
             return op.onError(e)
 
@@ -74,7 +86,6 @@ class Client(BaseClient):
     def pipedPush(self, *args, **kwargs):
         return self._process(operations.P2pPipedPush(), *args, **kwargs)
 
-
     def getVersion(self, *args, **kwargs):
         """
             Arguments: key -> The key you are seeking version information for.
@@ -82,10 +93,16 @@ class Client(BaseClient):
         """
         return self._process(operations.GetVersion(), *args, **kwargs)
 
-
     # @RequiresProtocol('2.0.3')
     def flush(self, *args, **kwargs):
         return self._process(operations.Flush(), *args, **kwargs)
+
+    # @RequiresProtocol('3.0.6')
+    def begin_batch(self, *args, **kwargs):
+        next_batch_id = self.next_batch_id()
+        kwargs['batch_id'] = next_batch_id
+        self._process(operations.StartBatch(), *args, **kwargs)
+        return batch.Batch(self, next_batch_id)
 
     # @RequiresProtocol('3.0.0')
     def mediaScan(self, *args, **kwargs):
@@ -97,6 +114,12 @@ class Client(BaseClient):
 
     def getLog(self, *args, **kwargs):
         return self._process(operations.GetLog(), *args, **kwargs)
+        
+    def setClusterVersion(self, *args, **kwargs):
+        return self._process(operations.SetClusterVersion(), *args, **kwargs)
+
+    def updateFirmware(self, *args, **kwargs):
+        return self._process(operations.UpdateFirmware(), *args, **kwargs)
 
 class KineticRangeIter(object):
 

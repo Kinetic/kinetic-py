@@ -153,6 +153,7 @@ class BaseTestCase(unittest.TestCase):
             raise
 
         cls.client = Client(cls.host, cls.port)
+        cls.client.connect()
 
     @classmethod
     def tearDownClass(cls):
@@ -256,6 +257,7 @@ class MultiSimulatorTestCase(unittest.TestCase):
             self.client_map = {}
             for port in self.ports:
                 self.client_map[port] = Client('localhost', port)
+                self.client_map[port].connect()
         except Exception:
             self.tearDown()
 

@@ -97,6 +97,10 @@ class BaseOperation(object):
             self.m.header.TimeQuanta = kwargs['time_quanta']
             del kwargs['time_quanta']
 
+        if 'batch_id' in kwargs:
+            self.m.header.batchID = kwargs['batch_id']
+            del kwargs['batch_id']
+
         return self._build(*args, **kwargs)
 
     def parse(self, m, value):
@@ -171,7 +175,8 @@ class GetPrevious(Get):
 
 class GetKeyRange(BaseOperation):
 
-    def _build(self, startKey=None, endKey=None, startKeyInclusive=True, endKeyInclusive=True, maxReturned=200):
+    def _build(self, startKey=None, endKey=None, startKeyInclusive=True, endKeyInclusive=True, 
+        maxReturned=200, reverse=False):
         if not startKey:
             startKey = ''
         if not endKey:
@@ -189,6 +194,7 @@ class GetKeyRange(BaseOperation):
         kr.startKeyInclusive = startKeyInclusive
         kr.endKeyInclusive = endKeyInclusive
         kr.maxReturned = maxReturned
+        kr.reverse = reverse
 
         return (m, None)
 
@@ -299,6 +305,35 @@ class P2pPipedPush(BaseOperation):
 
     def parse(self, m, value):
         return [op for op in m.body.p2pOperation.operation]
+
+
+class StartBatch(BaseOperation):
+
+    def _build(self):
+        self.m.header.messageType = messages.Command.START_BATCH
+        return (self.m, None)
+
+
+class EndBatch(BaseOperation):
+
+    def _build(self, **kwargs):
+        # batch_op_count
+        (m,_) = _buildMessage(self.m, messages.Command.END_BATCH, '')
+        m.body.batch.count = kwargs['batch_op_count']
+        del kwargs['batch_op_count']
+        return (m, None)
+
+    def onError(self, e):
+        if isinstance(e,common.KineticException):
+            if e.code and e.code == 'INVALID_BATCH':
+                return common.BatchAbortedException(e.value)
+        raise e
+
+class AbortBatch(BaseOperation):
+
+    def _build(self):
+        self.m.header.messageType = messages.Command.ABORT_BATCH
+        return (self.m, None)
 
 
 class Flush(BaseOperation):

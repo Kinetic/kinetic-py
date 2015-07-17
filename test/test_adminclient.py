@@ -204,15 +204,15 @@ class AdminClientTestCase(BaseTestCase):
         for util in util_list:
             self.assertTrue(util.value >= 0)
 
-    def reset_cluster_version_to_default(self, current_cluster_version):
-        self.adminClient = AdminClient(cluster_version=current_cluster_version)
-        self.adminClient.setClusterVersion(AdminClientTestCase.DEFAULT_CLUSTER_VERSION)
-        self.adminClient.close()
+    def reset_cluster_version_to_default(self):
+        c = AdminClient(self.host, self.port)
+        c.setClusterVersion(AdminClientTestCase.DEFAULT_CLUSTER_VERSION)
+        c.close()
 
     def test_set_cluster_version(self):
         new_cluster_version = AdminClientTestCase.DEFAULT_CLUSTER_VERSION + 1
         self.adminClient.setClusterVersion(new_cluster_version)
-        self.reset_cluster_version_to_default(new_cluster_version)
+        self.reset_cluster_version_to_default()
 
     def test_update_firmware(self):
         #TODO: implement test_update_firmware

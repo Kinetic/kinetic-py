@@ -33,6 +33,7 @@ class BaseCommandTestCase(BaseTestCase):
         super(BaseCommandTestCase, self).setUp()
         self.test_key = self.buildKey('test')
         self.client = client.Client(self.host, self.port)
+        self.client.connect()
         self.conn_args = '-H %s -P %s ' % (self.host, self.port)
 
     @contextlib.contextmanager

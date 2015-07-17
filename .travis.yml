@@ -1,0 +1,17 @@
+language: python
+
+python:
+    - "2.7"
+
+install:
+    - "pip install ."
+    - "pip install -r requirements.txt"
+
+env:
+    KINETIC_JAR=$TRAVIS_BUILD_DIR/simulator.jar
+    KINETIC_CONNECT_TIMEOUT=1.0
+
+before_script: ./build_simulator.sh
+
+script: nosetests
+sudo: false

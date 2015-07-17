@@ -202,6 +202,22 @@ class Cmd(cmd.Cmd, object):
         if not args.end:
             args.end = args.start + '\xff'
         keys = self.client.getKeyRange(args.start, args.end)
+        # getKeyRange will return a maximum of 200 keys. if we have that many
+        # we need to continue retrieving keys until we get none or less than 200.
+        if len(keys) == 200:
+            last_key_retrieved = keys[len(keys)-1]
+            retrieving_keys = True
+            start_key_inclusive = False
+            while retrieving_keys:
+                partial_keys = self.client.getKeyRange(last_key_retrieved, args.end, start_key_inclusive)
+                if len(partial_keys) > 0:
+                    keys.extend(partial_keys)
+                    if len(partial_keys) == 200:
+                        last_key_retrieved = partial_keys[len(partial_keys)-1]
+                    else:
+                        retrieving_keys = False
+                else:
+                    retrieving_keys = False
         return keys
 
     @add_parser(list_parser)

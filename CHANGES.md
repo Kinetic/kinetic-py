@@ -1,6 +1,39 @@
-Changes since 0.8.1
+Changes since 0.8.2
 ===========================
-This section will document changes to the library since the last release
+>**NOTE:** this section will document changes to the library since the last release
+
+## Important
+- Kinetic Protocol version updated to [3.0.6](https://github.com/Seagate/kinetic-protocol/tree/3.0.6)
+- Deprecrated classes and methods will be removed on the next major release.
+
+## New features
+- Added support for Batch operations
+- Added `reverse` parameter on GetKeyRange operation 
+
+## Major changes
+- `AsyncClient` has been renamed to `Client`
+- A new `SecureClient` has been added to `kinetic`.
+
+## Minor changes
+- Added env variable _KINETIC_CONNECT_TIMEOUT_ to control default connection timeout.
+
+## Deprecated features
+- Old blocking `Client` has been moved to `kinetic.depracated.BlockingClient`
+- Old `AdminClient` has been moved to `kinetic.depracated.AdminClient`
+
+## Misc
+- Added alias for `AsyncClient = Client` to smooth transition.
+- Added alias on `kinetic` for `AdminClient` to smooth transition.
+
+Changes from 0.8.1 to 0.8.2
+===========================
+
+## Bug fixes
+- Keys with empty values show correctly as '' instead of None
+- **WRITEBACK** set as default mode for `put` and `delete` operations
+
+## Misc
+- OSX requirements for SSL connections updated.
 
 Changes from 0.8.0 to 0.8.1
 ===========================

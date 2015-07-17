@@ -63,7 +63,7 @@ class BaseClient(object):
     def __init__(self, hostname=HOSTNAME, port=PORT, identity=USER_ID,
                  cluster_version=None, secret=CLIENT_SECRET,
                  chunk_size=common.DEFAULT_CHUNK_SIZE,
-                 connect_timeout=common.DEFAULT_CONNECT_TIMEOUT,
+                 connect_timeout=common.KINETIC_CONNECT_TIMEOUT,
                  socket_timeout=common.DEFAULT_SOCKET_TIMEOUT,
                  socket_address=None, socket_port=0,
                  defer_read=False,
@@ -99,7 +99,10 @@ class BaseClient(object):
         return not self._closed
 
     def build_socket(self, family=ss.AF_INET):
-       return socket.socket(family)
+        return socket.socket(family)
+       
+    def wrap_secure_socket(self, s, ssl_version):
+        return ssl.wrap_socket(s) #, ssl_version=ssl_version)   
 
     def connect(self):
         if self._socket:
@@ -110,7 +113,7 @@ class BaseClient(object):
         # Stage socket on a local variable first
         s = self.build_socket(family)
         if self.use_ssl:
-            s = ssl.wrap_socket(s)
+            s = self.wrap_secure_socket(s, ssl.PROTOCOL_TLSv1_2)
 
         s.settimeout(self.connect_timeout)
         if self.socket_address:
@@ -127,6 +130,7 @@ class BaseClient(object):
             self._socket.settimeout(self.socket_timeout)
 
             self._sequence = itertools.count()
+            self._batch_id = itertools.count()
             self._closed = False
         except:
             self._socket = None
@@ -177,6 +181,7 @@ class BaseClient(object):
         self._socket = None
         self.connection_id = None
         self._sequence = itertools.count()
+        self._batch_id = itertools.count()
 
 
     def update_header(self, command):
@@ -359,6 +364,12 @@ class BaseClient(object):
                     LOG.warn('Unsolicited status %s received but nobody listening.' % cmd.status.code)
             else: done = True
         return m,cmd,value
+
+    def send_no_ack(self, header, value):
+        self.network_send(header, value)
+
+    def next_batch_id(self):
+        return self._batch_id.next()
 
     ### with statement support ###
 

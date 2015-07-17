@@ -1,4 +1,4 @@
-# Copyright (C) 2014 Seagate Technology.
+# Copyright (C) 2015 Seagate Technology.
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,4 +16,6 @@
 
 #@author: Ignacio Corderi
 
-from adminclient import AdminClient
+### This module is deprecated
+
+from kinetic.deprecated import AdminClient 
