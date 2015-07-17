@@ -171,6 +171,14 @@ class ClusterVersionFailureException(KineticMessageException):
         super(ClusterVersionFailureException, self).__init__(status)
         self.cluster_version = cluster_version
 
+class BatchAbortedException(KineticException):
+    def __init__(self, value):
+        super(BatchAbortedException, self).__init__(value)
+        self.failed_operation_index = -1
+
+class BatchCompletedException(KineticClientException):
+    def __init__(self):
+        super(BatchCompletedException, self).__init__('batch completed. no more operations are permitted within this batch.')
 
 class HmacAlgorithms:
     INVALID_HMAC_ALGORITHM = -1 # Must come first, so default is invalid

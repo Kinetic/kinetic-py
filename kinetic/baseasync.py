@@ -132,7 +132,7 @@ class BaseAsync(deprecated.BlockingClient):
     ###
 
 
-    def sendAsync(self, command, value, onSuccess, onError):
+    def sendAsync(self, command, value, onSuccess, onError, no_ack=False):
         if self.faulted: # TODO(Nacho): should we fault through onError on fault or bow up on the callers face?
             self._raise(common.ConnectionFaulted("Can't send message when connection is on a faulted state."), onError)
             return #skip the rest
@@ -152,8 +152,9 @@ class BaseAsync(deprecated.BlockingClient):
         # get sequence
         self.update_header(command)
 
-        # add callback to pending dictionary
-        self._pending[command.header.sequence] = (innerSuccess, onError)
+        if not no_ack:
+            # add callback to pending dictionary
+            self._pending[command.header.sequence] = (innerSuccess, onError)
 
         # transmit
         self.network_send(command, value)
@@ -177,8 +178,14 @@ class BaseAsync(deprecated.BlockingClient):
             except Exception as e2:
                 onError(e2)
 
+        if 'no_ack' in kwargs:
+            send_no_ack = True
+            del kwargs['no_ack']
+        else:
+            send_no_ack = False
+
         header, value = op.build(*args, **kwargs)
-        self.sendAsync(header, value, innerSuccess, innerError)
+        self.sendAsync(header, value, innerSuccess, innerError, send_no_ack)
 
 
     def putAsync(self, onSuccess, onError, *args, **kwargs):

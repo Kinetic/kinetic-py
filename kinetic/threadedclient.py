@@ -59,8 +59,8 @@ class ThreadedClient(BaseAsync):
         self.writer_thread.join()
         self.thread.join()
 
-    def sendAsync(self, header, value, onSuccess, onError):
-        self.queue.put((header, value, onSuccess, onError))
+    def sendAsync(self, header, value, onSuccess, onError, no_ack=False):
+        self.queue.put((header, value, onSuccess, onError, no_ack))
 
     def _writer(self):
         while self.isConnected and not self.faulted:

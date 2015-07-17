@@ -58,3 +58,7 @@ from common import KineticMessageException
 AsyncClient = Client
 from kinetic.deprecated.adminclient import AdminClient
 from kinetic import greenclient as client
+# Fake old asyncclient module 
+class AsyncClientCompat(object):
+    AsyncClient = Client   
+asyncclient = AsyncClientCompat()
