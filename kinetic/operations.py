@@ -175,7 +175,8 @@ class GetPrevious(Get):
 
 class GetKeyRange(BaseOperation):
 
-    def _build(self, startKey=None, endKey=None, startKeyInclusive=True, endKeyInclusive=True, maxReturned=200):
+    def _build(self, startKey=None, endKey=None, startKeyInclusive=True, endKeyInclusive=True, 
+        maxReturned=200, reverse=False):
         if not startKey:
             startKey = ''
         if not endKey:
@@ -193,6 +194,7 @@ class GetKeyRange(BaseOperation):
         kr.startKeyInclusive = startKeyInclusive
         kr.endKeyInclusive = endKeyInclusive
         kr.maxReturned = maxReturned
+        kr.reverse = reverse
 
         return (m, None)
 

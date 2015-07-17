@@ -2,6 +2,13 @@ Changes since 0.8.2
 ===========================
 >**NOTE:** this section will document changes to the library since the last release
 
+## Important
+- Kinetic Protocol version updated to [3.0.6](https://github.com/Seagate/kinetic-protocol/tree/3.0.6)
+
+## New features
+- Added support for Batch operations
+- Added `reverse` parameter on GetKeyRange operation 
+
 ## Major changes
 - `AsyncClient` has been renamed to `Client`
 - A new `SecureClient` has been added to `kinetic`.
