@@ -16,10 +16,6 @@
 
 #@author: Ignacio Corderi
 
-# Logging
-import logging
-logging.basicConfig()
-
 # Protocol version
 from common import local
 
