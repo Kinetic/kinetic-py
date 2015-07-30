@@ -32,6 +32,7 @@ class BaseAsync(deprecated.BlockingClient):
     def __init__(self, *args, **kwargs):
         super(BaseAsync, self).__init__(*args, socket_timeout=None, **kwargs)
         self.unhandledException = lambda e: LOG.warn("Unhandled client exception. " + str(e))
+        self.on_faulted = None
         self.faulted = False
         self.error = None
         # private attributes
@@ -73,6 +74,7 @@ class BaseAsync(deprecated.BlockingClient):
             except Exception as e2:
                 LOG.error("Unhandled exception on callers code when reporting internal error. {0}".format(e2))
         self._pending = {}
+        if self.on_faulted != None: self.on_faulted(self)
 
 
     def _async_recv(self):

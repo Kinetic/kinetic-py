@@ -2,6 +2,9 @@ Changes since 0.9.1
 ===========================
 >**NOTE:** this section will document changes to the library since the last release
 
+## Minor changes
+- Added `on_faulted` handler on `Client`. 
+
 Changes from 0.9.0 to 0.9.1
 ===========================
 This version was skipped due to a pypi error.
