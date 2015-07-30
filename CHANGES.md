@@ -4,6 +4,7 @@ Changes since 0.9.1
 
 ## Minor changes
 - Added `on_faulted` handler on `Client`. 
+- Added `operation_timeout` support on `Client` for **blocking** calls.
 
 Changes from 0.9.0 to 0.9.1
 ===========================

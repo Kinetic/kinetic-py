@@ -138,6 +138,9 @@ class KineticException(Exception):
 
 class KineticClientException(KineticException):
     pass
+    
+class OperationTimeout(KineticException):
+    pass    
 
 class NotConnected(KineticClientException):
     pass

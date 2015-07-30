@@ -25,12 +25,14 @@ from eventlet.green.ssl import GreenSSLSocket
 
 import baseasync
 import common
+import kinetic_pb2 as proto
 
 LOG = logging.getLogger(__name__)
 
 DEFAULT_POOL_SIZE = 100
 DEFAULT_MAX_QUEUE_SIZE = 20
 MAX_PENDING = 10
+DEFAULT_OPERATION_TIMEOUT = None
 
 class Client(baseasync.BaseAsync):
 
@@ -42,6 +44,7 @@ class Client(baseasync.BaseAsync):
         self.queue = Queue(DEFAULT_MAX_QUEUE_SIZE)
         self.max_pending = MAX_PENDING
         self.closing = False
+        self.operation_timeout = kwargs.get('operation_timeout', DEFAULT_OPERATION_TIMEOUT)
 
     def build_socket(self, family=socket.AF_INET):
         return socket.socket(family)
@@ -99,7 +102,7 @@ class Client(baseasync.BaseAsync):
     def wait(self):
         self.queue.join()
 
-    def send(self, header, value):
+    def send(self, cmd, value):
         done = eventlet.event.Event()
         class Dummy : pass
         d = Dummy()
@@ -114,9 +117,16 @@ class Client(baseasync.BaseAsync):
             d.error = e
             done.send()
 
-        self.sendAsync(header, value, innerSuccess, innerError)
+        self.sendAsync(cmd, value, innerSuccess, innerError)
 
-        done.wait() # TODO(Nacho): should be add a default timeout?
+        if self.operation_timeout != None: 
+            with eventlet.Timeout(self.operation_timeout, 
+                    common.OperationTimeout("Operation seq=%s (%s) timeout." % (
+                        cmd.header.sequence, 
+                        proto.Command.MessageType.Name(cmd.header.messageType)))):
+                done.wait()           
+        else: done.wait()
+        
         if d.error: raise d.error
         return d.result
 
