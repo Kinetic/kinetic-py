@@ -56,7 +56,8 @@ class SecureClient(BlockingClient):
         # len() < 2 is because port can be positional on the baseclient
         if 'port' not in kwargs and len(args) < 2:
             kwargs['port'] = 8443
-                
+        if 'connect_timeout' not in kwargs:
+            kwargs['connect_timeout'] = 1.0
         super(SecureClient, self).__init__(*args, **kwargs)
 
     @withPin
