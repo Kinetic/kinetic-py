@@ -1,6 +1,7 @@
 # **Kinetic-py**
 [![Travis](https://img.shields.io/travis/Seagate/kinetic-py.svg)](https://travis-ci.org/Seagate/kinetic-py)
 [![PyPI](https://img.shields.io/pypi/v/kinetic.svg)](https://pypi.python.org/pypi/kinetic/)
+[![PyPI](https://img.shields.io/pypi/status/kinetic.svg)](https://pypi.python.org/pypi/kinetic/)
 [![PyPI](https://img.shields.io/pypi/l/kinetic.svg)](https://github.com/Seagate/kinetic-py/blob/master/LICENSE/LGPL2.1.md)
 
 Introduction

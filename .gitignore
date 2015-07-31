@@ -11,3 +11,7 @@ dist/
 
 # scripting
 tmp/
+
+# simulator
+kinetic-java/
+simulator.jar
