@@ -108,7 +108,7 @@ class BaseTestCase(unittest.TestCase):
             cls.datadir = tempfile.mkdtemp()
             cls.stdout = open(os.path.join(cls.datadir, 'simulator.log'), 'w')
             cls.stderr = open(os.path.join(cls.datadir, 'simulator.err'), 'w')
-            args = ['java', '-jar', cls.jar_path, str(cls.port), cls.datadir]
+            args = ['java', '-jar', cls.jar_path, '-port', str(cls.port), '-home', cls.datadir]
             cls.simulator = subprocess.Popen(args, stdout=cls.stdout.fileno(),
                                              stderr=cls.stderr.fileno())
         if cls.simulator.poll():
