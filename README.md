@@ -68,6 +68,5 @@ On debian systems the quickest way is `sudo apt-get install python-eventlet`.
 License
 -------
 
-This project is licensed under GNU Lesser General Public License, version 2.1
-* [Markdown](LICENSE/LGPL2.1.md) version
-* [Original](LICENSE/LGPL2.1.txt) version
+This project is licensed under Mozilla Public License, v. 2.0
+* [Original](LICENSE/Mozilla_Public_License_2.0.txt) version
